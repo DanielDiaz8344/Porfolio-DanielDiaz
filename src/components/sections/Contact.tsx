@@ -60,7 +60,7 @@ export default function Contact() {
         {/* Social Links */}
         <FadeContent blur duration={800} delay={500}>
           <div className="flex items-center justify-center gap-6">
-            <Magnet padding={60} magnetStrength={2}>
+            <Magnet padding={20} magnetStrength={4}>
               <a
                 href="https://www.instagram.com/bydanieldiaz"
                 target="_blank"
@@ -72,7 +72,7 @@ export default function Contact() {
               </a>
             </Magnet>
 
-            <Magnet padding={60} magnetStrength={2}>
+            <Magnet padding={20} magnetStrength={4}>
               <a
                 href="https://www.tiktok.com/@bydanieldiaz"
                 target="_blank"

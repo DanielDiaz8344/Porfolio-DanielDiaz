@@ -55,7 +55,7 @@ export default function Navbar() {
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-6 xl:gap-8">
           {navLinks.map((link) => (
-            <Magnet key={link.href} padding={50} magnetStrength={3}>
+            <Magnet key={link.href} padding={20} magnetStrength={4}>
               <button
                 onClick={() => handleNavClick(link.href)}
                 className="text-sm text-[#a3a3a3] hover:text-[#f5f5f5] transition-colors duration-300 font-body"
