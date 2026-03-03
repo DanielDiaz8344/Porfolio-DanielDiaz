@@ -2,7 +2,7 @@ import BlurText from '@/components/reactbits/BlurText';
 import RotatingText from '@/components/reactbits/RotatingText';
 import StarBorder from '@/components/reactbits/StarBorder';
 import ClickSpark from '@/components/reactbits/ClickSpark';
-import Ribbons from '@/components/reactbits/Ribbons';
+import Particles from '@/components/reactbits/Particles';
 
 export default function Hero() {
   const handleCTA = () => {
@@ -12,27 +12,46 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative h-screen w-full overflow-hidden flex items-center justify-center">
-      {/* Ribbons Background */}
-      <div className="absolute inset-0 z-0">
-        <Ribbons
-          colors={['#E53935', '#8B0000', '#FF6B6B', '#FF2D2D']}
-          baseSpring={0.03}
-          baseFriction={0.9}
-          baseThickness={20}
-          speedMultiplier={0.5}
-          maxAge={500}
-          enableFade
+      {/* === LAYERED BACKGROUND === */}
+
+      {/* Layer 1: Animated gradient orbs */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="hero-orb hero-orb-1" />
+        <div className="hero-orb hero-orb-2" />
+        <div className="hero-orb hero-orb-3" />
+      </div>
+
+      {/* Layer 2: 3D Particles */}
+      <div className="absolute inset-0 z-[1]">
+        <Particles
+          particleCount={250}
+          particleSpread={10}
+          speed={0.08}
+          particleColors={['#E53935', '#FF6B6B', '#FF2D2D', '#8B0000', '#ff4444']}
+          moveParticlesOnHover
+          particleHoverFactor={0.4}
+          alphaParticles
+          particleBaseSize={120}
+          sizeRandomness={1.5}
+          cameraDistance={20}
         />
       </div>
 
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#0a0a0a]/60 via-transparent to-[#0a0a0a]/80" />
+      {/* Layer 3: Subtle grid pattern */}
+      <div className="absolute inset-0 z-[2] hero-grid opacity-[0.04]" />
 
-      {/* Content */}
+      {/* Layer 4: Noise/grain texture */}
+      <div className="absolute inset-0 z-[3] hero-noise opacity-[0.03]" />
+
+      {/* Layer 5: Radial vignette + gradient overlay */}
+      <div className="absolute inset-0 z-[4] bg-[radial-gradient(ellipse_at_center,transparent_0%,#0a0a0a_70%)]" />
+      <div className="absolute inset-0 z-[4] bg-gradient-to-b from-[#0a0a0a]/40 via-transparent to-[#0a0a0a]/90" />
+
+      {/* === CONTENT === */}
       <ClickSpark sparkColor="#E53935" sparkSize={12} sparkRadius={20} sparkCount={10} duration={500}>
-        <div className="relative z-[2] flex flex-col items-center text-center px-6 gap-6 max-w-5xl mx-auto h-screen justify-center">
+        <div className="relative z-[5] flex flex-col items-center text-center px-6 gap-6 max-w-5xl mx-auto h-screen justify-center">
           {/* Name */}
-          <h1 className="font-heading font-bold text-[clamp(3rem,10vw,8rem)] leading-[0.9] tracking-tight text-[#f5f5f5]">
+          <h1 className="font-heading font-bold text-[clamp(3rem,10vw,8rem)] leading-[0.9] tracking-tight text-[#f5f5f5] drop-shadow-[0_0_40px_rgba(229,57,53,0.15)]">
             DANIEL DIAZ
           </h1>
 
