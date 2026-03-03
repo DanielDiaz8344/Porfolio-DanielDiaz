@@ -14,7 +14,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <span className="text-sm text-[#737373] font-body">
-            &copy; 2026 Daniel Designs
+            &copy; 2026 ByDanielDiaz
           </span>
           <span className="w-1.5 h-1.5 rounded-full bg-[#E53935] animate-pulse-red" />
           <span className="text-xs text-[#737373]">Disponible para freelance</span>

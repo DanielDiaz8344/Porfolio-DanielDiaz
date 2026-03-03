@@ -22,6 +22,12 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
+
   const handleNavClick = (href: string) => {
     setMobileOpen(false);
     const el = document.querySelector(href);
@@ -31,23 +37,23 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        scrolled ? 'bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-[#1f1f1f]' : 'bg-transparent'
+        scrolled || mobileOpen ? 'bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-[#1f1f1f]' : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 lg:py-4 flex items-center justify-between">
         {/* Logo */}
         <button onClick={() => handleNavClick('#hero')} className="cursor-pointer">
           <GradientText
             colors={['#E53935', '#FF6B6B', '#8B0000', '#FF2D2D']}
             animationSpeed={6}
-            className="text-xl font-heading font-bold"
+            className="text-lg sm:text-xl font-heading font-bold"
           >
-            Daniel Designs
+            ByDanielDiaz
           </GradientText>
         </button>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-6 xl:gap-8">
           {navLinks.map((link) => (
             <Magnet key={link.href} padding={50} magnetStrength={3}>
               <button
@@ -58,7 +64,7 @@ export default function Navbar() {
               </button>
             </Magnet>
           ))}
-          <div className="flex items-center gap-2 ml-4">
+          <div className="flex items-center gap-2 ml-2">
             <span className="w-2 h-2 rounded-full bg-[#E53935] animate-pulse-red" />
             <span className="text-xs text-[#737373]">Disponible</span>
           </div>
@@ -66,32 +72,44 @@ export default function Navbar() {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-[#f5f5f5] p-2"
+          className="lg:hidden text-[#f5f5f5] p-2 -mr-2"
           onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label={mobileOpen ? 'Cerrar menú' : 'Abrir menú'}
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Full screen overlay */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-          mobileOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
+        className={`lg:hidden fixed inset-0 top-[57px] bg-[#0a0a0a]/98 backdrop-blur-2xl transition-all duration-400 ease-in-out ${
+          mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
-        <div className="px-6 pb-6 bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-[#1f1f1f] flex flex-col gap-4">
-          {navLinks.map((link) => (
+        <div className="flex flex-col px-6 pt-8 gap-2">
+          {navLinks.map((link, index) => (
             <button
               key={link.href}
               onClick={() => handleNavClick(link.href)}
-              className="text-left text-[#a3a3a3] hover:text-[#f5f5f5] transition-colors duration-300 py-2 font-body"
+              className="text-left text-2xl font-heading font-semibold text-[#a3a3a3] hover:text-[#f5f5f5] active:text-[#E53935] transition-colors duration-300 py-3 border-b border-[#1f1f1f]/50"
+              style={{
+                transform: mobileOpen ? 'translateY(0)' : `translateY(${20 + index * 10}px)`,
+                opacity: mobileOpen ? 1 : 0,
+                transition: `all 0.4s ease ${index * 0.05}s`,
+              }}
             >
               {link.label}
             </button>
           ))}
-          <div className="flex items-center gap-2 pt-2 border-t border-[#1f1f1f]">
-            <span className="w-2 h-2 rounded-full bg-[#E53935] animate-pulse-red" />
-            <span className="text-xs text-[#737373]">Disponible para freelance</span>
+          <div
+            className="flex items-center gap-2 pt-6"
+            style={{
+              opacity: mobileOpen ? 1 : 0,
+              transition: 'opacity 0.4s ease 0.35s',
+            }}
+          >
+            <span className="w-2.5 h-2.5 rounded-full bg-[#E53935] animate-pulse-red" />
+            <span className="text-sm text-[#737373] font-body">Disponible para freelance</span>
           </div>
         </div>
       </div>

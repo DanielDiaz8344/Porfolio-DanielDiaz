@@ -78,11 +78,6 @@ export default function Hero() {
             </StarBorder>
           </div>
 
-          {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-            <span className="text-xs text-[#737373] font-body">Scroll</span>
-            <div className="w-[1px] h-8 bg-gradient-to-b from-[#E53935] to-transparent" />
-          </div>
         </div>
       </ClickSpark>
     </section>
