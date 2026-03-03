@@ -11,4 +11,16 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom'],
+          'vendor-motion': ['motion/react', 'framer-motion'],
+          'vendor-gsap': ['gsap', 'gsap/ScrollTrigger', '@gsap/react'],
+          'vendor-ogl': ['ogl'],
+        },
+      },
+    },
+  },
 })
