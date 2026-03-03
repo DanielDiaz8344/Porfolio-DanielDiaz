@@ -12,36 +12,35 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative h-screen w-full overflow-hidden flex items-center justify-center">
-      {/* Layer 1: Threads - dynamic red flowing lines with mouse interaction */}
+      {/* Threads background - spread out to the edges */}
       <div className="absolute inset-0 z-0">
         <Threads
           color={[0.9, 0.15, 0.12]}
-          amplitude={0.8}
-          distance={0.3}
+          amplitude={1}
+          distance={0.6}
           enableMouseInteraction
         />
       </div>
 
-      {/* Layer 2: Ambient glow orbs (CSS only, zero perf cost) */}
+      {/* Ambient glow orbs */}
       <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
         <div className="hero-orb hero-orb-1" />
         <div className="hero-orb hero-orb-2" />
-        <div className="hero-orb hero-orb-3" />
       </div>
 
-      {/* Layer 3: Vignette + gradient for text readability */}
-      <div className="absolute inset-0 z-[2] bg-[radial-gradient(ellipse_at_center,transparent_0%,#0a0a0a_75%)]" />
-      <div className="absolute inset-0 z-[2] bg-gradient-to-b from-[#0a0a0a]/50 via-transparent to-[#0a0a0a]" />
+      {/* Strong center mask so threads don't overlap text */}
+      <div className="absolute inset-0 z-[2] bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,#0a0a0a_0%,transparent_100%)]" />
+
+      {/* Edge vignette */}
+      <div className="absolute inset-0 z-[2] bg-gradient-to-b from-[#0a0a0a]/60 via-transparent to-[#0a0a0a]" />
 
       {/* Content */}
       <ClickSpark sparkColor="#E53935" sparkSize={12} sparkRadius={20} sparkCount={10} duration={500}>
         <div className="relative z-[5] flex flex-col items-center text-center px-6 gap-6 max-w-5xl mx-auto h-screen justify-center">
-          {/* Name */}
           <h1 className="font-heading font-bold text-[clamp(3rem,10vw,8rem)] leading-[0.9] tracking-tight text-[#f5f5f5] drop-shadow-[0_0_60px_rgba(229,57,53,0.3)]">
             DANIEL DIAZ
           </h1>
 
-          {/* Rotating Roles */}
           <div className="flex items-center gap-3 text-[clamp(1rem,2.5vw,1.5rem)] font-body text-[#a3a3a3]">
             <span className="w-3 h-[2px] bg-[#E53935]" />
             <RotatingText
@@ -61,7 +60,6 @@ export default function Hero() {
             <span className="w-3 h-[2px] bg-[#E53935]" />
           </div>
 
-          {/* Slogan */}
           <BlurText
             text="No solo diseño. Creo marcas."
             className="text-[clamp(1.2rem,3vw,2rem)] font-heading font-medium text-[#f5f5f5]/90"
@@ -70,7 +68,6 @@ export default function Hero() {
             direction="bottom"
           />
 
-          {/* CTA */}
           <div className="mt-4">
             <StarBorder
               as="button"
