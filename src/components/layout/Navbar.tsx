@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 import GradientText from '@/components/reactbits/GradientText';
 import Magnet from '@/components/reactbits/Magnet';
@@ -15,6 +15,17 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [navHeight, setNavHeight] = useState(0);
+  const navBarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (navBarRef.current) setNavHeight(navBarRef.current.offsetHeight);
+    };
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+    return () => window.removeEventListener('resize', updateHeight);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -40,7 +51,7 @@ export default function Navbar() {
         scrolled || mobileOpen ? 'bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-[#1f1f1f]' : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 lg:py-4 flex items-center justify-between">
+      <div ref={navBarRef} className="max-w-7xl mx-auto px-4 sm:px-6 py-3 lg:py-4 flex items-center justify-between">
         {/* Logo */}
         <button onClick={() => handleNavClick('#hero')} className="cursor-pointer">
           <GradientText
@@ -82,7 +93,8 @@ export default function Navbar() {
 
       {/* Mobile Menu - Full screen overlay */}
       <div
-        className={`lg:hidden fixed inset-0 top-[57px] bg-[#0a0a0a]/98 backdrop-blur-2xl transition-all duration-400 ease-in-out ${
+        style={{ top: navHeight }}
+        className={`lg:hidden fixed inset-0 bg-[#0a0a0a]/98 backdrop-blur-2xl transition-all duration-400 ease-in-out ${
           mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
