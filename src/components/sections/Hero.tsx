@@ -2,7 +2,6 @@ import BlurText from '@/components/reactbits/BlurText';
 import RotatingText from '@/components/reactbits/RotatingText';
 import StarBorder from '@/components/reactbits/StarBorder';
 import ClickSpark from '@/components/reactbits/ClickSpark';
-import Aurora from '@/components/reactbits/Aurora';
 import Threads from '@/components/reactbits/Threads';
 
 export default function Hero() {
@@ -13,18 +12,8 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative h-screen w-full overflow-hidden flex items-center justify-center">
-      {/* Layer 1: Aurora - flowing red atmosphere */}
+      {/* Layer 1: Threads - dynamic red flowing lines with mouse interaction */}
       <div className="absolute inset-0 z-0">
-        <Aurora
-          colorStops={['#E53935', '#8B0000', '#FF2D2D']}
-          amplitude={1.8}
-          blend={0.7}
-          speed={0.8}
-        />
-      </div>
-
-      {/* Layer 2: Threads - dynamic red flowing lines with mouse interaction */}
-      <div className="absolute inset-0 z-[1] opacity-60">
         <Threads
           color={[0.9, 0.15, 0.12]}
           amplitude={0.8}
@@ -33,16 +22,16 @@ export default function Hero() {
         />
       </div>
 
-      {/* Layer 3: Ambient glow orbs */}
-      <div className="absolute inset-0 z-[2] overflow-hidden pointer-events-none">
+      {/* Layer 2: Ambient glow orbs (CSS only, zero perf cost) */}
+      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
         <div className="hero-orb hero-orb-1" />
         <div className="hero-orb hero-orb-2" />
         <div className="hero-orb hero-orb-3" />
       </div>
 
-      {/* Layer 4: Vignette + gradient for text readability */}
-      <div className="absolute inset-0 z-[3] bg-[radial-gradient(ellipse_at_center,transparent_0%,#0a0a0a_75%)]" />
-      <div className="absolute inset-0 z-[3] bg-gradient-to-b from-[#0a0a0a]/50 via-transparent to-[#0a0a0a]" />
+      {/* Layer 3: Vignette + gradient for text readability */}
+      <div className="absolute inset-0 z-[2] bg-[radial-gradient(ellipse_at_center,transparent_0%,#0a0a0a_75%)]" />
+      <div className="absolute inset-0 z-[2] bg-gradient-to-b from-[#0a0a0a]/50 via-transparent to-[#0a0a0a]" />
 
       {/* Content */}
       <ClickSpark sparkColor="#E53935" sparkSize={12} sparkRadius={20} sparkCount={10} duration={500}>
