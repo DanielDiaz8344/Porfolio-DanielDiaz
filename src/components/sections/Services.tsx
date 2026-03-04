@@ -2,7 +2,6 @@ import { Palette, TrendingUp, Share2, Users, Video, Camera } from 'lucide-react'
 import SpotlightCard from '@/components/reactbits/SpotlightCard';
 import DecryptedText from '@/components/reactbits/DecryptedText';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
-import Magnet from '@/components/reactbits/Magnet';
 
 const services = [
   {
@@ -71,11 +70,9 @@ export default function Services() {
                 {/* Top accent line */}
                 <div className="absolute top-0 left-0 h-[3px] bg-[#E53935] w-0 group-hover:w-full transition-all duration-500 z-10" />
 
-                <Magnet padding={20} magnetStrength={3}>
-                  <div className="w-12 h-12 rounded-xl bg-[#E53935]/10 border border-[#E53935]/20 flex items-center justify-center group-hover:bg-[#E53935]/20 group-hover:border-[#E53935]/40 transition-colors duration-300">
-                    <service.icon size={24} className="text-[#E53935]" />
-                  </div>
-                </Magnet>
+                <div className="w-12 h-12 rounded-xl bg-[#E53935]/10 border border-[#E53935]/20 flex items-center justify-center group-hover:bg-[#E53935]/20 group-hover:border-[#E53935]/40 transition-colors duration-300">
+                  <service.icon size={24} className="text-[#E53935]" />
+                </div>
 
                 <h3 className="text-xl font-heading font-semibold text-[#f5f5f5]">
                   <DecryptedText
@@ -84,7 +81,7 @@ export default function Services() {
                     maxIterations={15}
                     sequential
                     revealDirection="start"
-                    animateOn="hover"
+                    animateOn="view"
                     className="text-[#f5f5f5]"
                     encryptedClassName="text-[#E53935]/60"
                   />
