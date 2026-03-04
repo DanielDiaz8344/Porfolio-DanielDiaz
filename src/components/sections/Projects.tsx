@@ -112,6 +112,7 @@ const projects: Project[] = [
     fullDesc:
       'Catálogo personal de 6 páginas diseñado para presentar mi oferta completa de servicios creativos. Incluye secciones de Diseño Web (sitios funcionales y optimizados para conversión), Branding Estratégico e Identidad Visual, Diseño Editorial y Maquetación Profesional (catálogos, eBooks, documentos), y Publicidad Impresa y Digital (flyers para imprenta y banners optimizados para Google Display y redes sociales). El catálogo cierra con un flujo claro de cotización: consulta personalizada por videollamada, propuesta formal en 48 horas y arranque del proyecto.',
     image: '/projects/catalogo-daniel-portada.png',
+    imageBg: '#0a0a0a',
     catalogs: [
       { label: 'Ver Catálogo', url: '/projects/catalogo-daniel-diaz.pdf' },
     ],
