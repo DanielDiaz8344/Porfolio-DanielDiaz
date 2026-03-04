@@ -93,7 +93,7 @@ const projects: Project[] = [
       'Desarrollo completo de landing page para empresa tecnológica venezolana, aplicando psicología del consumidor y estrategias de conversión.',
     fullDesc:
       'Landing page para Kyra Soluciones Venezuela, empresa de desarrollo web y sistemas IA. Se analizó la audiencia objetivo y se aplicaron principios de psicología del consumidor para maximizar conversiones. Secciones de hero, servicios, testimonios y contacto optimizadas para generar confianza.',
-    image: '/projects/landing-kyra.png',
+    image: '/projects/kyra-landing.png',
     link: 'https://landing-kyra.vercel.app/es',
     linkLabel: 'Ver Landing',
     tools: ['Framer', 'Figma', 'Canva', 'IA'],
