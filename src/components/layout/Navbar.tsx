@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import GradientText from '@/components/reactbits/GradientText';
 import Magnet from '@/components/reactbits/Magnet';
 
 const navLinks = [
@@ -77,7 +76,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
         showGlass
-          ? 'bg-white/[0.03] backdrop-blur-xl border-b border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.3)]'
+          ? 'bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.3)]'
           : 'bg-transparent'
       }`}
     >
@@ -89,13 +88,9 @@ export default function Navbar() {
       <div ref={navBarRef} className="max-w-7xl mx-auto px-4 sm:px-6 py-3 lg:py-4 flex items-center justify-between relative">
         {/* Logo */}
         <button onClick={() => handleNavClick('#hero')} className="cursor-pointer">
-          <GradientText
-            colors={['#E53935', '#FF6B6B', '#8B0000', '#FF2D2D']}
-            animationSpeed={6}
-            className="text-lg sm:text-xl font-heading font-bold"
-          >
+          <span className="text-lg sm:text-xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#E53935] via-[#FF6B6B] to-[#E53935] bg-[length:200%_100%] animate-[gradient-shift_6s_ease_infinite]">
             ByDanielDiaz
-          </GradientText>
+          </span>
         </button>
 
         {/* Desktop Nav */}
