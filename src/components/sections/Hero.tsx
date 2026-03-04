@@ -29,7 +29,7 @@ export default function Hero() {
       </div>
 
       {/* Strong center mask so threads don't overlap text */}
-      <div className="absolute inset-0 z-[2] bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,#0a0a0a_0%,transparent_100%)]" />
+      <div className="absolute inset-0 z-[2] bg-[radial-gradient(ellipse_40%_30%_at_50%_50%,#0a0a0a_0%,transparent_100%)] md:bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,#0a0a0a_0%,transparent_100%)]" />
 
       {/* Edge vignette */}
       <div className="absolute inset-0 z-[2] bg-gradient-to-b from-[#0a0a0a]/60 via-transparent to-[#0a0a0a]" />
