@@ -26,6 +26,24 @@ interface Project {
 }
 
 const projects: Project[] = [
+  // 1. PRIMACÍA — Proyecto más completo (diseño + dev + branding + sitio live)
+  {
+    title: 'Sube con Pepe',
+    tag: 'Landing Page & Branding',
+    shortDesc:
+      'Diseño y desarrollo de landing page para app de transporte con mascota ilustrada y manual de marca completo.',
+    fullDesc:
+      'Diseño y desarrollo de landing page para Sube con Pepe, una aplicación de transporte. El proyecto abarcó desde la conceptualización de la identidad visual —incluyendo la creación de una mascota ilustrada— hasta la implementación del sitio web con React y Tailwind CSS. Se diseñó un manual de marca completo que define la paleta de colores, tipografías, usos del logo y lineamientos gráficos. La landing page cuenta con diseño responsivo y animaciones interactivas que refuerzan la personalidad de la marca.',
+    image: '/projects/sube-con-pepe-landing.png',
+    link: 'https://subeconpepe.vercel.app',
+    linkLabel: 'Ver Landing',
+    catalogs: [
+      { label: 'Manual de Marca', url: '/projects/Manual de Marca Sube con Pepe.pdf' },
+    ],
+    tools: ['Figma', 'Illustrator', 'React', 'Tailwind'],
+    tags: ['Landing', 'Branding'],
+  },
+  // 2. UX/UI con video — muestra proceso profesional
   {
     title: 'Aircool',
     tag: 'UX/UI Design',
@@ -39,18 +57,21 @@ const projects: Project[] = [
     tools: ['Figma'],
     tags: ['UX/UI', 'Figma'],
   },
+  // 3. CONTRASTE — Content creation rompe expectativas, muestra versatilidad
   {
-    title: 'Kyra Wallet',
-    tag: 'Branding',
+    title: 'Zona Elite TikTok',
+    tag: 'Content Creation',
     shortDesc:
-      'Identidad visual integral para billetera digital innovadora, incluyendo logo, banner y elementos gráficos para presencia digital.',
+      'Creación de contenido para TikTok de marca deportiva: guion, grabación, edición y publicación con enfoque en storytelling.',
     fullDesc:
-      'Proyecto de identidad visual integral para Kyra Wallet, una billetera digital innovadora. El desarrollo incluyó investigación orgánica del mercado fintech, análisis de competencia y definición de conceptos visuales utilizando inteligencia artificial para optimizar el proceso creativo. Se diseñó un logotipo distintivo con formas geométricas que transmiten confianza y modernidad, un banner promocional con ilustraciones vectoriales personalizadas, y elementos gráficos coherentes para la presencia digital. El uso de IA permitió explorar múltiples variaciones conceptuales y refinar rápidamente las propuestas visuales según las necesidades del cliente, logrando una identidad sólida que posiciona a Kyra Wallet como una solución financiera digital confiable y moderna.',
-    image: '/projects/kyra-wallet.jpg',
-    images: ['/projects/kyra-wallet.jpg', '/projects/kyra-wallet-logo.jpg', '/projects/kyra-wallet-avatar.jpg'],
-    tools: ['Illustrator', 'Photoshop', 'IA'],
-    tags: ['Branding', 'Identidad Visual'],
+      'Gestión integral del contenido audiovisual para la cuenta de TikTok de Zona Elite (@zonaeliteve). El proceso abarca desde la conceptualización y escritura de guiones con técnicas de storytelling hasta la grabación, edición y publicación. Cada pieza se diseña para captar atención en los primeros segundos, mantener el engagement con narrativas dinámicas y cerrar con llamados a la acción efectivos. Se trabaja con tendencias actuales de la plataforma, transiciones creativas, música estratégica y copy persuasivo. El objetivo es posicionar a Zona Elite como referente en el nicho deportivo, generando comunidad y reconocimiento de marca a través de contenido auténtico y de alto impacto.',
+    image: '/projects/zona-elite-tiktok.gif',
+    link: 'https://www.tiktok.com/@zonaeliteve',
+    linkLabel: 'Ver TikTok',
+    tools: ['CapCut', 'Canva', 'TikTok'],
+    tags: ['Content Creation', 'Storytelling', 'Video'],
   },
+  // 4. Otro sitio live — refuerza capacidad web
   {
     title: 'Landing Page Kyra',
     tag: 'Landing Page',
@@ -64,6 +85,21 @@ const projects: Project[] = [
     tools: ['Framer', 'Figma', 'Canva', 'IA'],
     tags: ['Landing', 'Web Design'],
   },
+  // 5. Branding sólido — cierra los 5 visibles con identidad visual
+  {
+    title: 'Kyra Wallet',
+    tag: 'Branding',
+    shortDesc:
+      'Identidad visual integral para billetera digital innovadora, incluyendo logo, banner y elementos gráficos para presencia digital.',
+    fullDesc:
+      'Proyecto de identidad visual integral para Kyra Wallet, una billetera digital innovadora. El desarrollo incluyó investigación orgánica del mercado fintech, análisis de competencia y definición de conceptos visuales utilizando inteligencia artificial para optimizar el proceso creativo. Se diseñó un logotipo distintivo con formas geométricas que transmiten confianza y modernidad, un banner promocional con ilustraciones vectoriales personalizadas, y elementos gráficos coherentes para la presencia digital. El uso de IA permitió explorar múltiples variaciones conceptuales y refinar rápidamente las propuestas visuales según las necesidades del cliente, logrando una identidad sólida que posiciona a Kyra Wallet como una solución financiera digital confiable y moderna.',
+    image: '/projects/kyra-wallet.jpg',
+    images: ['/projects/kyra-wallet.jpg', '/projects/kyra-wallet-logo.jpg', '/projects/kyra-wallet-avatar.jpg'],
+    tools: ['Illustrator', 'Photoshop', 'IA'],
+    tags: ['Branding', 'Identidad Visual'],
+  },
+  // --- VER MÁS ---
+  // 6. Creativo/sorpresa — mantiene interés
   {
     title: 'Diseño de Cartas',
     tag: 'Diseño Gráfico',
@@ -75,6 +111,7 @@ const projects: Project[] = [
     tools: ['Canva', 'Photoshop'],
     tags: ['Cartas', 'Cyberpunk'],
   },
+  // 7. Volumen de trabajo — demuestra confianza del cliente
   {
     title: 'Catálogos Kyra',
     tag: 'Diseño Editorial',
@@ -93,6 +130,20 @@ const projects: Project[] = [
     tools: ['Canva', 'Photoshop'],
     tags: ['Branding', 'Editorial', 'Catálogos'],
   },
+  // 8. Logo limpio
+  {
+    title: 'Zona Elite',
+    tag: 'Logo Design',
+    shortDesc:
+      'Logotipo geométrico de lobo enmarcado en hexágono con degradado cyan a púrpura, diseñado para marca deportiva premium.',
+    fullDesc:
+      'Diseño de identidad visual para Zona Elite, una marca deportiva orientada al alto rendimiento. El concepto parte de la figura del lobo como símbolo de liderazgo, disciplina y mentalidad de manada. Se construyó con trazos geométricos limpios dentro de un hexágono —forma asociada a resistencia y estructura— aplicando un degradado de cyan a púrpura que aporta modernidad y diferenciación. El proceso incluyó bocetaje inicial, vectorización precisa en Illustrator y pruebas de legibilidad en múltiples tamaños. Se entregaron versiones para uso digital (redes sociales, favicon, app icon) e impreso (indumentaria, señalética), garantizando consistencia visual en cualquier soporte.',
+    image: '/projects/zona-elite.png',
+    imageBg: '#0a0a0a',
+    tools: ['Illustrator'],
+    tags: ['Logo', 'Branding'],
+  },
+  // 9. RECENCIA — Catálogo personal = CTA natural hacia contratación
   {
     title: 'Catálogo Daniel Diaz',
     tag: 'Diseño Editorial',
@@ -106,47 +157,6 @@ const projects: Project[] = [
     ],
     tools: ['Canva', 'Photoshop'],
     tags: ['Editorial', 'Servicios'],
-  },
-  {
-    title: 'Sube con Pepe',
-    tag: 'Landing Page & Branding',
-    shortDesc:
-      'Diseño y desarrollo de landing page para app de transporte con mascota ilustrada y manual de marca completo.',
-    fullDesc:
-      'Diseño y desarrollo de landing page para Sube con Pepe, una aplicación de transporte. El proyecto abarcó desde la conceptualización de la identidad visual —incluyendo la creación de una mascota ilustrada— hasta la implementación del sitio web con React y Tailwind CSS. Se diseñó un manual de marca completo que define la paleta de colores, tipografías, usos del logo y lineamientos gráficos. La landing page cuenta con diseño responsivo y animaciones interactivas que refuerzan la personalidad de la marca.',
-    image: '/projects/sube-con-pepe-landing.png',
-    link: 'https://subeconpepe.vercel.app',
-    linkLabel: 'Ver Landing',
-    catalogs: [
-      { label: 'Manual de Marca', url: '/projects/Manual de Marca Sube con Pepe.pdf' },
-    ],
-    tools: ['Figma', 'Illustrator', 'React', 'Tailwind'],
-    tags: ['Landing', 'Branding'],
-  },
-  {
-    title: 'Zona Elite',
-    tag: 'Logo Design',
-    shortDesc:
-      'Logotipo geométrico de lobo enmarcado en hexágono con degradado cyan a púrpura, diseñado para marca deportiva premium.',
-    fullDesc:
-      'Diseño de identidad visual para Zona Elite, una marca deportiva orientada al alto rendimiento. El concepto parte de la figura del lobo como símbolo de liderazgo, disciplina y mentalidad de manada. Se construyó con trazos geométricos limpios dentro de un hexágono —forma asociada a resistencia y estructura— aplicando un degradado de cyan a púrpura que aporta modernidad y diferenciación. El proceso incluyó bocetaje inicial, vectorización precisa en Illustrator y pruebas de legibilidad en múltiples tamaños. Se entregaron versiones para uso digital (redes sociales, favicon, app icon) e impreso (indumentaria, señalética), garantizando consistencia visual en cualquier soporte.',
-    image: '/projects/zona-elite.png',
-    imageBg: '#0a0a0a',
-    tools: ['Illustrator'],
-    tags: ['Logo', 'Branding'],
-  },
-  {
-    title: 'Zona Elite TikTok',
-    tag: 'Content Creation',
-    shortDesc:
-      'Creación de contenido para TikTok de marca deportiva: guion, grabación, edición y publicación con enfoque en storytelling.',
-    fullDesc:
-      'Gestión integral del contenido audiovisual para la cuenta de TikTok de Zona Elite (@zonaeliteve). El proceso abarca desde la conceptualización y escritura de guiones con técnicas de storytelling hasta la grabación, edición y publicación. Cada pieza se diseña para captar atención en los primeros segundos, mantener el engagement con narrativas dinámicas y cerrar con llamados a la acción efectivos. Se trabaja con tendencias actuales de la plataforma, transiciones creativas, música estratégica y copy persuasivo. El objetivo es posicionar a Zona Elite como referente en el nicho deportivo, generando comunidad y reconocimiento de marca a través de contenido auténtico y de alto impacto.',
-    image: '/projects/zona-elite-tiktok.gif',
-    link: 'https://www.tiktok.com/@zonaeliteve',
-    linkLabel: 'Ver TikTok',
-    tools: ['CapCut', 'Canva', 'TikTok'],
-    tags: ['Content Creation', 'Storytelling', 'Video'],
   },
 ];
 
