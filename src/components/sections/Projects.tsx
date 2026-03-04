@@ -1,4 +1,5 @@
-import { ExternalLink, ArrowUpRight } from 'lucide-react';
+import { useState } from 'react';
+import { ExternalLink, ArrowUpRight, ChevronDown } from 'lucide-react';
 import DecryptedText from '@/components/reactbits/DecryptedText';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
 
@@ -61,17 +62,15 @@ const projects: Project[] = [
     image: '/projects/kyra-wallet-avatar.jpg',
     tools: ['Photoshop', 'Illustrator', 'Canva'],
   },
-  {
-    title: 'Kyra VE — Variante Green',
-    tag: 'Identidad Visual',
-    description:
-      'Extensión de la identidad de Kyra VE Soluciones con variante cromática en verde esmeralda. Adaptación del logotipo para aplicaciones específicas y submarcas del ecosistema.',
-    image: '/projects/kyra-green.jpg',
-    tools: ['Illustrator'],
-  },
 ];
 
+const INITIAL_COUNT = 5;
+
 export default function Projects() {
+  const [showAll, setShowAll] = useState(false);
+  const visible = showAll ? projects : projects.slice(0, INITIAL_COUNT);
+  const hasMore = projects.length > INITIAL_COUNT;
+
   return (
     <section id="projects" className="py-24 md:py-32 bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto px-6">
@@ -91,7 +90,7 @@ export default function Projects() {
 
         {/* Projects Stack */}
         <div className="flex flex-col gap-8">
-          {projects.map((project, index) => {
+          {visible.map((project, index) => {
             const imageLeft = index % 2 === 0;
 
             return (
@@ -177,6 +176,21 @@ export default function Projects() {
             );
           })}
         </div>
+
+        {/* Ver más button */}
+        {hasMore && !showAll && (
+          <AnimatedContent distance={30} duration={0.4} threshold={0.1}>
+            <div className="flex justify-center mt-12">
+              <button
+                onClick={() => setShowAll(true)}
+                className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm font-body font-medium text-[#a3a3a3] hover:text-[#f5f5f5] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all duration-300 cursor-pointer"
+              >
+                Ver más proyectos
+                <ChevronDown size={16} className="group-hover:translate-y-0.5 transition-transform duration-300" />
+              </button>
+            </div>
+          </AnimatedContent>
+        )}
       </div>
     </section>
   );
