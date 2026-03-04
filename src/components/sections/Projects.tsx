@@ -255,29 +255,33 @@ export default function Projects() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6"
           >
-            {/* Backdrop */}
+            {/* Backdrop with ambient glow */}
             <div
-              className="absolute inset-0 bg-[#0a0a0a]/85 backdrop-blur-sm"
+              className="absolute inset-0 bg-[#0a0a0a]/80 backdrop-blur-md"
               onClick={() => setSelected(null)}
             />
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#E53935]/[0.04] rounded-full blur-[120px] pointer-events-none" />
 
-            {/* Modal card */}
+            {/* Modal card - liquid glass */}
             <motion.div
-              initial={{ opacity: 0, y: 30, scale: 0.97 }}
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 20, scale: 0.97 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-[#141414]/95 backdrop-blur-2xl rounded-2xl sm:rounded-3xl border border-white/[0.08] shadow-[0_16px_60px_rgba(0,0,0,0.6)]"
+              exit={{ opacity: 0, y: 30, scale: 0.95 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white/[0.04] backdrop-blur-2xl rounded-2xl sm:rounded-3xl border border-white/[0.08] shadow-[0_16px_80px_rgba(0,0,0,0.5)]"
             >
+              {/* Top red accent line */}
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#E53935]/30 to-transparent rounded-t-3xl" />
+
               {/* Close button */}
               <button
                 onClick={() => setSelected(null)}
-                className="absolute top-4 right-4 z-10 p-2 rounded-xl bg-[#0a0a0a]/60 backdrop-blur-md border border-white/[0.1] text-[#737373] hover:text-[#f5f5f5] transition-colors duration-200 cursor-pointer"
+                className="absolute top-4 right-4 z-20 p-2.5 rounded-xl bg-white/[0.06] backdrop-blur-md border border-white/[0.1] text-[#737373] hover:text-[#E53935] hover:border-[#E53935]/30 hover:bg-[#E53935]/[0.06] transition-all duration-300 cursor-pointer"
               >
-                <X size={18} />
+                <X size={16} />
               </button>
 
               {/* Video or Image(s) */}
@@ -302,21 +306,21 @@ export default function Projects() {
                     alt={selected.title}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-[#0e0e0e]/20 to-transparent" />
                 </div>
               )}
 
               {/* Image thumbnails */}
-              {selected.images && selected.images.length > 1 && (
-                <div className="flex gap-2 px-6 sm:px-8 -mt-6 relative z-10">
+              {!selected.video && selected.images && selected.images.length > 1 && (
+                <div className="flex gap-2 px-6 sm:px-8 -mt-8 relative z-10">
                   {selected.images.map((img, i) => (
                     <button
                       key={img}
                       onClick={() => setActiveImage(i)}
-                      className={`w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 cursor-pointer ${
+                      className={`w-14 h-14 rounded-lg overflow-hidden border-2 transition-all duration-300 cursor-pointer backdrop-blur-md ${
                         i === activeImage
-                          ? 'border-[#E53935] shadow-[0_0_12px_rgba(229,57,53,0.3)]'
-                          : 'border-white/[0.1] opacity-60 hover:opacity-100'
+                          ? 'border-[#E53935] shadow-[0_0_16px_rgba(229,57,53,0.3)] scale-105'
+                          : 'border-white/[0.08] opacity-50 hover:opacity-100 hover:border-white/[0.2]'
                       }`}
                     >
                       <img
@@ -331,40 +335,56 @@ export default function Projects() {
 
               {/* Content */}
               <div className="p-6 sm:p-8">
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-3">
-                  {selected.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs font-body text-[#E53935] bg-[#E53935]/[0.08] border border-[#E53935]/15 rounded-full px-3 py-0.5"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-
-                <h3 className="text-2xl sm:text-3xl font-heading font-bold text-[#f5f5f5]">
+                {/* Tag + Title */}
+                <span className="text-xs text-[#E53935] font-body uppercase tracking-widest">
+                  {selected.tag}
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-heading font-bold text-[#f5f5f5] mt-2">
                   {selected.title}
                 </h3>
 
-                <p className="text-[#a3a3a3] font-body leading-relaxed mt-4">
+                {/* Divider */}
+                <div className="w-12 h-[2px] bg-gradient-to-r from-[#E53935] to-transparent mt-4 mb-5" />
+
+                {/* Description */}
+                <p className="text-[#a3a3a3] font-body text-sm sm:text-base leading-relaxed">
                   {selected.fullDesc}
                 </p>
 
-                {/* Tools */}
-                <div className="mt-6">
-                  <span className="text-xs text-[#737373] font-body uppercase tracking-wider">
-                    Herramientas
-                  </span>
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {selected.tools.map((tool) => (
-                      <span
-                        key={tool}
-                        className="text-xs font-body text-[#a3a3a3] bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-1"
-                      >
-                        {tool}
-                      </span>
-                    ))}
+                {/* Tags + Tools row */}
+                <div className="flex flex-col sm:flex-row sm:items-start gap-6 mt-6 pt-6 border-t border-white/[0.06]">
+                  {/* Tags */}
+                  <div className="flex-1">
+                    <span className="text-[10px] text-[#737373] font-body uppercase tracking-widest">
+                      Categorías
+                    </span>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {selected.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-xs font-body text-[#E53935]/80 bg-[#E53935]/[0.06] border border-[#E53935]/10 rounded-full px-3 py-1"
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Tools */}
+                  <div className="flex-1">
+                    <span className="text-[10px] text-[#737373] font-body uppercase tracking-widest">
+                      Herramientas
+                    </span>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {selected.tools.map((tool) => (
+                        <span
+                          key={tool}
+                          className="text-xs font-body text-[#a3a3a3] bg-white/[0.04] border border-white/[0.08] rounded-full px-3 py-1"
+                        >
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
@@ -374,9 +394,9 @@ export default function Projects() {
                     href={selected.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-xl bg-[#E53935]/10 border border-[#E53935]/20 text-[#E53935] text-sm font-body font-medium hover:bg-[#E53935]/20 hover:border-[#E53935]/40 transition-all duration-300"
+                    className="group inline-flex items-center gap-2.5 mt-6 px-5 py-2.5 rounded-xl bg-[#E53935]/10 border border-[#E53935]/20 text-[#E53935] text-sm font-body font-medium hover:bg-[#E53935]/20 hover:border-[#E53935]/40 hover:shadow-[0_0_20px_rgba(229,57,53,0.1)] transition-all duration-300"
                   >
-                    <ExternalLink size={14} />
+                    <ExternalLink size={14} className="group-hover:rotate-12 transition-transform duration-300" />
                     {selected.linkLabel || 'Ver proyecto'}
                   </a>
                 )}
