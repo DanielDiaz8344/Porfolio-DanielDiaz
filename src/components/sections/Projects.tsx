@@ -50,7 +50,7 @@ const projects: Project[] = [
     shortDesc:
       'Sistema de inventario moderno diseñado para reemplazar procesos obsoletos basados en Excel, priorizando la simplicidad y usabilidad.',
     fullDesc:
-      'Proyecto de modernización del sistema de inventario para Aircool, una empresa que manejaba todo su inventario de manera tradicional usando Excel y procesos manuales. El desafío consistía en digitalizar y optimizar sus flujos de trabajo mediante el diseño de interfaces intuitivas y funcionales. Se desarrollaron las interfaces completas utilizando Figma, con especial atención a crear flujos de usuario sencillos y comprensibles para facilitar la transición del equipo. Se adaptó cuidadosamente la paleta de colores basándose en el logo existente de Aircool, asegurando coherencia visual y evitando la saturación que pudiera cansar la vista durante jornadas largas de trabajo. Las interfaces finales fueron documentadas y compartidas con el equipo de desarrollo para garantizar una implementación fiel al diseño.',
+      'Modernización del sistema de inventario para Aircool, reemplazando procesos manuales en Excel por interfaces digitales intuitivas. Se diseñaron flujos completos en Figma con una paleta adaptada del logo existente, priorizando legibilidad y bajo cansancio visual para jornadas extensas.',
     image: '/projects/aircool.png',
     imageBg: '#0a0a0a',
     video: 'https://drive.google.com/file/d/1dFc3ZJCI1TDfVFUI3cIeqgc9REjR3XMZ/preview',
@@ -78,7 +78,7 @@ const projects: Project[] = [
     shortDesc:
       'Desarrollo completo de landing page para empresa tecnológica venezolana, aplicando psicología del consumidor y estrategias de conversión.',
     fullDesc:
-      'Proyecto integral de landing page para Kyra Soluciones Venezuela, empresa líder en desarrollo web, sistemas IA y equipos tecnológicos. El proceso incluyó investigación exhaustiva sobre las necesidades del cliente, análisis de su audiencia objetivo y aplicación de principios de psicología del consumidor para maximizar conversiones. Se utilizó inteligencia artificial para optimizar el copy, la estructura visual y los elementos persuasivos. El diseño se creó utilizando Framer, Figma y Canva. El landing presenta secciones optimizadas de hero, servicios, testimonios y contacto, con un enfoque en generar confianza y credibilidad.',
+      'Landing page para Kyra Soluciones Venezuela, empresa de desarrollo web y sistemas IA. Se analizó la audiencia objetivo y se aplicaron principios de psicología del consumidor para maximizar conversiones. Secciones de hero, servicios, testimonios y contacto optimizadas para generar confianza.',
     image: '/projects/landing-kyra.png',
     link: 'https://landing-kyra.vercel.app/es',
     linkLabel: 'Ver Landing',
@@ -92,7 +92,7 @@ const projects: Project[] = [
     shortDesc:
       'Identidad visual integral para billetera digital innovadora, incluyendo logo, banner y elementos gráficos para presencia digital.',
     fullDesc:
-      'Proyecto de identidad visual integral para Kyra Wallet, una billetera digital innovadora. El desarrollo incluyó investigación orgánica del mercado fintech, análisis de competencia y definición de conceptos visuales utilizando inteligencia artificial para optimizar el proceso creativo. Se diseñó un logotipo distintivo con formas geométricas que transmiten confianza y modernidad, un banner promocional con ilustraciones vectoriales personalizadas, y elementos gráficos coherentes para la presencia digital. El uso de IA permitió explorar múltiples variaciones conceptuales y refinar rápidamente las propuestas visuales según las necesidades del cliente, logrando una identidad sólida que posiciona a Kyra Wallet como una solución financiera digital confiable y moderna.',
+      'Identidad visual para Kyra Wallet, billetera digital fintech. Investigación de mercado, análisis de competencia y creación de logotipo con formas geométricas que transmiten confianza. Se diseñaron banner promocional, ilustraciones vectoriales y elementos gráficos coherentes para toda la presencia digital.',
     image: '/projects/kyra-wallet.jpg',
     images: ['/projects/kyra-wallet.jpg', '/projects/kyra-wallet-logo.jpg', '/projects/kyra-wallet-avatar.jpg'],
     tools: ['Illustrator', 'Photoshop', 'IA'],
@@ -106,7 +106,7 @@ const projects: Project[] = [
     shortDesc:
       'Cartas con temática cyberpunk retro para mazo de blackjack, combinando investigación visual y diseño digital especializado.',
     fullDesc:
-      'Proyecto de diseño de cartas con temática cyberpunk retro para un mazo completo de blackjack. El proceso comenzó con investigación intensiva sobre la estética cyberpunk, analizando referencias visuales, paletas de colores características, tipografías futuristas y elementos gráficos del género. Se creó un concepto visual cohesivo que combina elementos retro-futuristas con la funcionalidad tradicional del blackjack, utilizando gradientes neón, texturas digitales y geometrías angulares propias del estilo cyberpunk. Las herramientas principales fueron Canva para la conceptualización y composición inicial, y Photoshop para refinamientos avanzados, efectos especiales y optimización final.',
+      'Mazo completo de blackjack con temática cyberpunk retro. Investigación de referencias visuales del género para crear un concepto cohesivo con gradientes neón, texturas digitales y geometrías angulares. Cada carta combina funcionalidad tradicional con estética retro-futurista.',
     image: '/projects/cartas.png',
     tools: ['Canva', 'Photoshop'],
     tags: ['Cartas', 'Cyberpunk'],
@@ -137,7 +137,7 @@ const projects: Project[] = [
     shortDesc:
       'Logotipo geométrico de lobo enmarcado en hexágono con degradado cyan a púrpura, diseñado para marca deportiva premium.',
     fullDesc:
-      'Diseño de identidad visual para Zona Elite, una marca deportiva orientada al alto rendimiento. El concepto parte de la figura del lobo como símbolo de liderazgo, disciplina y mentalidad de manada. Se construyó con trazos geométricos limpios dentro de un hexágono —forma asociada a resistencia y estructura— aplicando un degradado de cyan a púrpura que aporta modernidad y diferenciación. El proceso incluyó bocetaje inicial, vectorización precisa en Illustrator y pruebas de legibilidad en múltiples tamaños. Se entregaron versiones para uso digital (redes sociales, favicon, app icon) e impreso (indumentaria, señalética), garantizando consistencia visual en cualquier soporte.',
+      'Logo para Zona Elite, marca deportiva de alto rendimiento. El lobo simboliza liderazgo y disciplina, enmarcado en un hexágono con degradado cyan-púrpura que aporta modernidad. Entregado en versiones para digital e impreso.',
     image: '/projects/zona-elite.png',
     imageBg: '#0a0a0a',
     tools: ['Illustrator'],
@@ -150,7 +150,7 @@ const projects: Project[] = [
     shortDesc:
       'Catálogo profesional de servicios creativos propios: diseño web, branding, editorial, publicidad impresa y digital.',
     fullDesc:
-      'Catálogo personal de 6 páginas diseñado para presentar mi oferta completa de servicios creativos. Incluye secciones de Diseño Web (sitios funcionales y optimizados para conversión), Branding Estratégico e Identidad Visual, Diseño Editorial y Maquetación Profesional (catálogos, eBooks, documentos), y Publicidad Impresa y Digital (flyers para imprenta y banners optimizados para Google Display y redes sociales). El catálogo cierra con un flujo claro de cotización: consulta personalizada por videollamada, propuesta formal en 48 horas y arranque del proyecto.',
+      'Catálogo de 6 páginas con mi oferta de servicios: diseño web, branding, editorial y publicidad. Cierra con un flujo de cotización claro: videollamada, propuesta en 48h y arranque del proyecto.',
     image: '/projects/catalogo-daniel-portada.png',
     catalogs: [
       { label: 'Ver Catálogo', url: '/projects/catalogo-daniel-diaz.pdf' },
