@@ -113,10 +113,13 @@ const projects: Project[] = [
     shortDesc:
       'Diseño y desarrollo de landing page para app de transporte con mascota ilustrada y manual de marca completo.',
     fullDesc:
-      'Diseño y desarrollo de landing page para aplicación de transporte. Creación de mascota ilustrada, manual de marca completo y diseño web responsivo con animaciones interactivas. El proyecto abarcó desde la conceptualización de la identidad visual hasta la implementación del sitio web con React y Tailwind CSS.',
+      'Diseño y desarrollo de landing page para Sube con Pepe, una aplicación de transporte. El proyecto abarcó desde la conceptualización de la identidad visual —incluyendo la creación de una mascota ilustrada— hasta la implementación del sitio web con React y Tailwind CSS. Se diseñó un manual de marca completo que define la paleta de colores, tipografías, usos del logo y lineamientos gráficos. La landing page cuenta con diseño responsivo y animaciones interactivas que refuerzan la personalidad de la marca.',
     image: '/projects/sube-con-pepe.png',
     link: 'https://subeconpepe.vercel.app',
     linkLabel: 'Ver Landing',
+    catalogs: [
+      { label: 'Manual de Marca', url: '/projects/Manual de Marca Sube con Pepe.pdf' },
+    ],
     tools: ['Figma', 'Illustrator', 'React', 'Tailwind'],
     tags: ['Landing', 'Branding'],
   },
@@ -124,10 +127,11 @@ const projects: Project[] = [
     title: 'Zona Elite',
     tag: 'Logo Design',
     shortDesc:
-      'Logotipo minimalista con estilo geométrico para marca deportiva. Concepto de lobo en hexágono con degradado cyan-púrpura.',
+      'Logotipo geométrico de lobo enmarcado en hexágono con degradado cyan a púrpura, diseñado para marca deportiva premium.',
     fullDesc:
-      'Diseño de logotipo minimalista con estilo geométrico para marca deportiva. Concepto de lobo dentro de un hexágono con degradado cyan-púrpura, transmitiendo fuerza y exclusividad. El diseño funciona en múltiples formatos y tamaños, desde favicon hasta impresión de gran formato.',
+      'Diseño de identidad visual para Zona Elite, una marca deportiva orientada al alto rendimiento. El concepto parte de la figura del lobo como símbolo de liderazgo, disciplina y mentalidad de manada. Se construyó con trazos geométricos limpios dentro de un hexágono —forma asociada a resistencia y estructura— aplicando un degradado de cyan a púrpura que aporta modernidad y diferenciación. El proceso incluyó bocetaje inicial, vectorización precisa en Illustrator y pruebas de legibilidad en múltiples tamaños. Se entregaron versiones para uso digital (redes sociales, favicon, app icon) e impreso (indumentaria, señalética), garantizando consistencia visual en cualquier soporte.',
     image: '/projects/zona-elite.png',
+    imageBg: '#0a0a0a',
     tools: ['Illustrator'],
     tags: ['Logo', 'Branding'],
   },
