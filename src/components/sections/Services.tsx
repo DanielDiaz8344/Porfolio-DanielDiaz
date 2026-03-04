@@ -62,7 +62,7 @@ export default function Services() {
               threshold={0.05}
               className="h-full"
             >
-              <div className="group relative h-full rounded-2xl bg-[#141414] border border-[#1f1f1f] p-6 flex flex-col gap-5 transition-all duration-500 hover:border-[#E53935]/30 hover:bg-[#161616]">
+              <div tabIndex={0} className="group relative h-full rounded-2xl bg-[#141414] border border-[#1f1f1f] p-6 flex flex-col gap-5 transition-all duration-500 hover:border-[#E53935]/30 hover:bg-[#161616] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E53935]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]">
                 {/* Glow behind card on hover */}
                 <div className="absolute -inset-px rounded-2xl bg-[#E53935]/0 group-hover:bg-[#E53935]/[0.03] transition-all duration-500 -z-10 blur-xl" />
 

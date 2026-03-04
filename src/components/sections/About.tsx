@@ -83,6 +83,7 @@ export default function About() {
                 <img
                   src="/daniel-diaz.jpg"
                   alt="Daniel Diaz"
+                  loading="lazy"
                   className="w-full h-full object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/60 via-transparent to-transparent" />

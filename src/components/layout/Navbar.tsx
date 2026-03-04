@@ -46,7 +46,7 @@ export default function Navbar() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="relative flex items-center justify-between">
             {/* Logo */}
-            <button onClick={() => handleNavClick('#hero')} className="cursor-pointer">
+            <button onClick={() => handleNavClick('#hero')} aria-label="Ir a inicio" className="cursor-pointer">
               <span className="text-[clamp(1.1rem,2.5vw,1.25rem)] font-heading font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#E53935] via-[#FF6B6B] to-[#E53935] bg-[length:200%_100%] animate-[gradient-shift_6s_ease_infinite]">
                 ByDanielDiaz
               </span>
@@ -75,7 +75,7 @@ export default function Navbar() {
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? 'Cerrar menú' : 'Abrir menú'}
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 {mobileOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 ) : (

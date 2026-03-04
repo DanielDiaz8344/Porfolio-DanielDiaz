@@ -23,7 +23,7 @@ export default function Hero() {
       </div>
 
       {/* Ambient glow orbs */}
-      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none" aria-hidden="true">
         <div className="hero-orb hero-orb-1" />
         <div className="hero-orb hero-orb-2" />
       </div>

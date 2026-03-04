@@ -154,7 +154,7 @@ export default function Skills() {
                           delay={secIndex * 0.1 + toolIndex * 0.06}
                           threshold={0.05}
                         >
-                          <div className="group relative overflow-hidden rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/[0.08] px-4 py-3.5 flex items-center gap-3 transition-all duration-500 hover:bg-white/[0.07] hover:border-white/[0.15] hover:shadow-[0_8px_32px_rgba(229,57,53,0.08)]">
+                          <div tabIndex={0} className="group relative overflow-hidden rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/[0.08] px-4 py-3.5 flex items-center gap-3 transition-all duration-500 hover:bg-white/[0.07] hover:border-white/[0.15] hover:shadow-[0_8px_32px_rgba(229,57,53,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E53935]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]">
                             {/* Shine sweep on hover */}
                             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[linear-gradient(105deg,transparent_40%,rgba(255,255,255,0.03)_45%,rgba(255,255,255,0.06)_50%,rgba(255,255,255,0.03)_55%,transparent_60%)] group-hover:animate-[shimmer_1.5s_ease-in-out] pointer-events-none" />
 

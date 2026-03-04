@@ -181,6 +181,7 @@ export default function Projects() {
   const [selected, setSelected] = useState<Project | null>(null);
   const [activeImage, setActiveImage] = useState(0);
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [imageBroken, setImageBroken] = useState(false);
 
   useEffect(() => {
     if (selected) {
@@ -203,6 +204,7 @@ export default function Projects() {
     setSelected(project);
     setActiveImage(0);
     setVideoLoaded(false);
+    setImageBroken(false);
   };
 
   return (
@@ -236,8 +238,12 @@ export default function Projects() {
                 threshold={0.1}
               >
                 <div
+                  role="button"
+                  tabIndex={0}
                   onClick={() => openProject(project)}
-                  className="group relative overflow-hidden rounded-2xl bg-white/[0.03] backdrop-blur-md border border-white/[0.08] transition-all duration-500 hover:bg-white/[0.06] hover:border-white/[0.15] hover:shadow-[0_8px_40px_rgba(229,57,53,0.06)] cursor-pointer"
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openProject(project); } }}
+                  aria-label={`Ver proyecto ${project.title}`}
+                  className="group relative overflow-hidden rounded-2xl bg-white/[0.03] backdrop-blur-md border border-white/[0.08] transition-all duration-500 hover:bg-white/[0.06] hover:border-white/[0.15] hover:shadow-[0_8px_40px_rgba(229,57,53,0.06)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E53935]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
                 >
                   {/* Shimmer on hover */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[linear-gradient(105deg,transparent_40%,rgba(255,255,255,0.03)_45%,rgba(255,255,255,0.06)_50%,rgba(255,255,255,0.03)_55%,transparent_60%)] group-hover:animate-[shimmer_1.5s_ease-in-out] pointer-events-none z-10" />
@@ -255,6 +261,7 @@ export default function Projects() {
                       <img
                         src={project.image}
                         alt={project.title}
+                        loading="lazy"
                         className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${
                           project.imageBg ? 'object-contain p-6' : 'object-cover'
                         }`}
@@ -373,16 +380,21 @@ export default function Projects() {
                   />
                 </div>
               ) : (
-                <div className="relative overflow-hidden rounded-t-2xl sm:rounded-t-3xl bg-[#111] flex items-center justify-center max-h-[50vh]">
-                  <img
-                    src={
-                      selected.images
-                        ? selected.images[activeImage]
-                        : selected.image
-                    }
-                    alt={selected.title}
-                    className="w-full max-h-[50vh] object-contain"
-                  />
+                <div className={`relative overflow-hidden rounded-t-2xl sm:rounded-t-3xl bg-[#111] flex items-center justify-center ${imageBroken ? 'min-h-[200px]' : 'max-h-[50vh]'}`}>
+                  {imageBroken ? (
+                    <p className="text-sm text-[#737373] font-body">Imagen no disponible</p>
+                  ) : (
+                    <img
+                      src={
+                        selected.images
+                          ? selected.images[activeImage]
+                          : selected.image
+                      }
+                      alt={selected.title}
+                      className="w-full max-h-[50vh] object-contain"
+                      onError={() => setImageBroken(true)}
+                    />
+                  )}
                   <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0e0e0e] to-transparent" />
                 </div>
               )}
