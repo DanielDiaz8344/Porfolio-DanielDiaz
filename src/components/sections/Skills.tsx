@@ -63,6 +63,7 @@ const toolSections: { category: string; tools: Tool[] }[] = [
       { name: 'After Effects', icon: <TbBrandAdobeAfterEffect />, color: '#9999FF' },
       { name: 'Lightroom', icon: <Abbr color="#31A8FF">Lr</Abbr>, color: '#31A8FF' },
       { name: 'CapCut', icon: <CapCutIcon />, color: '#FFFFFF' },
+      { name: 'Veo 3', icon: <Abbr color="#4285F4">V3</Abbr>, color: '#4285F4' },
     ],
   },
   {
@@ -72,23 +73,22 @@ const toolSections: { category: string; tools: Tool[] }[] = [
       { name: 'FlutterFlow', icon: <SiFlutter />, color: '#02569B' },
       { name: 'Framer', icon: <SiFramer />, color: '#0099FF' },
       { name: 'HTML/CSS', icon: <SiHtml5 />, color: '#E44D26' },
+      { name: 'Pencil Dev', icon: <Pencil size={20} />, color: '#6366F1' },
     ],
   },
   {
-    category: 'IA & Automatización',
+    category: 'IA & Creación',
     tools: [
       { name: 'ChatGPT', icon: <SiOpenai />, color: '#10A37F' },
       { name: 'Claude Code', icon: <SiClaude />, color: '#D97757' },
       { name: 'Midjourney', icon: <Abbr color="#FFFFFF">Mj</Abbr>, color: '#FFFFFF' },
-      { name: 'Pencil Dev', icon: <Pencil size={20} />, color: '#6366F1' },
+      { name: 'Nano Banana', icon: <NanoBananaIcon />, color: '#FFD60A' },
     ],
   },
   {
     category: 'Productividad',
     tools: [
       { name: 'Notion', icon: <SiNotion />, color: '#FFFFFF' },
-      { name: 'Veo 3', icon: <Abbr color="#4285F4">V3</Abbr>, color: '#4285F4' },
-      { name: 'Nano Banana', icon: <NanoBananaIcon />, color: '#FFD60A' },
       { name: 'Google Suite', icon: <SiGoogle />, color: '#4285F4' },
     ],
   },
