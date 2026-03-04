@@ -10,10 +10,10 @@ import { Badge } from '@/components/ui/badge';
 const badges = ['Freelancer', 'Venezuela', 'Disponible'];
 
 const stats = [
-  { value: 3, suffix: '+', label: 'Años de experiencia' },
-  { value: 50, suffix: '+', label: 'Proyectos completados' },
-  { value: 30, suffix: '+', label: 'Clientes satisfechos' },
-  { value: 6, suffix: '', label: 'Servicios ofrecidos' },
+  { value: 3, suffix: '+', label: 'Años' },
+  { value: 50, suffix: '+', label: 'Proyectos' },
+  { value: 30, suffix: '+', label: 'Clientes' },
+  { value: 6, suffix: '', label: 'Servicios' },
 ];
 
 function Counter({ target, suffix }: { target: number; suffix: string }) {
@@ -71,47 +71,34 @@ export default function About() {
           />
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          {stats.map((stat, index) => (
-            <AnimatedContent
-              key={stat.label}
-              distance={40}
-              duration={0.5}
-              delay={index * 0.1}
-              threshold={0.1}
-            >
-              <div className="text-center p-4 rounded-xl border border-[#1f1f1f] bg-[#141414]/50">
-                <div className="text-[clamp(2rem,4vw,3rem)] font-heading font-bold leading-none mb-2">
-                  <GradientText
-                    colors={['#E53935', '#FF6B6B', '#FF2D2D', '#E53935']}
-                    animationSpeed={5}
-                    className="font-heading font-bold"
-                  >
-                    <Counter target={stat.value} suffix={stat.suffix} />
-                  </GradientText>
-                </div>
-                <p className="text-xs sm:text-sm text-[#737373] font-body">{stat.label}</p>
-              </div>
-            </AnimatedContent>
-          ))}
-        </div>
+        {/* 2-column: Photo left, Text + Stats right */}
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-10 md:gap-14 items-start">
 
-        {/* Content grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-          {/* Text */}
+          {/* Photo */}
+          <AnimatedContent distance={60} duration={0.7}>
+            <SpotlightCard
+              className="!p-0 !rounded-2xl overflow-hidden"
+              spotlightColor="rgba(229, 57, 53, 0.15)"
+            >
+              <div className="relative aspect-square md:aspect-[4/5] flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-20 h-20 rounded-full bg-[#E53935]/10 border border-[#E53935]/20 mx-auto mb-4 flex items-center justify-center">
+                    <span className="text-3xl font-heading font-bold text-[#E53935]">DD</span>
+                  </div>
+                  <p className="text-sm text-[#737373] font-body">Foto próximamente</p>
+                </div>
+                <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-[#E53935]/30" />
+                <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-[#E53935]/30" />
+              </div>
+            </SpotlightCard>
+          </AnimatedContent>
+
+          {/* Text + Badges + Stats */}
           <div className="flex flex-col gap-6">
             <FadeContent blur duration={800} delay={200}>
               <p className="text-lg text-[#a3a3a3] leading-relaxed font-body">
-                Soy Daniel Diaz,{' '}
-                <GradientText
-                  colors={['#E53935', '#FF6B6B', '#FF2D2D']}
-                  animationSpeed={4}
-                  className="font-semibold"
-                >
-                  diseñador visual
-                </GradientText>{' '}
-                con experiencia en branding, interfaces digitales y edición audiovisual.
+                Soy Daniel Diaz, <span className="text-[#f5f5f5] font-medium">diseñador visual</span> con
+                experiencia en branding, interfaces digitales y edición audiovisual.
                 Domino herramientas como Photoshop, Illustrator, Lightroom y Premiere
                 para crear contenido visual impactante.
               </p>
@@ -121,19 +108,14 @@ export default function About() {
               <p className="text-lg text-[#a3a3a3] leading-relaxed font-body">
                 Trabajo con Figma, Framer y plataformas como WordPress y FlutterFlow
                 para diseñar y desarrollar sitios web funcionales. Integro{' '}
-                <GradientText
-                  colors={['#FF6B6B', '#E53935', '#FF2D2D']}
-                  animationSpeed={4}
-                  className="font-semibold"
-                >
-                  inteligencia artificial
-                </GradientText>{' '}
-                en mis procesos creativos para optimizar tiempos y potenciar ideas visuales.
+                <span className="text-[#f5f5f5] font-medium">inteligencia artificial</span> en
+                mis procesos creativos para optimizar tiempos y potenciar ideas visuales.
               </p>
             </FadeContent>
 
-            <AnimatedContent distance={50} duration={0.6} delay={0.3}>
-              <div className="flex flex-wrap gap-3 mt-2">
+            {/* Badges */}
+            <AnimatedContent distance={30} duration={0.5} delay={0.2}>
+              <div className="flex flex-wrap gap-3">
                 {badges.map((badge) => (
                   <Magnet key={badge} padding={15} magnetStrength={3}>
                     <Badge
@@ -146,27 +128,33 @@ export default function About() {
                 ))}
               </div>
             </AnimatedContent>
-          </div>
 
-          {/* Photo placeholder with SpotlightCard */}
-          <AnimatedContent distance={80} direction="horizontal" duration={0.8}>
-            <SpotlightCard
-              className="!p-0 !rounded-2xl overflow-hidden"
-              spotlightColor="rgba(229, 57, 53, 0.15)"
-            >
-              <div className="relative aspect-square md:aspect-[4/5] flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-20 h-20 rounded-full bg-[#E53935]/10 border border-[#E53935]/20 mx-auto mb-4 flex items-center justify-center">
-                    <span className="text-3xl font-heading font-bold text-[#E53935]">DD</span>
+            {/* Stats row */}
+            <div className="grid grid-cols-4 gap-3 mt-4 pt-6 border-t border-[#1f1f1f]">
+              {stats.map((stat, index) => (
+                <AnimatedContent
+                  key={stat.label}
+                  distance={30}
+                  duration={0.4}
+                  delay={0.3 + index * 0.08}
+                  threshold={0.1}
+                >
+                  <div className="text-center">
+                    <div className="text-2xl sm:text-3xl font-heading font-bold leading-none mb-1">
+                      <GradientText
+                        colors={['#E53935', '#FF6B6B', '#FF2D2D', '#E53935']}
+                        animationSpeed={5}
+                        className="font-heading font-bold"
+                      >
+                        <Counter target={stat.value} suffix={stat.suffix} />
+                      </GradientText>
+                    </div>
+                    <p className="text-[10px] sm:text-xs text-[#737373] font-body">{stat.label}</p>
                   </div>
-                  <p className="text-sm text-[#737373] font-body">Foto próximamente</p>
-                </div>
-                {/* Decorative corner accents */}
-                <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-[#E53935]/30" />
-                <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-[#E53935]/30" />
-              </div>
-            </SpotlightCard>
-          </AnimatedContent>
+                </AnimatedContent>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
