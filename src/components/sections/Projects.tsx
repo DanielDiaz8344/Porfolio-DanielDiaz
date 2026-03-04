@@ -206,10 +206,6 @@ export default function Projects() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/40 via-transparent to-transparent" />
 
-                      {/* Tag pill on image */}
-                      <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#0a0a0a]/60 backdrop-blur-md border border-white/[0.1] text-xs font-body text-[#f5f5f5]">
-                        {project.tag}
-                      </div>
                     </div>
 
                     {/* Content */}
