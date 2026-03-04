@@ -322,7 +322,7 @@ export default function Projects() {
                   />
                 </div>
               ) : (
-                <div className="relative aspect-video overflow-hidden rounded-t-2xl sm:rounded-t-3xl">
+                <div className="relative overflow-hidden rounded-t-2xl sm:rounded-t-3xl bg-[#111] flex items-center justify-center max-h-[50vh]">
                   <img
                     src={
                       selected.images
@@ -330,9 +330,9 @@ export default function Projects() {
                         : selected.image
                     }
                     alt={selected.title}
-                    className="w-full h-full object-cover"
+                    className="w-full max-h-[50vh] object-contain"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-[#0e0e0e]/20 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0e0e0e] to-transparent" />
                 </div>
               )}
 
