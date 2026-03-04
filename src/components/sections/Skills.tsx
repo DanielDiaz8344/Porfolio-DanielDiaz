@@ -1,51 +1,78 @@
+import { type ReactNode } from 'react';
+import {
+  SiFigma,
+  SiCanva,
+  SiWordpress,
+  SiFlutter,
+  SiFramer,
+  SiHtml5,
+  SiOpenai,
+  SiClaude,
+  SiNotion,
+  SiGoogle,
+} from 'react-icons/si';
 import DecryptedText from '@/components/reactbits/DecryptedText';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
 import FadeContent from '@/components/reactbits/FadeContent';
 
-const toolSections = [
+function Abbr({ children, color }: { children: string; color: string }) {
+  return (
+    <span className="text-sm font-heading font-bold leading-none" style={{ color }}>
+      {children}
+    </span>
+  );
+}
+
+interface Tool {
+  name: string;
+  icon: ReactNode;
+  color: string;
+}
+
+const toolSections: { category: string; tools: Tool[] }[] = [
   {
     category: 'Diseño',
     tools: [
-      { name: 'Photoshop', abbr: 'Ps', color: '#31A8FF' },
-      { name: 'Illustrator', abbr: 'Ai', color: '#FF9A00' },
-      { name: 'Figma', abbr: 'Fi', color: '#A259FF' },
-      { name: 'Canva', abbr: 'Cv', color: '#00C4CC' },
+      { name: 'Photoshop', icon: <Abbr color="#31A8FF">Ps</Abbr>, color: '#31A8FF' },
+      { name: 'Illustrator', icon: <Abbr color="#FF9A00">Ai</Abbr>, color: '#FF9A00' },
+      { name: 'Figma', icon: <SiFigma />, color: '#A259FF' },
+      { name: 'Canva', icon: <SiCanva />, color: '#00C4CC' },
     ],
   },
   {
     category: 'Video & Foto',
     tools: [
-      { name: 'Premiere', abbr: 'Pr', color: '#9999FF' },
-      { name: 'After Effects', abbr: 'Ae', color: '#9999FF' },
-      { name: 'Lightroom', abbr: 'Lr', color: '#31A8FF' },
-      { name: 'CapCut', abbr: 'Cc', color: '#FFFFFF' },
+      { name: 'Premiere', icon: <Abbr color="#9999FF">Pr</Abbr>, color: '#9999FF' },
+      { name: 'After Effects', icon: <Abbr color="#9999FF">Ae</Abbr>, color: '#9999FF' },
+      { name: 'Lightroom', icon: <Abbr color="#31A8FF">Lr</Abbr>, color: '#31A8FF' },
+      { name: 'CapCut', icon: <Abbr color="#FFFFFF">Cc</Abbr>, color: '#FFFFFF' },
     ],
   },
   {
     category: 'Web & Desarrollo',
     tools: [
-      { name: 'WordPress', abbr: 'Wp', color: '#21759B' },
-      { name: 'FlutterFlow', abbr: 'Ff', color: '#02569B' },
-      { name: 'Framer', abbr: 'Fr', color: '#0099FF' },
-      { name: 'HTML/CSS', abbr: '</>', color: '#E44D26' },
+      { name: 'WordPress', icon: <SiWordpress />, color: '#21759B' },
+      { name: 'FlutterFlow', icon: <SiFlutter />, color: '#02569B' },
+      { name: 'Framer', icon: <SiFramer />, color: '#0099FF' },
+      { name: 'HTML/CSS', icon: <SiHtml5 />, color: '#E44D26' },
     ],
   },
   {
     category: 'IA & Automatización',
     tools: [
-      { name: 'ChatGPT', abbr: 'AI', color: '#10A37F' },
-      { name: 'Claude Code', abbr: 'Cl', color: '#D97757' },
-      { name: 'Midjourney', abbr: 'Mj', color: '#FFFFFF' },
-      { name: 'Pencil Dev', abbr: 'Pd', color: '#6366F1' },
+      { name: 'ChatGPT', icon: <SiOpenai />, color: '#10A37F' },
+      { name: 'Claude Code', icon: <SiClaude />, color: '#D97757' },
+      { name: 'Midjourney', icon: <Abbr color="#FFFFFF">Mj</Abbr>, color: '#FFFFFF' },
+      { name: 'Pencil Dev', icon: <Abbr color="#6366F1">Pd</Abbr>, color: '#6366F1' },
     ],
   },
   {
     category: 'Productividad',
     tools: [
-      { name: 'Notion', abbr: 'No', color: '#FFFFFF' },
-      { name: 'Veo 3', abbr: 'V3', color: '#4285F4' },
-      { name: 'Nano Banana', abbr: 'Nb', color: '#FFD60A' },
-      { name: 'Google Suite', abbr: 'Gs', color: '#4285F4' },
+      { name: 'Notion', icon: <SiNotion />, color: '#FFFFFF' },
+      { name: 'Veo 3', icon: <Abbr color="#4285F4">V3</Abbr>, color: '#4285F4' },
+      { name: 'Nano Banana', icon: <Abbr color="#FFD60A">Nb</Abbr>, color: '#FFD60A' },
+      { name: 'Google Suite', icon: <SiGoogle />, color: '#4285F4' },
     ],
   },
 ];
@@ -105,14 +132,14 @@ export default function Skills() {
                         className="group flex items-center gap-3 rounded-xl bg-[#141414] border border-[#1f1f1f] px-4 py-3 transition-all duration-400 hover:border-[#E53935]/30 hover:bg-[#161616]"
                       >
                         <div
-                          className="w-10 h-10 rounded-lg flex items-center justify-center text-sm font-heading font-bold shrink-0 transition-transform duration-400 group-hover:scale-110"
+                          className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-400 group-hover:scale-110 text-[1.25rem]"
                           style={{
                             backgroundColor: `${tool.color}15`,
                             color: tool.color,
                             border: `1px solid ${tool.color}30`,
                           }}
                         >
-                          {tool.abbr}
+                          {tool.icon}
                         </div>
                         <span className="text-sm font-body text-[#737373] group-hover:text-[#a3a3a3] transition-colors duration-300">
                           {tool.name}
