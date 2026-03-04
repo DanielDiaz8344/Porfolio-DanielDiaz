@@ -148,7 +148,7 @@ export default function Projects() {
         </div>
 
         {/* Projects Stack */}
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-5">
           {visible.map((project, index) => {
             const imageLeft = index % 2 === 0;
 
@@ -173,7 +173,7 @@ export default function Projects() {
                     }`}
                   >
                     {/* Image */}
-                    <div className="relative md:w-1/2 aspect-video md:aspect-auto md:min-h-[320px] overflow-hidden">
+                    <div className="relative md:w-[40%] aspect-video md:aspect-auto md:h-[220px] overflow-hidden">
                       <img
                         src={project.image}
                         alt={project.title}
@@ -188,9 +188,9 @@ export default function Projects() {
                     </div>
 
                     {/* Content */}
-                    <div className="md:w-1/2 p-6 sm:p-8 flex flex-col justify-center gap-4">
+                    <div className="md:w-[60%] p-5 sm:p-6 flex flex-col justify-center gap-3">
                       <div className="flex items-start justify-between gap-3">
-                        <h3 className="text-2xl sm:text-3xl font-heading font-bold text-[#f5f5f5] group-hover:text-[#E53935] transition-colors duration-300">
+                        <h3 className="text-xl sm:text-2xl font-heading font-bold text-[#f5f5f5] group-hover:text-[#E53935] transition-colors duration-300">
                           {project.title}
                         </h3>
                         <ArrowUpRight
@@ -199,7 +199,7 @@ export default function Projects() {
                         />
                       </div>
 
-                      <p className="text-[#a3a3a3] font-body text-sm sm:text-base leading-relaxed">
+                      <p className="text-[#a3a3a3] font-body text-sm leading-relaxed line-clamp-2">
                         {project.shortDesc}
                       </p>
 
