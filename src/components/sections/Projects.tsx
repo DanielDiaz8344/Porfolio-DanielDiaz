@@ -270,7 +270,8 @@ export default function Projects() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6"
+            data-lenis-prevent
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overscroll-contain"
           >
             {/* Backdrop with ambient glow */}
             <div
@@ -285,7 +286,8 @@ export default function Projects() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 30, scale: 0.95 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white/[0.04] backdrop-blur-2xl rounded-2xl sm:rounded-3xl border border-white/[0.08] shadow-[0_16px_80px_rgba(0,0,0,0.5)]"
+              data-lenis-prevent
+              className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto overscroll-contain bg-white/[0.04] backdrop-blur-2xl rounded-2xl sm:rounded-3xl border border-white/[0.08] shadow-[0_16px_80px_rgba(0,0,0,0.5)]"
             >
               {/* Top red accent line */}
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#E53935]/30 to-transparent rounded-t-3xl" />
