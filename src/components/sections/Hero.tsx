@@ -41,7 +41,7 @@ export default function Hero() {
             DANIEL DIAZ
           </h1>
 
-          <div className="flex items-center gap-3 text-[clamp(1rem,2.5vw,1.5rem)] font-body text-[#a3a3a3]">
+          <div className="flex items-center gap-3 text-[clamp(1rem,3vw,1.5rem)] font-body text-[#a3a3a3]">
             <span className="w-3 h-[2px] bg-[#E53935]" />
             <RotatingText
               texts={[

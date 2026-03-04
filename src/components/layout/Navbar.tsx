@@ -47,7 +47,7 @@ export default function Navbar() {
           <div className="relative flex items-center justify-between">
             {/* Logo */}
             <button onClick={() => handleNavClick('#hero')} className="cursor-pointer">
-              <span className="text-lg sm:text-xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#E53935] via-[#FF6B6B] to-[#E53935] bg-[length:200%_100%] animate-[gradient-shift_6s_ease_infinite]">
+              <span className="text-[clamp(1.1rem,2.5vw,1.25rem)] font-heading font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#E53935] via-[#FF6B6B] to-[#E53935] bg-[length:200%_100%] animate-[gradient-shift_6s_ease_infinite]">
                 ByDanielDiaz
               </span>
             </button>

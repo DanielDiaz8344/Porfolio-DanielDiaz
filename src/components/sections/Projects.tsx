@@ -348,9 +348,9 @@ export default function Projects() {
               {/* Close button */}
               <button
                 onClick={() => setSelected(null)}
-                className="absolute top-4 right-4 z-20 p-2.5 rounded-xl bg-white/[0.06] backdrop-blur-md border border-white/[0.1] text-[#737373] hover:text-[#E53935] hover:border-[#E53935]/30 hover:bg-[#E53935]/[0.06] transition-all duration-300 cursor-pointer"
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 p-2.5 rounded-xl bg-[#0a0a0a]/60 backdrop-blur-md border border-white/[0.1] text-[#f5f5f5] hover:text-[#E53935] hover:border-[#E53935]/30 hover:bg-[#E53935]/[0.06] transition-all duration-300 cursor-pointer"
               >
-                <X size={16} />
+                <X size={18} />
               </button>
 
               {/* Video or Image(s) */}

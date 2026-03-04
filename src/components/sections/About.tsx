@@ -71,7 +71,7 @@ export default function About() {
         </div>
 
         {/* 2-column: Photo left, Text + Stats right */}
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-6 md:gap-14 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-6 sm:gap-8 md:gap-14 items-start">
 
           {/* Photo */}
           <AnimatedContent distance={60} duration={0.7}>

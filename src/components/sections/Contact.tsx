@@ -14,7 +14,7 @@ export default function Contact() {
   return (
     <section id="contact" className="relative py-24 md:py-32 bg-[#0a0a0a] overflow-hidden">
       {/* Ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#E53935]/[0.04] rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(500px,90vw)] h-[min(500px,90vw)] bg-[#E53935]/[0.04] rounded-full blur-[150px] pointer-events-none" />
 
       <div className="relative max-w-4xl mx-auto px-6 text-center">
         {/* Title */}
