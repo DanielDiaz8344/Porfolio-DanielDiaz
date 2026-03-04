@@ -43,7 +43,21 @@ const projects: Project[] = [
     tools: ['Figma', 'Illustrator', 'React', 'Tailwind'],
     tags: ['Landing', 'Branding'],
   },
-  // 2. UX/UI con video — muestra proceso profesional
+  // 2. Landing SIE — producto tech con IA
+  {
+    title: 'SIE',
+    tag: 'Landing Page',
+    shortDesc:
+      'Landing page para Sistema Inteligente Empresarial, un ERP multiplataforma de nueva generación desarrollado en Flutter.',
+    fullDesc:
+      'Diseño y desarrollo de landing page para SIE (Sistema Inteligente Empresarial), un ERP multiplataforma con módulos de Cajas de Ahorro, Gestión de Condominios y más de 159 módulos planificados. La landing fue creada utilizando Claude AI y Pencil Dev, logrando un diseño limpio y profesional con secciones de servicios, características, beneficios y contacto. El sitio comunica la propuesta de valor del producto: funcionalidad offline-first, seguridad RLS y disponibilidad en 6 plataformas.',
+    image: '/projects/sie-landing.png',
+    link: 'https://landing-page-sie.vercel.app',
+    linkLabel: 'Ver Landing',
+    tools: ['Claude AI', 'Pencil Dev'],
+    tags: ['Landing', 'ERP', 'IA'],
+  },
+  // 3. UX/UI con video — muestra proceso profesional
   {
     title: 'Aircool',
     tag: 'UX/UI Design',
