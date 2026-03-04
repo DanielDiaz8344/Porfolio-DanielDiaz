@@ -11,6 +11,12 @@ import {
   SiNotion,
   SiGoogle,
 } from 'react-icons/si';
+import {
+  TbBrandAdobePhotoshop,
+  TbBrandAdobeIllustrator,
+  TbBrandAdobePremier,
+  TbBrandAdobeAfterEffect,
+} from 'react-icons/tb';
 import DecryptedText from '@/components/reactbits/DecryptedText';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
 import FadeContent from '@/components/reactbits/FadeContent';
@@ -33,8 +39,8 @@ const toolSections: { category: string; tools: Tool[] }[] = [
   {
     category: 'Diseño',
     tools: [
-      { name: 'Photoshop', icon: <Abbr color="#31A8FF">Ps</Abbr>, color: '#31A8FF' },
-      { name: 'Illustrator', icon: <Abbr color="#FF9A00">Ai</Abbr>, color: '#FF9A00' },
+      { name: 'Photoshop', icon: <TbBrandAdobePhotoshop />, color: '#31A8FF' },
+      { name: 'Illustrator', icon: <TbBrandAdobeIllustrator />, color: '#FF9A00' },
       { name: 'Figma', icon: <SiFigma />, color: '#A259FF' },
       { name: 'Canva', icon: <SiCanva />, color: '#00C4CC' },
     ],
@@ -42,8 +48,8 @@ const toolSections: { category: string; tools: Tool[] }[] = [
   {
     category: 'Video & Foto',
     tools: [
-      { name: 'Premiere', icon: <Abbr color="#9999FF">Pr</Abbr>, color: '#9999FF' },
-      { name: 'After Effects', icon: <Abbr color="#9999FF">Ae</Abbr>, color: '#9999FF' },
+      { name: 'Premiere', icon: <TbBrandAdobePremier />, color: '#9999FF' },
+      { name: 'After Effects', icon: <TbBrandAdobeAfterEffect />, color: '#9999FF' },
       { name: 'Lightroom', icon: <Abbr color="#31A8FF">Lr</Abbr>, color: '#31A8FF' },
       { name: 'CapCut', icon: <Abbr color="#FFFFFF">Cc</Abbr>, color: '#FFFFFF' },
     ],
