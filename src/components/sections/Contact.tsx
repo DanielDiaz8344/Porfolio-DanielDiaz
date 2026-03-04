@@ -70,7 +70,7 @@ export default function Contact() {
 
         {/* Social Links */}
         <AnimatedContent distance={30} duration={0.6} delay={0.4} threshold={0.1}>
-          <div className="flex items-center justify-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
               href="https://www.instagram.com/bydanieldiaz"
               target="_blank"
