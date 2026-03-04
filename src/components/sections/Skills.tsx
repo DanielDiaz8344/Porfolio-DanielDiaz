@@ -142,27 +142,46 @@ export default function Skills() {
                   <h3 className="text-sm font-body text-[#E53935] uppercase tracking-widest mb-4">
                     {section.category}
                   </h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    {section.tools.map((tool) => (
-                      <div
-                        key={tool.name}
-                        className="group flex items-center gap-3 rounded-xl bg-[#141414] border border-[#1f1f1f] px-4 py-3 transition-all duration-400 hover:border-[#E53935]/30 hover:bg-[#161616]"
-                      >
-                        <div
-                          className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-400 group-hover:scale-110 text-[1.25rem]"
-                          style={{
-                            backgroundColor: `${tool.color}15`,
-                            color: tool.color,
-                            border: `1px solid ${tool.color}30`,
-                          }}
+                  {/* Ambient glow behind glass cards */}
+                  <div className="relative">
+                    <div className="absolute -inset-4 bg-[radial-gradient(ellipse_at_center,rgba(229,57,53,0.04),transparent_70%)] rounded-3xl pointer-events-none" />
+                    <div className="relative grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      {section.tools.map((tool, toolIndex) => (
+                        <AnimatedContent
+                          key={tool.name}
+                          distance={30}
+                          duration={0.4}
+                          delay={secIndex * 0.1 + toolIndex * 0.06}
+                          threshold={0.05}
                         >
-                          {tool.icon}
-                        </div>
-                        <span className="text-sm font-body text-[#737373] group-hover:text-[#a3a3a3] transition-colors duration-300">
-                          {tool.name}
-                        </span>
-                      </div>
-                    ))}
+                          <div className="group relative overflow-hidden rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/[0.08] px-4 py-3.5 flex items-center gap-3 transition-all duration-500 hover:bg-white/[0.07] hover:border-white/[0.15] hover:shadow-[0_8px_32px_rgba(229,57,53,0.08)]">
+                            {/* Shine sweep on hover */}
+                            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[linear-gradient(105deg,transparent_40%,rgba(255,255,255,0.03)_45%,rgba(255,255,255,0.06)_50%,rgba(255,255,255,0.03)_55%,transparent_60%)] group-hover:animate-[shimmer_1.5s_ease-in-out] pointer-events-none" />
+
+                            <div
+                              className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 text-[1.25rem] transition-all duration-500 group-hover:scale-110"
+                              style={{
+                                backgroundColor: `${tool.color}12`,
+                                color: tool.color,
+                                border: `1px solid ${tool.color}25`,
+                                boxShadow: `0 0 0px ${tool.color}00`,
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.boxShadow = `0 0 16px ${tool.color}30`;
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.boxShadow = `0 0 0px ${tool.color}00`;
+                              }}
+                            >
+                              {tool.icon}
+                            </div>
+                            <span className="text-sm font-body text-[#737373] group-hover:text-[#d4d4d4] transition-colors duration-300">
+                              {tool.name}
+                            </span>
+                          </div>
+                        </AnimatedContent>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </AnimatedContent>
