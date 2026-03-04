@@ -23,10 +23,6 @@ export default function Footer() {
             <span className="text-sm text-[#737373] font-body">
               &copy; 2026 ByDanielDiaz
             </span>
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08]">
-              <span className="w-2 h-2 rounded-full bg-[#E53935] animate-pulse-red" />
-              <span className="text-xs text-[#737373]">Disponible para freelance</span>
-            </div>
           </div>
 
           {/* Right: social icons in glass pills */}

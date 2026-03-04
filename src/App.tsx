@@ -1,11 +1,18 @@
+import { lazy, Suspense } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import Hero from '@/components/sections/Hero';
-import About from '@/components/sections/About';
-import Services from '@/components/sections/Services';
-import Skills from '@/components/sections/Skills';
-import Projects from '@/components/sections/Projects';
-import Contact from '@/components/sections/Contact';
+
+// Lazy-loaded below-the-fold sections (code splitting)
+const About    = lazy(() => import('@/components/sections/About'));
+const Services = lazy(() => import('@/components/sections/Services'));
+const Skills   = lazy(() => import('@/components/sections/Skills'));
+const Projects = lazy(() => import('@/components/sections/Projects'));
+const Contact  = lazy(() => import('@/components/sections/Contact'));
+
+function SectionFallback() {
+  return <div aria-hidden="true" style={{ minHeight: '50dvh', background: '#0a0a0a' }} />;
+}
 
 function App() {
   return (
@@ -16,11 +23,13 @@ function App() {
       <Navbar />
       <main id="main">
         <Hero />
-        <About />
-        <Services />
-        <Skills />
-        <Projects />
-        <Contact />
+        <Suspense fallback={<SectionFallback />}>
+          <About />
+          <Services />
+          <Skills />
+          <Projects />
+          <Contact />
+        </Suspense>
       </main>
       <Footer />
     </div>

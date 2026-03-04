@@ -1,8 +1,42 @@
-import { Palette, TrendingUp, Share2, Users, Video, Camera, ArrowUpRight } from 'lucide-react';
+import { memo } from 'react';
+import { Palette, TrendingUp, Share2, Users, Video, Camera, ArrowUpRight, type LucideIcon } from 'lucide-react';
 import DecryptedText from '@/components/reactbits/DecryptedText';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
 
-const services = [
+interface Service {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+const ServiceCard = memo(function ServiceCard({ service }: { service: Service }) {
+  return (
+    <div tabIndex={0} className="group relative h-full rounded-2xl bg-[#141414] border border-[#1f1f1f] p-6 flex flex-col gap-5 transition-all duration-500 hover:border-[#E53935]/30 hover:bg-[#161616] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E53935]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]">
+      {/* Glow behind card on hover */}
+      <div className="absolute -inset-px rounded-2xl bg-[#E53935]/0 group-hover:bg-[#E53935]/[0.03] transition-all duration-500 -z-10 blur-xl" />
+
+      {/* Icon with glow */}
+      <div className="relative w-14 h-14 rounded-xl bg-[#E53935]/10 border border-[#E53935]/20 flex items-center justify-center group-hover:bg-[#E53935]/20 group-hover:border-[#E53935]/40 group-hover:shadow-[0_0_20px_rgba(229,57,53,0.15)] transition-all duration-500">
+        <service.icon size={26} className="text-[#E53935] transition-transform duration-500 group-hover:scale-110" />
+      </div>
+
+      {/* Title + arrow */}
+      <div className="flex items-center justify-between">
+        <h3 className="text-xl font-heading font-semibold text-[#f5f5f5]">
+          {service.title}
+        </h3>
+        <ArrowUpRight size={18} className="text-[#737373] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+      </div>
+
+      {/* Description */}
+      <p className="text-[#737373] font-body text-sm leading-relaxed">
+        {service.description}
+      </p>
+    </div>
+  );
+});
+
+const services: Service[] = [
   {
     icon: Palette,
     title: 'Diseño Gráfico',
@@ -35,7 +69,7 @@ const services = [
   },
 ];
 
-export default function Services() {
+const Services = memo(function Services() {
   return (
     <section id="services" className="py-24 md:py-32 bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto px-6">
@@ -62,32 +96,13 @@ export default function Services() {
               threshold={0.05}
               className="h-full"
             >
-              <div tabIndex={0} className="group relative h-full rounded-2xl bg-[#141414] border border-[#1f1f1f] p-6 flex flex-col gap-5 transition-all duration-500 hover:border-[#E53935]/30 hover:bg-[#161616] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E53935]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]">
-                {/* Glow behind card on hover */}
-                <div className="absolute -inset-px rounded-2xl bg-[#E53935]/0 group-hover:bg-[#E53935]/[0.03] transition-all duration-500 -z-10 blur-xl" />
-
-                {/* Icon with glow */}
-                <div className="relative w-14 h-14 rounded-xl bg-[#E53935]/10 border border-[#E53935]/20 flex items-center justify-center group-hover:bg-[#E53935]/20 group-hover:border-[#E53935]/40 group-hover:shadow-[0_0_20px_rgba(229,57,53,0.15)] transition-all duration-500">
-                  <service.icon size={26} className="text-[#E53935] transition-transform duration-500 group-hover:scale-110" />
-                </div>
-
-                {/* Title + arrow */}
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-heading font-semibold text-[#f5f5f5]">
-                    {service.title}
-                  </h3>
-                  <ArrowUpRight size={18} className="text-[#737373] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
-                </div>
-
-                {/* Description */}
-                <p className="text-[#737373] font-body text-sm leading-relaxed">
-                  {service.description}
-                </p>
-              </div>
+              <ServiceCard service={service} />
             </AnimatedContent>
           ))}
         </div>
       </div>
     </section>
   );
-}
+});
+
+export default Services;

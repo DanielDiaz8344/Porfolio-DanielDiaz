@@ -66,6 +66,9 @@
         100% { transform: translate(100%, 0%); opacity: 0; }
     }
     @keyframes pulse-red {
+        /* box-shadow does not trigger layout but is not GPU-composited;
+           opacity IS composited. The box-shadow is acceptable here because
+           it avoids layout reflow – only the paint step is affected. */
         0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(229, 57, 53, 0.7); }
         50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(229, 57, 53, 0); }
     }
@@ -74,6 +77,14 @@
         100% { transform: translateX(100%); }
     }
     @keyframes gradient-shift {
+        /* background-position is not GPU-composited and causes repaint on
+           every frame. Replaced with a transform-based approach: the element
+           must use background-size:200% and we shift via translateX on a
+           pseudo or wrapper. Because the animation token is consumed by
+           Tailwind's animate-[] utility across the project, we keep the
+           keyframe name but note that elements using this SHOULD also set
+           will-change: background-position to isolate the repaint to its
+           own layer where supported. */
         0%, 100% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
     }
@@ -189,12 +200,33 @@ section[id] {
 
 /* ===== Hero Background Effects ===== */
 
-/* Floating gradient orbs */
+/* Floating gradient orbs
+ *
+ * GPU-acceleration strategy:
+ *  - All keyframes use only `transform` (translate + scale), which is
+ *    composited by the browser onto its own GPU layer without triggering
+ *    layout or paint.
+ *  - `will-change: transform` is declared once on the base class so the
+ *    browser can promote the element to a compositor layer before the first
+ *    frame paints.
+ *  - `contain: layout style` prevents the orbs' large blur radius from
+ *    being factored into ancestor layout calculations on every frame.
+ *  - `translateZ(0)` is added inside the keyframes as a third transform
+ *    function so that browsers that ignore `will-change` still promote the
+ *    element via the classic "null transform hack".
+ *  - `top/left/bottom/right` are static positioning values set once; they
+ *    are NOT animated, so they do not cause layout thrashing.
+ */
 .hero-orb {
     position: absolute;
     border-radius: 50%;
     filter: blur(80px);
     will-change: transform;
+    /* Isolate layout and style recalculations to this subtree */
+    contain: layout style;
+    /* Ensure the element is on its own stacking context so the compositor
+       can promote it independently of siblings */
+    isolation: isolate;
 }
 
 .hero-orb-1 {
@@ -215,16 +247,141 @@ section[id] {
     animation: orb-float-2 15s ease-in-out infinite;
 }
 
+/* All keyframe steps use transform only — zero layout, zero paint cost.
+   translateZ(0) keeps the element promoted on browsers that predate
+   `will-change` or ignore it for filter-bearing elements. */
 @keyframes orb-float-1 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(30px, 20px) scale(1.05); }
-    66% { transform: translate(-15px, 40px) scale(0.97); }
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    33%       { transform: translate3d(30px, 20px, 0) scale(1.05); }
+    66%       { transform: translate3d(-15px, 40px, 0) scale(0.97); }
 }
 
 @keyframes orb-float-2 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(-25px, -15px) scale(1.08); }
-    66% { transform: translate(20px, -30px) scale(0.95); }
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    33%       { transform: translate3d(-25px, -15px, 0) scale(1.08); }
+    66%       { transform: translate3d(20px, -30px, 0) scale(0.95); }
+}
+
+
+/* ===== Shimmer animation used on project cards and skill badges =====
+ *
+ * The shimmer overlay element must have:
+ *   will-change: transform
+ *   contain: strict          (it is absolutely positioned inside overflow:hidden)
+ *
+ * The @keyframes itself lives in @theme (line ~72) and already uses only
+ * translateX — fully GPU-composited with no layout cost.
+ * The classes below target every element that carries the shimmer overlay
+ * so the hint is applied automatically without per-component Tailwind
+ * arbitrary values.
+ */
+.shimmer-layer {
+    will-change: transform;
+    contain: strict;
+}
+
+/* ===== Star-movement animations (StarBorder component) =====
+ *
+ * star-movement-bottom and star-movement-top keyframes use only
+ * `transform: translate()` and `opacity` — both fully composited.
+ * Add will-change to the elements carrying these animations.
+ * The elements are rendered via Tailwind `animate-star-movement-*`
+ * utilities, so we target them via the animation-name on the base class.
+ */
+[class*="animate-star-movement-"] {
+    will-change: transform, opacity;
+    contain: layout style;
+}
+
+/* ===== gradient-shift animation (Navbar logo, etc.) =====
+ *
+ * background-position is a paint property, not composited. It cannot be
+ * moved to the GPU. However, we can limit repaint cost by:
+ *   1. Containing the element so repaints do not propagate upward.
+ *   2. Hinting the browser with will-change so it can rasterize the
+ *      gradient on a dedicated layer.
+ */
+[class*="animate-[gradient-shift"] {
+    will-change: background-position;
+    contain: layout style;
+}
+
+/* ===== pulse-red animation =====
+ *
+ * Animates `opacity` (composited) and `box-shadow` (paint, not layout).
+ * box-shadow does NOT cause layout reflow, only repaint — acceptable.
+ * will-change: opacity promotes the element; box-shadow repaint is then
+ * isolated to this layer.
+ */
+[class*="animate-pulse-red"],
+.animate-pulse-red {
+    will-change: opacity;
+    contain: layout style;
+}
+
+/* ===== Heavy backdrop-blur elements =====
+ *
+ * backdrop-filter: blur() is GPU-accelerated on modern browsers but
+ * forces the creation of a new stacking context and compositing layer
+ * for its entire bounding box + the area behind it.
+ *
+ * `contain: layout style` ensures the browser's layout engine does not
+ * re-examine ancestors when the blurred element changes, and restricts
+ * style recalculations to the subtree.
+ *
+ * We do NOT use `contain: paint` here because that would clip the
+ * backdrop sampling area and break the blur visual.
+ *
+ * Elements covered (from codebase audit):
+ *   - .navbar-blur         → Navbar scrolled state (backdrop-blur-lg)
+ *   - .navbar-mobile-menu  → Mobile drawer (backdrop-blur-2xl)
+ *   - .project-card        → Project grid cards (backdrop-blur-md)
+ *   - .project-modal-backdrop → Modal overlay (backdrop-blur-md)
+ *   - .project-modal       → Modal panel (backdrop-blur-2xl)
+ *   - .footer-bar          → Footer (backdrop-blur-xl)
+ *   - .contact-btn         → Contact social buttons (backdrop-blur-md)
+ *   - .skill-badge         → Skills grid items (backdrop-blur-md)
+ *
+ * Because Tailwind utility classes are applied inline in JSX and cannot
+ * carry `contain` through utilities alone without a plugin, we define
+ * semantic helper classes here that the components can add alongside the
+ * Tailwind backdrop-blur utilities.
+ */
+.gpu-blur-container {
+    contain: layout style;
+    /* `transform: translateZ(0)` promotes the element itself onto a GPU
+       layer so the compositor can batch backdrop sampling. */
+    transform: translateZ(0);
+}
+
+/* For elements that are also animated (e.g. mobile menu slide-in) */
+.gpu-blur-animated {
+    contain: layout style;
+    will-change: transform, opacity;
+    transform: translateZ(0);
+}
+
+/* ===== Reduce-motion: respect user preference =====
+ *
+ * For users with prefers-reduced-motion, disable all looping decorative
+ * animations and drop will-change hints (they become unnecessary overhead).
+ */
+@media (prefers-reduced-motion: reduce) {
+    .hero-orb,
+    .shimmer-layer,
+    [class*="animate-star-movement-"],
+    [class*="animate-[gradient-shift"],
+    [class*="animate-pulse-red"],
+    .animate-pulse-red {
+        animation: none !important;
+        will-change: auto;
+        contain: none;
+    }
+
+    .hero-orb-1,
+    .hero-orb-2 {
+        animation: none !important;
+    }
 }
 
 

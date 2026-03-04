@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { memo, useState, useEffect, useRef, useCallback } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import Magnet from '@/components/reactbits/Magnet';
 
@@ -11,7 +11,7 @@ const navLinks = [
   { label: 'Contacto', href: '#contact' },
 ];
 
-export default function Navbar() {
+const Navbar = memo(function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const navBarRef = useRef<HTMLElement>(null);
@@ -27,11 +27,15 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = useCallback((href: string) => {
     setMobileOpen(false);
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, []);
+
+  const toggleMobileMenu = useCallback(() => {
+    setMobileOpen((prev) => !prev);
+  }, []);
 
   return (
     <>
@@ -72,7 +76,7 @@ export default function Navbar() {
               className={`lg:hidden p-3 rounded-xl transition-all duration-300 text-[#f5f5f5] ${
                 mobileOpen ? 'bg-[#E53935]/10' : 'bg-white/[0.06] hover:bg-white/[0.1]'
               }`}
-              onClick={() => setMobileOpen(!mobileOpen)}
+              onClick={toggleMobileMenu}
               aria-label={mobileOpen ? 'Cerrar menú' : 'Abrir menú'}
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -126,4 +130,6 @@ export default function Navbar() {
       </AnimatePresence>
     </>
   );
-}
+});
+
+export default Navbar;

@@ -6,7 +6,7 @@ import SpotlightCard from '@/components/reactbits/SpotlightCard';
 import Magnet from '@/components/reactbits/Magnet';
 import { Badge } from '@/components/ui/badge';
 
-const badges = ['Freelancer', 'Venezuela'];
+const badges = ['Venezuela'];
 
 const stats = [
   { value: 3, suffix: '+', label: 'Años' },
@@ -83,7 +83,7 @@ export default function About() {
                 <img
                   src="/daniel-diaz.jpg"
                   alt="Daniel Diaz"
-                  loading="lazy"
+                  fetchPriority="high"
                   className="w-full h-full object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/60 via-transparent to-transparent" />

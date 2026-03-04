@@ -164,15 +164,29 @@ const Threads: React.FC<ThreadsProps> = ({
 
     const mesh = new Mesh(gl, { geometry, program });
 
+    // --- Debounced resize -------------------------------------------
+    // Without debouncing, every pixel of a window-drag fires a full
+    // GL viewport resize (expensive buffer re-allocation). A 100 ms
+    // debounce collapses the burst into a single call once dragging stops.
+    let resizeTimer: ReturnType<typeof setTimeout> | null = null;
     function resize() {
-      const { clientWidth, clientHeight } = container;
-      renderer.setSize(clientWidth, clientHeight);
-      program.uniforms.iResolution.value.r = clientWidth;
-      program.uniforms.iResolution.value.g = clientHeight;
-      program.uniforms.iResolution.value.b = clientWidth / clientHeight;
+      if (resizeTimer !== null) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const { clientWidth, clientHeight } = container;
+        renderer.setSize(clientWidth, clientHeight);
+        program.uniforms.iResolution.value.r = clientWidth;
+        program.uniforms.iResolution.value.g = clientHeight;
+        program.uniforms.iResolution.value.b = clientWidth / clientHeight;
+        resizeTimer = null;
+      }, 100);
     }
     window.addEventListener('resize', resize);
-    resize();
+    // Initial size must be applied immediately (not debounced).
+    const { clientWidth: initW, clientHeight: initH } = container;
+    renderer.setSize(initW, initH);
+    program.uniforms.iResolution.value.r = initW;
+    program.uniforms.iResolution.value.g = initH;
+    program.uniforms.iResolution.value.b = initW / initH;
 
     let currentMouse = [0.5, 0.5];
     let targetMouse = [0.5, 0.5];
@@ -190,6 +204,27 @@ const Threads: React.FC<ThreadsProps> = ({
       container.addEventListener('mousemove', handleMouseMove);
       container.addEventListener('mouseleave', handleMouseLeave);
     }
+
+    // --- Page Visibility API ----------------------------------------
+    // When the tab is hidden the browser throttles or entirely suspends
+    // rAF callbacks, but the callback still gets enqueued and the GPU
+    // command buffer is still built on some browsers. Explicitly
+    // cancelling the loop on hide and restarting on show guarantees zero
+    // GPU work while the tab is not visible, saving CPU, GPU, and battery.
+    function handleVisibilityChange() {
+      if (document.hidden) {
+        if (animationFrameId.current) {
+          cancelAnimationFrame(animationFrameId.current);
+          animationFrameId.current = 0;
+        }
+      } else {
+        // Resume: pass performance.now() so iTime doesn't jump.
+        if (!animationFrameId.current) {
+          animationFrameId.current = requestAnimationFrame(update);
+        }
+      }
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     function update(t: number) {
       if (enableMouseInteraction) {
@@ -211,7 +246,9 @@ const Threads: React.FC<ThreadsProps> = ({
 
     return () => {
       if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
+      if (resizeTimer !== null) clearTimeout(resizeTimer);
       window.removeEventListener('resize', resize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
 
       if (enableMouseInteraction) {
         container.removeEventListener('mousemove', handleMouseMove);

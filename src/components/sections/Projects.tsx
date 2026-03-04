@@ -176,12 +176,175 @@ const projects: Project[] = [
 
 const INITIAL_COUNT = 5;
 
-export default function Projects() {
-  const [showAll, setShowAll] = useState(false);
-  const [selected, setSelected] = useState<Project | null>(null);
+interface ProjectModalProps {
+  selected: Project;
+  onClose: () => void;
+}
+
+function ProjectModal({ selected, onClose }: ProjectModalProps) {
   const [activeImage, setActiveImage] = useState(0);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [imageBroken, setImageBroken] = useState(false);
+
+  useEffect(() => {
+    setActiveImage(0);
+    setVideoLoaded(false);
+    setImageBroken(false);
+  }, [selected]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      data-lenis-prevent
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overscroll-contain"
+    >
+      <div
+        className="absolute inset-0 bg-[#0a0a0a]/80 backdrop-blur-md"
+        onClick={onClose}
+      />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#E53935]/[0.04] rounded-full blur-[120px] pointer-events-none" />
+
+      <motion.div
+        initial={{ opacity: 0, y: 40, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 30, scale: 0.95 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        data-lenis-prevent
+        style={{ willChange: 'transform' }}
+        className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto overscroll-contain bg-white/[0.04] backdrop-blur-2xl rounded-2xl sm:rounded-3xl border border-white/[0.08] shadow-[0_16px_80px_rgba(0,0,0,0.5)]"
+      >
+        {/* Top red accent line */}
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#E53935]/30 to-transparent rounded-t-3xl" />
+
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 p-2.5 rounded-xl bg-[#0a0a0a]/60 backdrop-blur-md border border-white/[0.1] text-[#f5f5f5] hover:text-[#E53935] hover:border-[#E53935]/30 hover:bg-[#E53935]/[0.06] transition-all duration-300 cursor-pointer"
+        >
+          <X size={18} />
+        </button>
+
+        {/* Video or Image(s) */}
+        {selected.video ? (
+          <div className="relative aspect-video overflow-hidden rounded-t-2xl sm:rounded-t-3xl bg-black">
+            {!videoLoaded && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#111]">
+                <Loader2 size={32} className="text-[#E53935] animate-spin" />
+                <span className="text-xs text-[#737373] font-body">Cargando video...</span>
+              </div>
+            )}
+            <iframe
+              src={selected.video}
+              title={selected.title}
+              className={`w-full h-full transition-opacity duration-500 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              onLoad={() => setVideoLoaded(true)}
+            />
+          </div>
+        ) : (
+          <div className={`relative overflow-hidden rounded-t-2xl sm:rounded-t-3xl bg-[#111] flex items-center justify-center ${imageBroken ? 'min-h-[200px]' : 'max-h-[50vh]'}`}>
+            {imageBroken ? (
+              <p className="text-sm text-[#737373] font-body">Imagen no disponible</p>
+            ) : (
+              <img
+                src={selected.images ? selected.images[activeImage] : selected.image}
+                alt={selected.title}
+                className="w-full max-h-[50vh] object-contain"
+                onError={() => setImageBroken(true)}
+              />
+            )}
+            <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0e0e0e] to-transparent" />
+          </div>
+        )}
+
+        {/* Image thumbnails */}
+        {!selected.video && selected.images && selected.images.length > 1 && (
+          <div className="flex gap-2 px-4 sm:px-8 -mt-4 sm:-mt-8 relative z-10">
+            {selected.images.map((img, i) => (
+              <button
+                key={img}
+                onClick={() => setActiveImage(i)}
+                className={`w-11 h-11 sm:w-14 sm:h-14 rounded-lg overflow-hidden border-2 transition-all duration-300 cursor-pointer backdrop-blur-md shrink-0 ${
+                  i === activeImage
+                    ? 'border-[#E53935] shadow-[0_0_16px_rgba(229,57,53,0.3)] scale-105'
+                    : 'border-white/[0.08] opacity-50 hover:opacity-100 hover:border-white/[0.2]'
+                }`}
+              >
+                <img src={img} alt={`${selected.title} ${i + 1}`} className="w-full h-full object-cover" />
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Content */}
+        <div className="p-6 sm:p-8">
+          <span className="text-xs text-[#E53935] font-body uppercase tracking-widest">{selected.tag}</span>
+          <h3 className="text-2xl sm:text-3xl font-heading font-bold text-[#f5f5f5] mt-2">{selected.title}</h3>
+
+          {selected.link && (
+            <a
+              href={selected.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center justify-center gap-3 mt-5 w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#E53935] text-white text-sm font-body font-semibold hover:bg-[#d32f2f] hover:shadow-[0_0_30px_rgba(229,57,53,0.25)] active:scale-[0.98] transition-all duration-300"
+            >
+              <ExternalLink size={16} className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300" />
+              {selected.linkLabel || 'Ver proyecto'}
+            </a>
+          )}
+
+          {selected.catalogs && selected.catalogs.length > 0 && (
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mt-5">
+              {selected.catalogs.map((cat) => (
+                <a
+                  key={cat.url}
+                  href={cat.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-2.5 px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:bg-[#E53935]/10 hover:border-[#E53935]/30 transition-all duration-300"
+                >
+                  <FileText size={16} className="text-[#E53935] shrink-0" />
+                  <span className="text-xs font-body text-[#a3a3a3] group-hover:text-[#f5f5f5] transition-colors duration-300 truncate">{cat.label}</span>
+                </a>
+              ))}
+            </div>
+          )}
+
+          <div className="w-12 h-[2px] bg-gradient-to-r from-[#E53935] to-transparent mt-5 mb-5" />
+
+          <p className="text-[#a3a3a3] font-body text-sm sm:text-base leading-relaxed">{selected.fullDesc}</p>
+
+          <div className="flex flex-col sm:flex-row sm:items-start gap-6 mt-6 pt-6 border-t border-white/[0.06]">
+            <div className="flex-1">
+              <span className="text-[10px] text-[#737373] font-body uppercase tracking-widest">Categorías</span>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {selected.tags.map((tag) => (
+                  <span key={tag} className="text-xs font-body text-[#E53935]/80 bg-[#E53935]/[0.06] border border-[#E53935]/10 rounded-full px-3 py-1">#{tag}</span>
+                ))}
+              </div>
+            </div>
+            <div className="flex-1">
+              <span className="text-[10px] text-[#737373] font-body uppercase tracking-widest">Herramientas</span>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {selected.tools.map((tool) => (
+                  <span key={tool} className="text-xs font-body text-[#a3a3a3] bg-white/[0.04] border border-white/[0.08] rounded-full px-3 py-1">{tool}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+export default function Projects() {
+  const [showAll, setShowAll] = useState(false);
+  const [selected, setSelected] = useState<Project | null>(null);
 
   useEffect(() => {
     if (selected) {
@@ -202,9 +365,6 @@ export default function Projects() {
 
   const openProject = (project: Project) => {
     setSelected(project);
-    setActiveImage(0);
-    setVideoLoaded(false);
-    setImageBroken(false);
   };
 
   return (
@@ -323,195 +483,12 @@ export default function Projects() {
       </div>
 
       {/* Project Detail Modal */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {selected && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            data-lenis-prevent
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overscroll-contain"
-          >
-            {/* Backdrop with ambient glow */}
-            <div
-              className="absolute inset-0 bg-[#0a0a0a]/80 backdrop-blur-md"
-              onClick={() => setSelected(null)}
-            />
-            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#E53935]/[0.04] rounded-full blur-[120px] pointer-events-none" />
-
-            {/* Modal card - liquid glass */}
-            <motion.div
-              initial={{ opacity: 0, y: 40, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 30, scale: 0.95 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              data-lenis-prevent
-              className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto overscroll-contain bg-white/[0.04] backdrop-blur-2xl rounded-2xl sm:rounded-3xl border border-white/[0.08] shadow-[0_16px_80px_rgba(0,0,0,0.5)]"
-            >
-              {/* Top red accent line */}
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#E53935]/30 to-transparent rounded-t-3xl" />
-
-              {/* Close button */}
-              <button
-                onClick={() => setSelected(null)}
-                className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 p-2.5 rounded-xl bg-[#0a0a0a]/60 backdrop-blur-md border border-white/[0.1] text-[#f5f5f5] hover:text-[#E53935] hover:border-[#E53935]/30 hover:bg-[#E53935]/[0.06] transition-all duration-300 cursor-pointer"
-              >
-                <X size={18} />
-              </button>
-
-              {/* Video or Image(s) */}
-              {selected.video ? (
-                <div className="relative aspect-video overflow-hidden rounded-t-2xl sm:rounded-t-3xl bg-black">
-                  {/* Loading skeleton */}
-                  {!videoLoaded && (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#111]">
-                      <Loader2 size={32} className="text-[#E53935] animate-spin" />
-                      <span className="text-xs text-[#737373] font-body">Cargando video...</span>
-                    </div>
-                  )}
-                  <iframe
-                    src={selected.video}
-                    title={selected.title}
-                    className={`w-full h-full transition-opacity duration-500 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
-                    allow="autoplay; encrypted-media"
-                    allowFullScreen
-                    onLoad={() => setVideoLoaded(true)}
-                  />
-                </div>
-              ) : (
-                <div className={`relative overflow-hidden rounded-t-2xl sm:rounded-t-3xl bg-[#111] flex items-center justify-center ${imageBroken ? 'min-h-[200px]' : 'max-h-[50vh]'}`}>
-                  {imageBroken ? (
-                    <p className="text-sm text-[#737373] font-body">Imagen no disponible</p>
-                  ) : (
-                    <img
-                      src={
-                        selected.images
-                          ? selected.images[activeImage]
-                          : selected.image
-                      }
-                      alt={selected.title}
-                      className="w-full max-h-[50vh] object-contain"
-                      onError={() => setImageBroken(true)}
-                    />
-                  )}
-                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0e0e0e] to-transparent" />
-                </div>
-              )}
-
-              {/* Image thumbnails */}
-              {!selected.video && selected.images && selected.images.length > 1 && (
-                <div className="flex gap-2 px-4 sm:px-8 -mt-4 sm:-mt-8 relative z-10">
-                  {selected.images.map((img, i) => (
-                    <button
-                      key={img}
-                      onClick={() => setActiveImage(i)}
-                      className={`w-11 h-11 sm:w-14 sm:h-14 rounded-lg overflow-hidden border-2 transition-all duration-300 cursor-pointer backdrop-blur-md shrink-0 ${
-                        i === activeImage
-                          ? 'border-[#E53935] shadow-[0_0_16px_rgba(229,57,53,0.3)] scale-105'
-                          : 'border-white/[0.08] opacity-50 hover:opacity-100 hover:border-white/[0.2]'
-                      }`}
-                    >
-                      <img
-                        src={img}
-                        alt={`${selected.title} ${i + 1}`}
-                        className="w-full h-full object-cover"
-                      />
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {/* Content */}
-              <div className="p-6 sm:p-8">
-                {/* Tag + Title */}
-                <span className="text-xs text-[#E53935] font-body uppercase tracking-widest">
-                  {selected.tag}
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-heading font-bold text-[#f5f5f5] mt-2">
-                  {selected.title}
-                </h3>
-
-                {/* CTA Link - prominent position */}
-                {selected.link && (
-                  <a
-                    href={selected.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex items-center justify-center gap-3 mt-5 w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#E53935] text-white text-sm font-body font-semibold hover:bg-[#d32f2f] hover:shadow-[0_0_30px_rgba(229,57,53,0.25)] active:scale-[0.98] transition-all duration-300"
-                  >
-                    <ExternalLink size={16} className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300" />
-                    {selected.linkLabel || 'Ver proyecto'}
-                  </a>
-                )}
-
-                {/* Catalogs grid */}
-                {selected.catalogs && selected.catalogs.length > 0 && (
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mt-5">
-                    {selected.catalogs.map((cat) => (
-                      <a
-                        key={cat.url}
-                        href={cat.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-center gap-2.5 px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:bg-[#E53935]/10 hover:border-[#E53935]/30 transition-all duration-300"
-                      >
-                        <FileText size={16} className="text-[#E53935] shrink-0" />
-                        <span className="text-xs font-body text-[#a3a3a3] group-hover:text-[#f5f5f5] transition-colors duration-300 truncate">
-                          {cat.label}
-                        </span>
-                      </a>
-                    ))}
-                  </div>
-                )}
-
-                {/* Divider */}
-                <div className="w-12 h-[2px] bg-gradient-to-r from-[#E53935] to-transparent mt-5 mb-5" />
-
-                {/* Description */}
-                <p className="text-[#a3a3a3] font-body text-sm sm:text-base leading-relaxed">
-                  {selected.fullDesc}
-                </p>
-
-                {/* Tags + Tools row */}
-                <div className="flex flex-col sm:flex-row sm:items-start gap-6 mt-6 pt-6 border-t border-white/[0.06]">
-                  {/* Tags */}
-                  <div className="flex-1">
-                    <span className="text-[10px] text-[#737373] font-body uppercase tracking-widest">
-                      Categorías
-                    </span>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {selected.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs font-body text-[#E53935]/80 bg-[#E53935]/[0.06] border border-[#E53935]/10 rounded-full px-3 py-1"
-                        >
-                          #{tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Tools */}
-                  <div className="flex-1">
-                    <span className="text-[10px] text-[#737373] font-body uppercase tracking-widest">
-                      Herramientas
-                    </span>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {selected.tools.map((tool) => (
-                        <span
-                          key={tool}
-                          className="text-xs font-body text-[#a3a3a3] bg-white/[0.04] border border-white/[0.08] rounded-full px-3 py-1"
-                        >
-                          {tool}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
+          <ProjectModal
+            selected={selected}
+            onClose={() => setSelected(null)}
+          />
         )}
       </AnimatePresence>
     </section>
