@@ -114,7 +114,7 @@ const projects: Project[] = [
       'Diseño y desarrollo de landing page para app de transporte con mascota ilustrada y manual de marca completo.',
     fullDesc:
       'Diseño y desarrollo de landing page para Sube con Pepe, una aplicación de transporte. El proyecto abarcó desde la conceptualización de la identidad visual —incluyendo la creación de una mascota ilustrada— hasta la implementación del sitio web con React y Tailwind CSS. Se diseñó un manual de marca completo que define la paleta de colores, tipografías, usos del logo y lineamientos gráficos. La landing page cuenta con diseño responsivo y animaciones interactivas que refuerzan la personalidad de la marca.',
-    image: '/projects/sube-con-pepe.png',
+    image: '/projects/sube-con-pepe-landing.png',
     link: 'https://subeconpepe.vercel.app',
     linkLabel: 'Ver Landing',
     catalogs: [
