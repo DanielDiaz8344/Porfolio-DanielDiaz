@@ -14,6 +14,7 @@ interface Project {
   link?: string;
   linkLabel?: string;
   pdf?: string;
+  video?: string;
   tools: string[];
   tags: string[];
 }
@@ -27,7 +28,8 @@ const projects: Project[] = [
     fullDesc:
       'Proyecto de modernización del sistema de inventario para Aircool, una empresa que manejaba todo su inventario de manera tradicional usando Excel y procesos manuales. El desafío consistía en digitalizar y optimizar sus flujos de trabajo mediante el diseño de interfaces intuitivas y funcionales. Se desarrollaron las interfaces completas utilizando Figma, con especial atención a crear flujos de usuario sencillos y comprensibles para facilitar la transición del equipo. Se adaptó cuidadosamente la paleta de colores basándose en el logo existente de Aircool, asegurando coherencia visual y evitando la saturación que pudiera cansar la vista durante jornadas largas de trabajo. Las interfaces finales fueron documentadas y compartidas con el equipo de desarrollo para garantizar una implementación fiel al diseño.',
     image: '/projects/aircool.png',
-    tools: ['Figma', 'IA'],
+    video: 'https://drive.google.com/file/d/1dFc3ZJCI1TDfVFUI3cIeqgc9REjR3XMZ/preview',
+    tools: ['Figma'],
     tags: ['UX/UI', 'Figma'],
   },
   {
@@ -222,22 +224,20 @@ export default function Projects() {
           })}
         </div>
 
-        {/* Ver más button */}
-        {hasMore && !showAll && (
-          <AnimatedContent distance={30} duration={0.4} threshold={0.1}>
-            <div className="flex justify-center mt-12">
-              <button
-                onClick={() => setShowAll(true)}
-                className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm font-body font-medium text-[#a3a3a3] hover:text-[#f5f5f5] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all duration-300 cursor-pointer"
-              >
-                Ver más proyectos
-                <ChevronDown
-                  size={16}
-                  className="group-hover:translate-y-0.5 transition-transform duration-300"
-                />
-              </button>
-            </div>
-          </AnimatedContent>
+        {/* Ver más / Ver menos button */}
+        {hasMore && (
+          <div className="flex justify-center mt-12">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm font-body font-medium text-[#a3a3a3] hover:text-[#f5f5f5] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all duration-300 cursor-pointer"
+            >
+              {showAll ? 'Ver menos' : 'Ver más proyectos'}
+              <ChevronDown
+                size={16}
+                className={`transition-transform duration-300 ${showAll ? 'rotate-180 group-hover:-translate-y-0.5' : 'group-hover:translate-y-0.5'}`}
+              />
+            </button>
+          </div>
         )}
       </div>
 
@@ -273,19 +273,31 @@ export default function Projects() {
                 <X size={18} />
               </button>
 
-              {/* Image(s) */}
-              <div className="relative aspect-video overflow-hidden rounded-t-2xl sm:rounded-t-3xl">
-                <img
-                  src={
-                    selected.images
-                      ? selected.images[activeImage]
-                      : selected.image
-                  }
-                  alt={selected.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent" />
-              </div>
+              {/* Video or Image(s) */}
+              {selected.video ? (
+                <div className="relative aspect-video overflow-hidden rounded-t-2xl sm:rounded-t-3xl bg-black">
+                  <iframe
+                    src={selected.video}
+                    title={selected.title}
+                    className="w-full h-full"
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                  />
+                </div>
+              ) : (
+                <div className="relative aspect-video overflow-hidden rounded-t-2xl sm:rounded-t-3xl">
+                  <img
+                    src={
+                      selected.images
+                        ? selected.images[activeImage]
+                        : selected.image
+                    }
+                    alt={selected.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent" />
+                </div>
+              )}
 
               {/* Image thumbnails */}
               {selected.images && selected.images.length > 1 && (
