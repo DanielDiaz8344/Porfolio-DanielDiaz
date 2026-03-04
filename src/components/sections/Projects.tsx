@@ -135,6 +135,19 @@ const projects: Project[] = [
     tools: ['Illustrator'],
     tags: ['Logo', 'Branding'],
   },
+  {
+    title: 'Zona Elite TikTok',
+    tag: 'Content Creation',
+    shortDesc:
+      'Creación de contenido para TikTok de marca deportiva: guion, grabación, edición y publicación con enfoque en storytelling.',
+    fullDesc:
+      'Gestión integral del contenido audiovisual para la cuenta de TikTok de Zona Elite (@zonaeliteve). El proceso abarca desde la conceptualización y escritura de guiones con técnicas de storytelling hasta la grabación, edición y publicación. Cada pieza se diseña para captar atención en los primeros segundos, mantener el engagement con narrativas dinámicas y cerrar con llamados a la acción efectivos. Se trabaja con tendencias actuales de la plataforma, transiciones creativas, música estratégica y copy persuasivo. El objetivo es posicionar a Zona Elite como referente en el nicho deportivo, generando comunidad y reconocimiento de marca a través de contenido auténtico y de alto impacto.',
+    image: '/projects/zona-elite-tiktok.gif',
+    link: 'https://www.tiktok.com/@zonaeliteve',
+    linkLabel: 'Ver TikTok',
+    tools: ['CapCut', 'Canva', 'TikTok'],
+    tags: ['Content Creation', 'Storytelling', 'Video'],
+  },
 ];
 
 const INITIAL_COUNT = 5;
