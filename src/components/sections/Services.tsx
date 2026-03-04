@@ -1,5 +1,4 @@
-import { Palette, TrendingUp, Share2, Users, Video, Camera } from 'lucide-react';
-import SpotlightCard from '@/components/reactbits/SpotlightCard';
+import { Palette, TrendingUp, Share2, Users, Video, Camera, ArrowUpRight } from 'lucide-react';
 import DecryptedText from '@/components/reactbits/DecryptedText';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
 
@@ -27,12 +26,12 @@ const services = [
   {
     icon: Video,
     title: 'Edición de Video',
-    description: 'Edición profesional con Premiere, CapCut y Filmora. Contenido audiovisual que atrapa y convierte.',
+    description: 'Edición profesional y contenido audiovisual que atrapa y convierte.',
   },
   {
     icon: Camera,
     title: 'Fotografía',
-    description: 'Fotografía profesional, retoque y producción visual para marcas, productos y redes sociales.',
+    description: 'Fotografía profesional, retoque y producción visual para marcas y productos.',
   },
 ];
 
@@ -40,7 +39,7 @@ export default function Services() {
   return (
     <section id="services" className="py-24 md:py-32 bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-12">
+        <div className="mb-14">
           <DecryptedText
             text="Lo que hago"
             speed={60}
@@ -59,38 +58,32 @@ export default function Services() {
               key={service.title}
               distance={80}
               duration={0.6}
-              delay={index * 0.12}
+              delay={index * 0.1}
               threshold={0.05}
               className="h-full"
             >
-              <SpotlightCard
-                className="h-full flex flex-col gap-4 group"
-                spotlightColor="rgba(229, 57, 53, 0.15)"
-              >
-                {/* Top accent line */}
-                <div className="absolute top-0 left-0 h-[3px] bg-[#E53935] w-0 group-hover:w-full transition-all duration-500 z-10" />
+              <div className="group relative h-full rounded-2xl bg-[#141414] border border-[#1f1f1f] p-6 flex flex-col gap-5 transition-all duration-500 hover:border-[#E53935]/30 hover:bg-[#161616]">
+                {/* Glow behind card on hover */}
+                <div className="absolute -inset-px rounded-2xl bg-[#E53935]/0 group-hover:bg-[#E53935]/[0.03] transition-all duration-500 -z-10 blur-xl" />
 
-                <div className="w-12 h-12 rounded-xl bg-[#E53935]/10 border border-[#E53935]/20 flex items-center justify-center group-hover:bg-[#E53935]/20 group-hover:border-[#E53935]/40 transition-colors duration-300">
-                  <service.icon size={24} className="text-[#E53935]" />
+                {/* Icon with glow */}
+                <div className="relative w-14 h-14 rounded-xl bg-[#E53935]/10 border border-[#E53935]/20 flex items-center justify-center group-hover:bg-[#E53935]/20 group-hover:border-[#E53935]/40 group-hover:shadow-[0_0_20px_rgba(229,57,53,0.15)] transition-all duration-500">
+                  <service.icon size={26} className="text-[#E53935] transition-transform duration-500 group-hover:scale-110" />
                 </div>
 
-                <h3 className="text-xl font-heading font-semibold text-[#f5f5f5]">
-                  <DecryptedText
-                    text={service.title}
-                    speed={40}
-                    maxIterations={15}
-                    sequential
-                    revealDirection="start"
-                    animateOn="view"
-                    className="text-[#f5f5f5]"
-                    encryptedClassName="text-[#E53935]/60"
-                  />
-                </h3>
+                {/* Title + arrow */}
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-heading font-semibold text-[#f5f5f5]">
+                    {service.title}
+                  </h3>
+                  <ArrowUpRight size={18} className="text-[#737373] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                </div>
 
+                {/* Description */}
                 <p className="text-[#737373] font-body text-sm leading-relaxed">
                   {service.description}
                 </p>
-              </SpotlightCard>
+              </div>
             </AnimatedContent>
           ))}
         </div>
