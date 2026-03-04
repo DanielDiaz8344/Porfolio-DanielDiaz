@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { ExternalLink, ArrowUpRight, ChevronDown, X } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { ExternalLink, ArrowUpRight, ChevronDown, X, Loader2 } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import DecryptedText from '@/components/reactbits/DecryptedText';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
@@ -125,6 +125,7 @@ export default function Projects() {
   const [showAll, setShowAll] = useState(false);
   const [selected, setSelected] = useState<Project | null>(null);
   const [activeImage, setActiveImage] = useState(0);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   useEffect(() => {
     if (selected) {
@@ -146,6 +147,7 @@ export default function Projects() {
   const openProject = (project: Project) => {
     setSelected(project);
     setActiveImage(0);
+    setVideoLoaded(false);
   };
 
   return (
@@ -303,12 +305,20 @@ export default function Projects() {
               {/* Video or Image(s) */}
               {selected.video ? (
                 <div className="relative aspect-video overflow-hidden rounded-t-2xl sm:rounded-t-3xl bg-black">
+                  {/* Loading skeleton */}
+                  {!videoLoaded && (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#111]">
+                      <Loader2 size={32} className="text-[#E53935] animate-spin" />
+                      <span className="text-xs text-[#737373] font-body">Cargando video...</span>
+                    </div>
+                  )}
                   <iframe
                     src={selected.video}
                     title={selected.title}
-                    className="w-full h-full"
+                    className={`w-full h-full transition-opacity duration-500 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
                     allow="autoplay; encrypted-media"
                     allowFullScreen
+                    onLoad={() => setVideoLoaded(true)}
                   />
                 </div>
               ) : (
