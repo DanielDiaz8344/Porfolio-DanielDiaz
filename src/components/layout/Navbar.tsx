@@ -67,14 +67,6 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Desktop CTA */}
-            <div className="hidden lg:flex items-center gap-3">
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08]">
-                <span className="w-2 h-2 rounded-full bg-[#E53935] animate-pulse-red" />
-                <span className="text-xs text-[#737373]">Disponible</span>
-              </div>
-            </div>
-
             {/* Mobile Menu Button */}
             <button
               className={`lg:hidden p-2 sm:p-3 rounded-lg sm:rounded-xl transition-all duration-300 text-[#f5f5f5] ${
@@ -127,13 +119,6 @@ export default function Navbar() {
                   </button>
                 ))}
 
-                <div className="border-t border-white/[0.08] my-2 sm:my-3" />
-
-                {/* Disponible badge */}
-                <div className="flex items-center justify-center gap-2.5 py-3 sm:py-4 rounded-xl sm:rounded-2xl bg-white/[0.04]">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#E53935] animate-pulse-red" />
-                  <span className="text-sm text-[#737373] font-body">Disponible para freelance</span>
-                </div>
               </div>
             </motion.div>
           </motion.div>
