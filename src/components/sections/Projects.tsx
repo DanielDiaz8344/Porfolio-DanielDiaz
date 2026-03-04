@@ -369,8 +369,21 @@ export default function Projects() {
                   {selected.title}
                 </h3>
 
+                {/* CTA Link - prominent position */}
+                {selected.link && (
+                  <a
+                    href={selected.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center justify-center gap-3 mt-5 w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#E53935] text-white text-sm font-body font-semibold hover:bg-[#d32f2f] hover:shadow-[0_0_30px_rgba(229,57,53,0.25)] active:scale-[0.98] transition-all duration-300"
+                  >
+                    <ExternalLink size={16} className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300" />
+                    {selected.linkLabel || 'Ver proyecto'}
+                  </a>
+                )}
+
                 {/* Divider */}
-                <div className="w-12 h-[2px] bg-gradient-to-r from-[#E53935] to-transparent mt-4 mb-5" />
+                <div className="w-12 h-[2px] bg-gradient-to-r from-[#E53935] to-transparent mt-5 mb-5" />
 
                 {/* Description */}
                 <p className="text-[#a3a3a3] font-body text-sm sm:text-base leading-relaxed">
@@ -413,19 +426,6 @@ export default function Projects() {
                     </div>
                   </div>
                 </div>
-
-                {/* Link */}
-                {selected.link && (
-                  <a
-                    href={selected.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2.5 mt-6 px-5 py-2.5 rounded-xl bg-[#E53935]/10 border border-[#E53935]/20 text-[#E53935] text-sm font-body font-medium hover:bg-[#E53935]/20 hover:border-[#E53935]/40 hover:shadow-[0_0_20px_rgba(229,57,53,0.1)] transition-all duration-300"
-                  >
-                    <ExternalLink size={14} className="group-hover:rotate-12 transition-transform duration-300" />
-                    {selected.linkLabel || 'Ver proyecto'}
-                  </a>
-                )}
               </div>
             </motion.div>
           </motion.div>
