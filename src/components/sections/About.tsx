@@ -28,7 +28,7 @@ function Counter({ target, suffix }: { target: number; suffix: string }) {
       ([entry]) => {
         if (entry.isIntersecting && !started.current) {
           started.current = true;
-          const duration = 1500;
+          const duration = 1000;
           const start = performance.now();
           const step = (now: number) => {
             const progress = Math.min((now - start) / duration, 1);
@@ -95,7 +95,7 @@ export default function About() {
 
           {/* Text + Badges + Stats */}
           <div className="flex flex-col gap-6">
-            <FadeContent blur duration={800} delay={200}>
+            <FadeContent blur duration={600} delay={150}>
               <p className="text-lg text-[#a3a3a3] leading-relaxed font-body">
                 Soy Daniel Diaz, <span className="text-[#f5f5f5] font-medium">diseñador visual</span> con
                 experiencia en branding, interfaces digitales y edición audiovisual.
@@ -104,7 +104,7 @@ export default function About() {
               </p>
             </FadeContent>
 
-            <FadeContent blur duration={800} delay={400}>
+            <FadeContent blur duration={600} delay={250}>
               <p className="text-lg text-[#a3a3a3] leading-relaxed font-body">
                 Trabajo con Figma, Framer y plataformas como WordPress y FlutterFlow
                 para diseñar y desarrollar sitios web funcionales. Integro{' '}
@@ -136,7 +136,7 @@ export default function About() {
                   key={stat.label}
                   distance={30}
                   duration={0.4}
-                  delay={0.3 + index * 0.08}
+                  delay={0.15 + index * 0.06}
                   threshold={0.1}
                 >
                   <div className="bg-[#141414] border border-[#1f1f1f] rounded-lg px-4 py-3">

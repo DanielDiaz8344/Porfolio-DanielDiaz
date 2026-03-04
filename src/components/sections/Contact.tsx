@@ -44,7 +44,7 @@ export default function Contact() {
         </AnimatedContent>
 
         {/* CTA Buttons */}
-        <AnimatedContent distance={40} duration={0.6} delay={0.3} threshold={0.1}>
+        <AnimatedContent distance={40} duration={0.6} delay={0.2} threshold={0.1}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
             <a
               href={whatsappLink}
@@ -69,7 +69,7 @@ export default function Contact() {
         </AnimatedContent>
 
         {/* Social Links */}
-        <AnimatedContent distance={30} duration={0.6} delay={0.4} threshold={0.1}>
+        <AnimatedContent distance={30} duration={0.6} delay={0.25} threshold={0.1}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
               href="https://www.instagram.com/bydanieldiaz"
