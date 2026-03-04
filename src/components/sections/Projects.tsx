@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react';
-import { ExternalLink, ArrowUpRight, ChevronDown, X, Loader2 } from 'lucide-react';
+import { ExternalLink, ArrowUpRight, ChevronDown, X, Loader2, FileText } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import DecryptedText from '@/components/reactbits/DecryptedText';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
+
+interface CatalogItem {
+  label: string;
+  url: string;
+}
 
 interface Project {
   title: string;
@@ -13,7 +18,7 @@ interface Project {
   images?: string[];
   link?: string;
   linkLabel?: string;
-  pdf?: string;
+  catalogs?: CatalogItem[];
   video?: string;
   imageBg?: string;
   tools: string[];
@@ -71,16 +76,23 @@ const projects: Project[] = [
     tags: ['Cartas', 'Cyberpunk'],
   },
   {
-    title: 'Catálogo Kyra',
+    title: 'Catálogos Kyra',
     tag: 'Diseño Editorial',
     shortDesc:
-      'Catálogo corporativo creado con paleta de colores oscura y integración del logo Kyra, enfocado en presentación empresarial profesional.',
+      'Colección de catálogos corporativos para Kyra Soluciones, abarcando servicios, e-commerce, sistemas, páginas web y empleado virtual.',
     fullDesc:
-      'Desarrollo de catálogo corporativo completo para presentación de servicios empresariales. El proyecto se basó en una reunión detallada con el cliente donde explicó exhaustivamente las actividades y servicios de su empresa. Se utilizó el logo de Kyra, previamente diseñado por mí, como elemento central de la identidad visual del catálogo. La paleta de colores se construyó sobre tonos oscuros complementados con los colores característicos del logo, creando una estética profesional y moderna. El diseño se realizó principalmente en Canva, aprovechando su versatilidad para composiciones complejas y gestión eficiente de elementos gráficos.',
+      'Desarrollo de una colección completa de catálogos corporativos para Kyra Soluciones Venezuela. Cada catálogo fue diseñado tras reuniones detalladas con el cliente para comprender a fondo cada línea de servicio. Se utilizó el logo de Kyra como elemento central de identidad visual, con una paleta de colores oscura complementada con los colores característicos de la marca. Cada catálogo mantiene coherencia visual pero con personalidad propia según su área: e-commerce, desarrollo de sistemas, páginas web, empleado virtual y servicios generales.',
     image: '/projects/portafolio-portada.png',
-    pdf: '/projects/Manual de Marca Sube con Pepe.pdf',
+    catalogs: [
+      { label: 'Servicios', url: '/projects/catalogo-servicios.pdf' },
+      { label: 'E-Commerce', url: '/projects/catalogo-ecommerce.pdf' },
+      { label: 'Sistemas', url: '/projects/catalogo-sistemas.pdf' },
+      { label: 'Página Web', url: '/projects/catalogo-pagina-web.pdf' },
+      { label: 'Empleado Virtual', url: '/projects/catalogo-empleado-virtual.pdf' },
+      { label: 'Daniel Diaz', url: '/projects/catalogo-daniel-diaz.pdf' },
+    ],
     tools: ['Canva', 'Photoshop'],
-    tags: ['Branding', 'Editorial'],
+    tags: ['Branding', 'Editorial', 'Catálogos'],
   },
   {
     title: 'Logo Daniel Designs',
@@ -376,6 +388,26 @@ export default function Projects() {
                     <ExternalLink size={16} className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300" />
                     {selected.linkLabel || 'Ver proyecto'}
                   </a>
+                )}
+
+                {/* Catalogs grid */}
+                {selected.catalogs && selected.catalogs.length > 0 && (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mt-5">
+                    {selected.catalogs.map((cat) => (
+                      <a
+                        key={cat.url}
+                        href={cat.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center gap-2.5 px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:bg-[#E53935]/10 hover:border-[#E53935]/30 transition-all duration-300"
+                      >
+                        <FileText size={16} className="text-[#E53935] shrink-0" />
+                        <span className="text-xs font-body text-[#a3a3a3] group-hover:text-[#f5f5f5] transition-colors duration-300 truncate">
+                          {cat.label}
+                        </span>
+                      </a>
+                    ))}
+                  </div>
                 )}
 
                 {/* Divider */}
