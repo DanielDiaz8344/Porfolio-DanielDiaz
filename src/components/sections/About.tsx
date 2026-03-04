@@ -54,7 +54,7 @@ export default function About() {
 
           {/* Photo placeholder */}
           <AnimatedContent distance={80} direction="horizontal" duration={0.8}>
-            <div className="relative aspect-[4/5] rounded-2xl border border-[#1f1f1f] bg-[#141414] overflow-hidden flex items-center justify-center">
+            <div className="relative aspect-square md:aspect-[4/5] rounded-2xl border border-[#1f1f1f] bg-[#141414] overflow-hidden flex items-center justify-center">
               <div className="text-center">
                 <div className="w-20 h-20 rounded-full bg-[#E53935]/10 border border-[#E53935]/20 mx-auto mb-4 flex items-center justify-center">
                   <span className="text-3xl font-heading font-bold text-[#E53935]">DD</span>
