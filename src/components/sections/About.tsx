@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import DecryptedText from '@/components/reactbits/DecryptedText';
 import FadeContent from '@/components/reactbits/FadeContent';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
-import GradientText from '@/components/reactbits/GradientText';
 import SpotlightCard from '@/components/reactbits/SpotlightCard';
 import Magnet from '@/components/reactbits/Magnet';
 import { Badge } from '@/components/ui/badge';
@@ -130,7 +129,7 @@ export default function About() {
             </AnimatedContent>
 
             {/* Stats row */}
-            <div className="grid grid-cols-4 gap-3 mt-4 pt-6 border-t border-[#1f1f1f]">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4 pt-6 border-t border-[#1f1f1f]">
               {stats.map((stat, index) => (
                 <AnimatedContent
                   key={stat.label}
@@ -139,17 +138,11 @@ export default function About() {
                   delay={0.3 + index * 0.08}
                   threshold={0.1}
                 >
-                  <div className="text-center">
-                    <div className="text-2xl sm:text-3xl font-heading font-bold leading-none mb-1">
-                      <GradientText
-                        colors={['#E53935', '#FF6B6B', '#FF2D2D', '#E53935']}
-                        animationSpeed={5}
-                        className="font-heading font-bold"
-                      >
-                        <Counter target={stat.value} suffix={stat.suffix} />
-                      </GradientText>
-                    </div>
-                    <p className="text-[10px] sm:text-xs text-[#737373] font-body">{stat.label}</p>
+                  <div className="flex items-center gap-3">
+                    <span className="text-3xl sm:text-4xl font-heading font-bold text-[#E53935] leading-none">
+                      <Counter target={stat.value} suffix={stat.suffix} />
+                    </span>
+                    <span className="text-xs text-[#737373] font-body leading-tight">{stat.label}</span>
                   </div>
                 </AnimatedContent>
               ))}
