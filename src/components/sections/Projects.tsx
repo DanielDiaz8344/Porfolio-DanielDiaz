@@ -94,17 +94,6 @@ const projects: Project[] = [
     tags: ['Branding', 'Editorial', 'Catálogos'],
   },
   {
-    title: 'Logo Daniel Designs',
-    tag: 'Branding Personal',
-    shortDesc:
-      'Logo personal que refleja identidad como diseñador profesional, usando negro y rojo como paleta base.',
-    fullDesc:
-      'Creación de mi logo personal "Daniel Designs", un proyecto que refleja mi identidad como diseñador profesional. El proceso comenzó con la generación del concepto base utilizando inteligencia artificial, explorando diferentes enfoques tipográficos y compositivos. Posteriormente se aplicaron retoques especializados usando Canva y Photoshop para refinamientos avanzados. La paleta de colores se basó en mis dos colores favoritos: negro y rojo, creando un contraste potente que transmite elegancia y energía. El resultado es un logo limpio, moderno y memorable que funciona perfectamente en diferentes aplicaciones.',
-    image: '/projects/kyra-logo.jpg',
-    tools: ['Canva', 'Photoshop', 'IA'],
-    tags: ['Branding', 'Logo'],
-  },
-  {
     title: 'Catálogo Daniel Diaz',
     tag: 'Diseño Editorial',
     shortDesc:
@@ -112,7 +101,6 @@ const projects: Project[] = [
     fullDesc:
       'Catálogo personal de 6 páginas diseñado para presentar mi oferta completa de servicios creativos. Incluye secciones de Diseño Web (sitios funcionales y optimizados para conversión), Branding Estratégico e Identidad Visual, Diseño Editorial y Maquetación Profesional (catálogos, eBooks, documentos), y Publicidad Impresa y Digital (flyers para imprenta y banners optimizados para Google Display y redes sociales). El catálogo cierra con un flujo claro de cotización: consulta personalizada por videollamada, propuesta formal en 48 horas y arranque del proyecto.',
     image: '/projects/catalogo-daniel-portada.png',
-    imageBg: '#0a0a0a',
     catalogs: [
       { label: 'Ver Catálogo', url: '/projects/catalogo-daniel-diaz.pdf' },
     ],
