@@ -31,10 +31,21 @@ const toolSections = [
     ],
   },
   {
-    category: 'IA & Otros',
+    category: 'IA & Automatización',
     tools: [
       { name: 'ChatGPT', abbr: 'AI', color: '#10A37F' },
+      { name: 'Claude Code', abbr: 'Cl', color: '#D97757' },
       { name: 'Midjourney', abbr: 'Mj', color: '#FFFFFF' },
+      { name: 'Pencil Dev', abbr: 'Pd', color: '#6366F1' },
+    ],
+  },
+  {
+    category: 'Productividad',
+    tools: [
+      { name: 'Notion', abbr: 'No', color: '#FFFFFF' },
+      { name: 'Veo 3', abbr: 'V3', color: '#4285F4' },
+      { name: 'Nano Banana', abbr: 'Nb', color: '#FFD60A' },
+      { name: 'Google Suite', abbr: 'Gs', color: '#4285F4' },
     ],
   },
 ];
