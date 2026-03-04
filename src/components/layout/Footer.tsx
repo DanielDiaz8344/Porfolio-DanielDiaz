@@ -1,5 +1,4 @@
 import { Instagram } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
 
 const TikTokIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -9,34 +8,48 @@ const TikTokIcon = () => (
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#0a0a0a]">
-      <Separator className="bg-[#1f1f1f]" />
-      <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-1">
-          <span className="text-sm text-[#737373] font-body">
-            &copy; 2026 ByDanielDiaz
-          </span>
-          <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-[#E53935] animate-pulse-red" />
-          <span className="hidden sm:inline text-xs text-[#737373]">Disponible para freelance</span>
-        </div>
+    <footer className="relative w-full">
+      {/* Glass top border with red accent */}
+      <div className="h-px bg-gradient-to-r from-transparent via-[#E53935]/20 to-transparent" />
 
-        <div className="flex items-center gap-4">
-          <a
-            href="https://www.instagram.com/bydanieldiaz"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#737373] hover:text-[#E53935] transition-colors duration-300"
-          >
-            <Instagram size={20} />
-          </a>
-          <a
-            href="https://www.tiktok.com/@bydanieldiaz"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#737373] hover:text-[#E53935] transition-colors duration-300"
-          >
-            <TikTokIcon />
-          </a>
+      {/* Glass background */}
+      <div className="relative bg-white/[0.02] backdrop-blur-xl border-t border-white/[0.06]">
+        {/* Ambient glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(229,57,53,0.03),transparent_70%)] pointer-events-none" />
+
+        <div className="relative max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-5">
+          {/* Left: copyright + badge */}
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-2">
+            <span className="text-sm text-[#737373] font-body">
+              &copy; 2026 ByDanielDiaz
+            </span>
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08]">
+              <span className="w-2 h-2 rounded-full bg-[#E53935] animate-pulse-red" />
+              <span className="text-xs text-[#737373]">Disponible para freelance</span>
+            </div>
+          </div>
+
+          {/* Right: social icons in glass pills */}
+          <div className="flex items-center gap-3">
+            <a
+              href="https://www.instagram.com/bydanieldiaz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center transition-all duration-300 hover:bg-white/[0.08] hover:border-white/[0.15] hover:shadow-[0_0_16px_rgba(229,57,53,0.12)]"
+            >
+              <Instagram size={18} className="text-[#737373] group-hover:text-[#E53935] transition-colors duration-300" />
+            </a>
+            <a
+              href="https://www.tiktok.com/@bydanieldiaz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center transition-all duration-300 hover:bg-white/[0.08] hover:border-white/[0.15] hover:shadow-[0_0_16px_rgba(229,57,53,0.12)]"
+            >
+              <span className="text-[#737373] group-hover:text-[#E53935] transition-colors duration-300">
+                <TikTokIcon />
+              </span>
+            </a>
+          </div>
         </div>
       </div>
     </footer>
