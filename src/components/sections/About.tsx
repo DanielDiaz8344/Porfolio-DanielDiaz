@@ -97,19 +97,18 @@ export default function About() {
           <div className="flex flex-col gap-6">
             <FadeContent blur duration={600} delay={150}>
               <p className="text-lg text-[#a3a3a3] leading-relaxed font-body">
-                Soy Daniel Diaz, <span className="text-[#f5f5f5] font-medium">diseñador visual</span> con
-                experiencia en branding, interfaces digitales y edición audiovisual.
-                Domino herramientas como Photoshop, Illustrator, Lightroom y Premiere
-                para crear contenido visual impactante.
+                Soy Daniel Diaz, <span className="text-[#f5f5f5] font-medium">diseñador visual</span> enfocado
+                en construir marcas que conectan. Branding, interfaces y producción audiovisual
+                son mi terreno — con Photoshop, Illustrator, Lightroom y Premiere como extensión natural de mi proceso.
               </p>
             </FadeContent>
 
             <FadeContent blur duration={600} delay={250}>
               <p className="text-lg text-[#a3a3a3] leading-relaxed font-body">
-                Trabajo con Figma, Framer y plataformas como WordPress y FlutterFlow
-                para diseñar y desarrollar sitios web funcionales. Integro{' '}
-                <span className="text-[#f5f5f5] font-medium">inteligencia artificial</span> en
-                mis procesos creativos para optimizar tiempos y potenciar ideas visuales.
+                Diseño y desarrollo webs con Figma, Framer, WordPress y FlutterFlow.
+                Integro <span className="text-[#f5f5f5] font-medium">inteligencia artificial</span> en
+                cada etapa creativa para mover más rápido sin perder calidad —
+                porque el tiempo de tu marca también es valioso.
               </p>
             </FadeContent>
 
