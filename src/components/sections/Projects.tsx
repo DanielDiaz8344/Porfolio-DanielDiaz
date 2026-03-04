@@ -127,8 +127,17 @@ export default function Projects() {
   const [activeImage, setActiveImage] = useState(0);
 
   useEffect(() => {
-    document.body.style.overflow = selected ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    if (selected) {
+      window.__lenis?.stop();
+      document.body.style.overflow = 'hidden';
+    } else {
+      window.__lenis?.start();
+      document.body.style.overflow = '';
+    }
+    return () => {
+      window.__lenis?.start();
+      document.body.style.overflow = '';
+    };
   }, [selected]);
 
   const visible = showAll ? projects : projects.slice(0, INITIAL_COUNT);
