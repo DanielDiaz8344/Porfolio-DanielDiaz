@@ -206,11 +206,6 @@ const Threads: React.FC<ThreadsProps> = ({
     }
 
     // --- Page Visibility API ----------------------------------------
-    // When the tab is hidden the browser throttles or entirely suspends
-    // rAF callbacks, but the callback still gets enqueued and the GPU
-    // command buffer is still built on some browsers. Explicitly
-    // cancelling the loop on hide and restarting on show guarantees zero
-    // GPU work while the tab is not visible, saving CPU, GPU, and battery.
     function handleVisibilityChange() {
       if (document.hidden) {
         if (animationFrameId.current) {
@@ -218,13 +213,34 @@ const Threads: React.FC<ThreadsProps> = ({
           animationFrameId.current = 0;
         }
       } else {
-        // Resume: pass performance.now() so iTime doesn't jump.
         if (!animationFrameId.current) {
           animationFrameId.current = requestAnimationFrame(update);
         }
       }
     }
     document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // --- Intersection Observer ---------------------------------------
+    // Pause the WebGL loop when the canvas is scrolled out of the
+    // viewport. This is the most common case of wasted GPU work:
+    // the Hero section is above the fold and keeps rendering at 60fps
+    // even when the user is looking at sections further down the page.
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!animationFrameId.current && !document.hidden) {
+            animationFrameId.current = requestAnimationFrame(update);
+          }
+        } else {
+          if (animationFrameId.current) {
+            cancelAnimationFrame(animationFrameId.current);
+            animationFrameId.current = 0;
+          }
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(container);
 
     function update(t: number) {
       if (enableMouseInteraction) {
@@ -249,6 +265,7 @@ const Threads: React.FC<ThreadsProps> = ({
       if (resizeTimer !== null) clearTimeout(resizeTimer);
       window.removeEventListener('resize', resize);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
+      observer.disconnect();
 
       if (enableMouseInteraction) {
         container.removeEventListener('mousemove', handleMouseMove);
