@@ -79,13 +79,13 @@ export default function About() {
               className="!p-0 !rounded-2xl overflow-hidden"
               spotlightColor="rgba(229, 57, 53, 0.15)"
             >
-              <div className="relative aspect-square md:aspect-[4/5] flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-20 h-20 rounded-full bg-[#E53935]/10 border border-[#E53935]/20 mx-auto mb-4 flex items-center justify-center">
-                    <span className="text-3xl font-heading font-bold text-[#E53935]">DD</span>
-                  </div>
-                  <p className="text-sm text-[#737373] font-body">Foto próximamente</p>
-                </div>
+              <div className="relative aspect-square md:aspect-[4/5] overflow-hidden">
+                <img
+                  src="/daniel-diaz.jpg"
+                  alt="Daniel Diaz"
+                  className="w-full h-full object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/60 via-transparent to-transparent" />
                 <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-[#E53935]/30" />
                 <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-[#E53935]/30" />
               </div>
