@@ -15,6 +15,7 @@ interface Project {
   linkLabel?: string;
   pdf?: string;
   video?: string;
+  imageBg?: string;
   tools: string[];
   tags: string[];
 }
@@ -28,6 +29,7 @@ const projects: Project[] = [
     fullDesc:
       'Proyecto de modernización del sistema de inventario para Aircool, una empresa que manejaba todo su inventario de manera tradicional usando Excel y procesos manuales. El desafío consistía en digitalizar y optimizar sus flujos de trabajo mediante el diseño de interfaces intuitivas y funcionales. Se desarrollaron las interfaces completas utilizando Figma, con especial atención a crear flujos de usuario sencillos y comprensibles para facilitar la transición del equipo. Se adaptó cuidadosamente la paleta de colores basándose en el logo existente de Aircool, asegurando coherencia visual y evitando la saturación que pudiera cansar la vista durante jornadas largas de trabajo. Las interfaces finales fueron documentadas y compartidas con el equipo de desarrollo para garantizar una implementación fiel al diseño.',
     image: '/projects/aircool.png',
+    imageBg: '#e8e8e8',
     video: 'https://drive.google.com/file/d/1dFc3ZJCI1TDfVFUI3cIeqgc9REjR3XMZ/preview',
     tools: ['Figma'],
     tags: ['UX/UI', 'Figma'],
@@ -175,11 +177,16 @@ export default function Projects() {
                     }`}
                   >
                     {/* Image */}
-                    <div className="relative md:w-[40%] aspect-video md:aspect-auto md:h-[220px] overflow-hidden">
+                    <div
+                      className="relative md:w-[40%] aspect-video md:aspect-auto md:h-[220px] overflow-hidden"
+                      style={project.imageBg ? { backgroundColor: project.imageBg } : undefined}
+                    >
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${
+                          project.imageBg ? 'object-contain p-6' : 'object-cover'
+                        }`}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/40 via-transparent to-transparent" />
 
