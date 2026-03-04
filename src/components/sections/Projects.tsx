@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { ExternalLink, ArrowUpRight, ChevronDown, X, Loader2 } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import DecryptedText from '@/components/reactbits/DecryptedText';
