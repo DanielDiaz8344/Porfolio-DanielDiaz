@@ -99,7 +99,7 @@ export default function About() {
               <p className="text-lg text-[#a3a3a3] leading-relaxed font-body">
                 Soy Daniel Diaz, <span className="text-[#f5f5f5] font-medium">diseñador visual</span> enfocado
                 en construir marcas que conectan. Branding, interfaces y producción audiovisual
-                son mi terreno — con Photoshop, Illustrator, Lightroom y Premiere como extensión natural de mi proceso.
+                son mi terreno, con Photoshop, Illustrator, Lightroom y Premiere como herramientas de cabecera.
               </p>
             </FadeContent>
 
@@ -107,7 +107,7 @@ export default function About() {
               <p className="text-lg text-[#a3a3a3] leading-relaxed font-body">
                 Diseño y desarrollo webs con Figma, Framer, WordPress y FlutterFlow.
                 Integro <span className="text-[#f5f5f5] font-medium">inteligencia artificial</span> en
-                cada etapa creativa para mover más rápido sin perder calidad —
+                cada etapa creativa para entregar más rápido sin sacrificar calidad,
                 porque el tiempo de tu marca también es valioso.
               </p>
             </FadeContent>
