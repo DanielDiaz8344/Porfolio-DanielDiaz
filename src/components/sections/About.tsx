@@ -6,7 +6,7 @@ import SpotlightCard from '@/components/reactbits/SpotlightCard';
 import Magnet from '@/components/reactbits/Magnet';
 import { Badge } from '@/components/ui/badge';
 
-const badges = ['Freelancer', 'Venezuela', 'Disponible'];
+const badges = ['Freelancer', 'Venezuela'];
 
 const stats = [
   { value: 3, suffix: '+', label: 'Años' },
@@ -47,7 +47,7 @@ function Counter({ target, suffix }: { target: number; suffix: string }) {
 
   return (
     <span ref={ref}>
-      {suffix}{count}
+      {count}{suffix}
     </span>
   );
 }
@@ -129,7 +129,7 @@ export default function About() {
             </AnimatedContent>
 
             {/* Stats row */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4 pt-6 border-t border-[#1f1f1f]">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
               {stats.map((stat, index) => (
                 <AnimatedContent
                   key={stat.label}
@@ -138,11 +138,11 @@ export default function About() {
                   delay={0.3 + index * 0.08}
                   threshold={0.1}
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="text-3xl sm:text-4xl font-heading font-bold text-[#E53935] leading-none">
+                  <div className="bg-[#141414] border border-[#1f1f1f] rounded-lg px-4 py-3">
+                    <span className="text-2xl sm:text-3xl font-heading font-bold text-[#E53935]">
                       <Counter target={stat.value} suffix={stat.suffix} />
                     </span>
-                    <span className="text-xs text-[#737373] font-body leading-tight">{stat.label}</span>
+                    <p className="text-xs text-[#737373] font-body mt-1">{stat.label}</p>
                   </div>
                 </AnimatedContent>
               ))}
