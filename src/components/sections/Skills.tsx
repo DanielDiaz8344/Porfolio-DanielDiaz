@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react';
+import { Pencil } from 'lucide-react';
 import {
   SiFigma,
   SiCanva,
@@ -29,6 +30,21 @@ function Abbr({ children, color }: { children: string; color: string }) {
   );
 }
 
+const CapCutIcon = () => (
+  <svg viewBox="0 0 512 510" fill="currentColor" className="w-[1.25em] h-[1.25em]">
+    <path d="M109.1 181.5c2.2-19.5 18.3-34.6 38-35.5l167.2 0a40.6 40.6 0 0130.1 17.4 42.2 42.2 0 016.4 14.9l49.1-24.4a2.2 2.2 0 013.1 1.7v27.6a4.6 4.6 0 01-2.8 4.2l-135.6 67.3 135.3 67a4.7 4.7 0 013.1 4.1v27.7a2.3 2.3 0 01-3.6 1.8c-16.1-8.2-32.5-15.9-48.5-24.2a63.5 63.5 0 01-4.3 11.2 40.8 40.8 0 01-26.1 20.1 45 45 0 01-11.2.9l-155.8 0c-3.5 0-7 0-10.5-.3-18.1-2.7-32-17.4-33.9-35.6v-26.8a5.9 5.9 0 014.1-4.9c27.8-13.7 55.5-27.6 83.4-41.3l-84.2-41.7a5.4 5.4 0 01-3.2-4.9c0-8.9-.2-17.8 0-26.7zm31 .2a10.1 10.1 0 00-9.3 5.5c-1.7 3.4-.9 7.3-1 10.9 30.6 15.1 61 30.3 91.5 45.3l90.6-44.9c0-2.7.1-5.4 0-8.2a10.2 10.2 0 00-10.1-8.7l-161.6 0zm-1 135.4c.1 3.7-.7 7.6 1.1 11a10.2 10.2 0 009.3 5.4l161.7 0a10.1 10.1 0 008.8-5.1c2-3.6 1.1-7.9 1.3-11.8l-90.8-44.9-91.4 45.3z" />
+  </svg>
+);
+
+const NanoBananaIcon = () => (
+  <svg viewBox="0 0 254 245" fill="none" className="w-[1.25em] h-[1.25em]">
+    <path d="M32.4 60.7C5.9 90.4-2 122.2 8.5 156c10.6 33.9 31.8 60.4 63.5 79.4 42.4 10.6 84.7 5.3 127.1-15.9 42.4-21.2 58.3-53 47.7-95.3-10.6-53-37.1-90-79.4-111.2C125-8.1 80 7.8 32.4 60.7" fill="currentColor" opacity="0.9" />
+    <circle cx="104" cy="124" r="9.5" fill="#0e0e0e" />
+    <circle cx="136" cy="140" r="9.5" fill="#0e0e0e" />
+    <circle cx="167" cy="124" r="9.5" fill="#0e0e0e" />
+  </svg>
+);
+
 interface Tool {
   name: string;
   icon: ReactNode;
@@ -51,7 +67,7 @@ const toolSections: { category: string; tools: Tool[] }[] = [
       { name: 'Premiere', icon: <TbBrandAdobePremier />, color: '#9999FF' },
       { name: 'After Effects', icon: <TbBrandAdobeAfterEffect />, color: '#9999FF' },
       { name: 'Lightroom', icon: <Abbr color="#31A8FF">Lr</Abbr>, color: '#31A8FF' },
-      { name: 'CapCut', icon: <Abbr color="#FFFFFF">Cc</Abbr>, color: '#FFFFFF' },
+      { name: 'CapCut', icon: <CapCutIcon />, color: '#FFFFFF' },
     ],
   },
   {
@@ -69,7 +85,7 @@ const toolSections: { category: string; tools: Tool[] }[] = [
       { name: 'ChatGPT', icon: <SiOpenai />, color: '#10A37F' },
       { name: 'Claude Code', icon: <SiClaude />, color: '#D97757' },
       { name: 'Midjourney', icon: <Abbr color="#FFFFFF">Mj</Abbr>, color: '#FFFFFF' },
-      { name: 'Pencil Dev', icon: <Abbr color="#6366F1">Pd</Abbr>, color: '#6366F1' },
+      { name: 'Pencil Dev', icon: <Pencil size={20} />, color: '#6366F1' },
     ],
   },
   {
@@ -77,7 +93,7 @@ const toolSections: { category: string; tools: Tool[] }[] = [
     tools: [
       { name: 'Notion', icon: <SiNotion />, color: '#FFFFFF' },
       { name: 'Veo 3', icon: <Abbr color="#4285F4">V3</Abbr>, color: '#4285F4' },
-      { name: 'Nano Banana', icon: <Abbr color="#FFD60A">Nb</Abbr>, color: '#FFD60A' },
+      { name: 'Nano Banana', icon: <NanoBananaIcon />, color: '#FFD60A' },
       { name: 'Google Suite', icon: <SiGoogle />, color: '#4285F4' },
     ],
   },
