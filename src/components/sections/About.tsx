@@ -1,70 +1,171 @@
-import ScrollReveal from '@/components/reactbits/ScrollReveal';
+import { useEffect, useRef, useState } from 'react';
+import DecryptedText from '@/components/reactbits/DecryptedText';
 import FadeContent from '@/components/reactbits/FadeContent';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
+import GradientText from '@/components/reactbits/GradientText';
+import SpotlightCard from '@/components/reactbits/SpotlightCard';
+import Magnet from '@/components/reactbits/Magnet';
 import { Badge } from '@/components/ui/badge';
 
 const badges = ['Freelancer', 'Venezuela', 'Disponible'];
+
+const stats = [
+  { value: 3, suffix: '+', label: 'Años de experiencia' },
+  { value: 50, suffix: '+', label: 'Proyectos completados' },
+  { value: 30, suffix: '+', label: 'Clientes satisfechos' },
+  { value: 6, suffix: '', label: 'Servicios ofrecidos' },
+];
+
+function Counter({ target, suffix }: { target: number; suffix: string }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true;
+          const duration = 1500;
+          const start = performance.now();
+          const step = (now: number) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.floor(eased * target));
+            if (progress < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [target]);
+
+  return (
+    <span ref={ref}>
+      {suffix}{count}
+    </span>
+  );
+}
 
 export default function About() {
   return (
     <section id="about" className="py-24 md:py-32 bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto px-6">
-        <ScrollReveal
-          containerClassName="mb-12"
-          textClassName="text-[clamp(2rem,5vw,3.5rem)] font-heading font-bold text-[#f5f5f5]"
-        >
-          Sobre Mí
-        </ScrollReveal>
+        {/* Title */}
+        <div className="mb-12">
+          <DecryptedText
+            text="Sobre Mí"
+            speed={60}
+            maxIterations={20}
+            sequential
+            revealDirection="start"
+            animateOn="view"
+            className="text-[clamp(2rem,5vw,3.5rem)] font-heading font-bold text-[#f5f5f5]"
+            encryptedClassName="text-[#E53935]/40"
+          />
+        </div>
 
+        {/* Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          {stats.map((stat, index) => (
+            <AnimatedContent
+              key={stat.label}
+              distance={40}
+              duration={0.5}
+              delay={index * 0.1}
+              threshold={0.1}
+            >
+              <div className="text-center p-4 rounded-xl border border-[#1f1f1f] bg-[#141414]/50">
+                <div className="text-[clamp(2rem,4vw,3rem)] font-heading font-bold leading-none mb-2">
+                  <GradientText
+                    colors={['#E53935', '#FF6B6B', '#FF2D2D', '#E53935']}
+                    animationSpeed={5}
+                    className="font-heading font-bold"
+                  >
+                    <Counter target={stat.value} suffix={stat.suffix} />
+                  </GradientText>
+                </div>
+                <p className="text-xs sm:text-sm text-[#737373] font-body">{stat.label}</p>
+              </div>
+            </AnimatedContent>
+          ))}
+        </div>
+
+        {/* Content grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
           {/* Text */}
           <div className="flex flex-col gap-6">
             <FadeContent blur duration={800} delay={200}>
               <p className="text-lg text-[#a3a3a3] leading-relaxed font-body">
-                Soy Daniel Diaz, diseñador visual con experiencia en branding,
-                interfaces digitales y edición audiovisual. Domino herramientas como
-                Photoshop, Illustrator, Lightroom y Premiere para crear contenido
-                visual impactante.
+                Soy Daniel Diaz,{' '}
+                <GradientText
+                  colors={['#E53935', '#FF6B6B', '#FF2D2D']}
+                  animationSpeed={4}
+                  className="font-semibold"
+                >
+                  diseñador visual
+                </GradientText>{' '}
+                con experiencia en branding, interfaces digitales y edición audiovisual.
+                Domino herramientas como Photoshop, Illustrator, Lightroom y Premiere
+                para crear contenido visual impactante.
               </p>
             </FadeContent>
 
             <FadeContent blur duration={800} delay={400}>
               <p className="text-lg text-[#a3a3a3] leading-relaxed font-body">
                 Trabajo con Figma, Framer y plataformas como WordPress y FlutterFlow
-                para diseñar y desarrollar sitios web funcionales. Integro inteligencia
-                artificial en mis procesos creativos para optimizar tiempos y potenciar
-                ideas visuales.
+                para diseñar y desarrollar sitios web funcionales. Integro{' '}
+                <GradientText
+                  colors={['#FF6B6B', '#E53935', '#FF2D2D']}
+                  animationSpeed={4}
+                  className="font-semibold"
+                >
+                  inteligencia artificial
+                </GradientText>{' '}
+                en mis procesos creativos para optimizar tiempos y potenciar ideas visuales.
               </p>
             </FadeContent>
 
             <AnimatedContent distance={50} duration={0.6} delay={0.3}>
               <div className="flex flex-wrap gap-3 mt-2">
                 {badges.map((badge) => (
-                  <Badge
-                    key={badge}
-                    variant="outline"
-                    className="border-[#E53935]/30 text-[#E53935] bg-[#E53935]/5 hover:bg-[#E53935]/10 px-4 py-1.5 text-sm font-body"
-                  >
-                    {badge}
-                  </Badge>
+                  <Magnet key={badge} padding={15} magnetStrength={3}>
+                    <Badge
+                      variant="outline"
+                      className="border-[#E53935]/30 text-[#E53935] bg-[#E53935]/5 hover:bg-[#E53935]/10 px-4 py-1.5 text-sm font-body cursor-default"
+                    >
+                      {badge}
+                    </Badge>
+                  </Magnet>
                 ))}
               </div>
             </AnimatedContent>
           </div>
 
-          {/* Photo placeholder */}
+          {/* Photo placeholder with SpotlightCard */}
           <AnimatedContent distance={80} direction="horizontal" duration={0.8}>
-            <div className="relative aspect-square md:aspect-[4/5] rounded-2xl border border-[#1f1f1f] bg-[#141414] overflow-hidden flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-20 h-20 rounded-full bg-[#E53935]/10 border border-[#E53935]/20 mx-auto mb-4 flex items-center justify-center">
-                  <span className="text-3xl font-heading font-bold text-[#E53935]">DD</span>
+            <SpotlightCard
+              className="!p-0 !rounded-2xl overflow-hidden"
+              spotlightColor="rgba(229, 57, 53, 0.15)"
+            >
+              <div className="relative aspect-square md:aspect-[4/5] flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-20 h-20 rounded-full bg-[#E53935]/10 border border-[#E53935]/20 mx-auto mb-4 flex items-center justify-center">
+                    <span className="text-3xl font-heading font-bold text-[#E53935]">DD</span>
+                  </div>
+                  <p className="text-sm text-[#737373] font-body">Foto próximamente</p>
                 </div>
-                <p className="text-sm text-[#737373] font-body">Foto próximamente</p>
+                {/* Decorative corner accents */}
+                <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-[#E53935]/30" />
+                <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-[#E53935]/30" />
               </div>
-              {/* Decorative corner accents */}
-              <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-[#E53935]/30" />
-              <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-[#E53935]/30" />
-            </div>
+            </SpotlightCard>
           </AnimatedContent>
         </div>
       </div>
