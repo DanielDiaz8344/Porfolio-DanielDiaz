@@ -35,7 +35,7 @@ export default function Footer() {
               href="https://www.instagram.com/bydanieldiaz"
               target="_blank"
               rel="noopener noreferrer"
-              className="group w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center transition-all duration-300 hover:bg-white/[0.08] hover:border-white/[0.15] hover:shadow-[0_0_16px_rgba(229,57,53,0.12)]"
+              className="group w-11 h-11 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center transition-all duration-300 hover:bg-white/[0.08] hover:border-white/[0.15] hover:shadow-[0_0_16px_rgba(229,57,53,0.12)]"
             >
               <Instagram size={18} className="text-[#737373] group-hover:text-[#E53935] transition-colors duration-300" />
             </a>
@@ -43,7 +43,7 @@ export default function Footer() {
               href="https://www.tiktok.com/@bydanieldiaz"
               target="_blank"
               rel="noopener noreferrer"
-              className="group w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center transition-all duration-300 hover:bg-white/[0.08] hover:border-white/[0.15] hover:shadow-[0_0_16px_rgba(229,57,53,0.12)]"
+              className="group w-11 h-11 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center transition-all duration-300 hover:bg-white/[0.08] hover:border-white/[0.15] hover:shadow-[0_0_16px_rgba(229,57,53,0.12)]"
             >
               <span className="text-[#737373] group-hover:text-[#E53935] transition-colors duration-300">
                 <TikTokIcon />

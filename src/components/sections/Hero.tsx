@@ -37,7 +37,7 @@ export default function Hero() {
       {/* Content */}
       <ClickSpark sparkColor="#E53935" sparkSize={12} sparkRadius={20} sparkCount={10} duration={500}>
         <div className="relative z-[5] flex flex-col items-center text-center px-6 gap-6 max-w-5xl mx-auto h-screen justify-center">
-          <h1 className="font-heading font-bold text-[clamp(3rem,10vw,8rem)] leading-[0.9] tracking-tight text-[#f5f5f5] drop-shadow-[0_0_60px_rgba(229,57,53,0.3)]">
+          <h1 className="font-heading font-bold text-[clamp(3rem,10vw,8rem)] leading-[0.95] sm:leading-[0.9] tracking-tight text-[#f5f5f5] drop-shadow-[0_0_60px_rgba(229,57,53,0.3)]">
             DANIEL DIAZ
           </h1>
 

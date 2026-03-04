@@ -178,6 +178,10 @@ html.lenis, html.lenis body {
     overscroll-behavior: contain;
 }
 
+section[id] {
+    scroll-margin-top: 80px;
+}
+
 ::selection {
     background-color: rgba(229, 57, 53, 0.3);
     color: #f5f5f5;

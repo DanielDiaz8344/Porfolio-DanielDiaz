@@ -389,7 +389,7 @@ export default function Projects() {
 
               {/* Image thumbnails */}
               {!selected.video && selected.images && selected.images.length > 1 && (
-                <div className="flex gap-2 px-6 sm:px-8 -mt-8 relative z-10">
+                <div className="flex gap-2 px-4 sm:px-8 -mt-4 sm:-mt-8 relative z-10">
                   {selected.images.map((img, i) => (
                     <button
                       key={img}

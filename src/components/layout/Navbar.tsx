@@ -69,13 +69,13 @@ export default function Navbar() {
 
             {/* Mobile Menu Button */}
             <button
-              className={`lg:hidden p-2 sm:p-3 rounded-lg sm:rounded-xl transition-all duration-300 text-[#f5f5f5] ${
+              className={`lg:hidden p-3 rounded-xl transition-all duration-300 text-[#f5f5f5] ${
                 mobileOpen ? 'bg-[#E53935]/10' : 'bg-white/[0.06] hover:bg-white/[0.1]'
               }`}
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? 'Cerrar menú' : 'Abrir menú'}
             >
-              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {mobileOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 ) : (
