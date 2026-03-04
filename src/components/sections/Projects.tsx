@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ExternalLink, ArrowUpRight, ChevronDown, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import DecryptedText from '@/components/reactbits/DecryptedText';
@@ -125,6 +125,11 @@ export default function Projects() {
   const [showAll, setShowAll] = useState(false);
   const [selected, setSelected] = useState<Project | null>(null);
   const [activeImage, setActiveImage] = useState(0);
+
+  useEffect(() => {
+    document.body.style.overflow = selected ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [selected]);
 
   const visible = showAll ? projects : projects.slice(0, INITIAL_COUNT);
   const hasMore = projects.length > INITIAL_COUNT;
@@ -256,14 +261,14 @@ export default function Projects() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-50 overflow-y-auto px-3 sm:px-6"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6"
           >
             {/* Backdrop with ambient glow */}
             <div
-              className="fixed inset-0 bg-[#0a0a0a]/80 backdrop-blur-md"
+              className="absolute inset-0 bg-[#0a0a0a]/80 backdrop-blur-md"
               onClick={() => setSelected(null)}
             />
-            <div className="fixed top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#E53935]/[0.04] rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#E53935]/[0.04] rounded-full blur-[120px] pointer-events-none" />
 
             {/* Modal card - liquid glass */}
             <motion.div
@@ -271,7 +276,7 @@ export default function Projects() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 30, scale: 0.95 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full max-w-3xl mx-auto my-6 sm:my-10 bg-white/[0.04] backdrop-blur-2xl rounded-2xl sm:rounded-3xl border border-white/[0.08] shadow-[0_16px_80px_rgba(0,0,0,0.5)]"
+              className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white/[0.04] backdrop-blur-2xl rounded-2xl sm:rounded-3xl border border-white/[0.08] shadow-[0_16px_80px_rgba(0,0,0,0.5)]"
             >
               {/* Top red accent line */}
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#E53935]/30 to-transparent rounded-t-3xl" />
