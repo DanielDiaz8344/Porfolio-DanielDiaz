@@ -2,7 +2,6 @@ import { Palette, TrendingUp, Share2, Users, Video, Camera } from 'lucide-react'
 import SpotlightCard from '@/components/reactbits/SpotlightCard';
 import DecryptedText from '@/components/reactbits/DecryptedText';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
-import ScrollVelocity from '@/components/reactbits/ScrollVelocity';
 import ClickSpark from '@/components/reactbits/ClickSpark';
 import Magnet from '@/components/reactbits/Magnet';
 
@@ -43,7 +42,7 @@ export default function Services() {
   return (
     <section id="services" className="py-24 md:py-32 bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-6">
+        <div className="mb-12">
           <DecryptedText
             text="Lo que hago"
             speed={60}
@@ -55,17 +54,6 @@ export default function Services() {
             encryptedClassName="text-[#E53935]/40"
           />
         </div>
-      </div>
-
-      {/* Scrolling banner */}
-      <div className="mb-12 overflow-hidden opacity-15">
-        <ScrollVelocity
-          texts={['DISEÑO · MARKETING · VIDEO · FOTO · SOCIAL · BRANDING ·']}
-          velocity={80}
-          numCopies={8}
-          scrollerStyle={{ fontSize: '0.875rem', fontWeight: 500, letterSpacing: '0.25em' }}
-          className="text-[#E53935]"
-        />
       </div>
 
       <div className="max-w-7xl mx-auto px-6">
@@ -85,11 +73,6 @@ export default function Services() {
                 >
                   {/* Top accent line */}
                   <div className="absolute top-0 left-0 h-[3px] bg-[#E53935] w-0 group-hover:w-full transition-all duration-500" />
-
-                  {/* Number indicator */}
-                  <span className="absolute top-3 right-4 text-5xl font-heading font-bold text-[#E53935]/[0.07] leading-none select-none">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
 
                   <Magnet padding={20} magnetStrength={3}>
                     <div className="w-12 h-12 rounded-xl bg-[#E53935]/10 border border-[#E53935]/20 flex items-center justify-center group-hover:bg-[#E53935]/20 group-hover:border-[#E53935]/40 transition-colors duration-300">
