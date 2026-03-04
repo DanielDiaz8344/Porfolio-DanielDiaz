@@ -37,12 +37,7 @@ const CapCutIcon = () => (
 );
 
 const NanoBananaIcon = () => (
-  <svg viewBox="0 0 254 245" fill="none" className="w-[1.25em] h-[1.25em]">
-    <path d="M32.4 60.7C5.9 90.4-2 122.2 8.5 156c10.6 33.9 31.8 60.4 63.5 79.4 42.4 10.6 84.7 5.3 127.1-15.9 42.4-21.2 58.3-53 47.7-95.3-10.6-53-37.1-90-79.4-111.2C125-8.1 80 7.8 32.4 60.7" fill="currentColor" opacity="0.9" />
-    <circle cx="104" cy="124" r="9.5" fill="#0e0e0e" />
-    <circle cx="136" cy="140" r="9.5" fill="#0e0e0e" />
-    <circle cx="167" cy="124" r="9.5" fill="#0e0e0e" />
-  </svg>
+  <span className="text-[1.1em] leading-none">🍌</span>
 );
 
 interface Tool {
