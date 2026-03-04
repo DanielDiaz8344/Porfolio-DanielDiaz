@@ -324,7 +324,7 @@ export default function Projects() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             data-lenis-prevent
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overscroll-contain"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overscroll-contain"
           >
             {/* Backdrop with ambient glow */}
             <div
@@ -394,7 +394,7 @@ export default function Projects() {
                     <button
                       key={img}
                       onClick={() => setActiveImage(i)}
-                      className={`w-14 h-14 rounded-lg overflow-hidden border-2 transition-all duration-300 cursor-pointer backdrop-blur-md ${
+                      className={`w-11 h-11 sm:w-14 sm:h-14 rounded-lg overflow-hidden border-2 transition-all duration-300 cursor-pointer backdrop-blur-md shrink-0 ${
                         i === activeImage
                           ? 'border-[#E53935] shadow-[0_0_16px_rgba(229,57,53,0.3)] scale-105'
                           : 'border-white/[0.08] opacity-50 hover:opacity-100 hover:border-white/[0.2]'

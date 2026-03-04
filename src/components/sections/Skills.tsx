@@ -175,7 +175,7 @@ export default function Skills() {
                             >
                               {tool.icon}
                             </div>
-                            <span className="text-sm font-body text-[#737373] group-hover:text-[#d4d4d4] transition-colors duration-300">
+                            <span className="text-sm font-body text-[#737373] group-hover:text-[#d4d4d4] transition-colors duration-300 truncate">
                               {tool.name}
                             </span>
                           </div>
