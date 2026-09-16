@@ -263,7 +263,14 @@ function AutoplayVideo({
 function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void }) {
   // w-full h-full (no max-*): max-w-full solo limita, no estira, y el vídeo
   // —más pequeño que el marco— se quedaba pintado a su tamaño nativo.
-  const media = 'w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.03]';
+  //
+  // El clip de Zona Elite es un logo sobre negro puro (0,0,0) con un 63% del
+  // ancho vacío. mix-blend-screen vuelve ese negro transparente —el negro es
+  // el elemento neutro de 'screen'— así que el logo queda sobre el fondo de la
+  // tarjeta, y object-cover recorta el sobrante para que se vea más grande.
+  const media = `w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.03] ${
+    project.motion ? 'object-cover mix-blend-screen' : 'object-contain'
+  }`;
 
   return (
     <div
@@ -290,7 +297,7 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
         {/* Los logos necesitan mucho más aire que una captura de pantalla */}
         <div
           className={`absolute inset-0 flex items-center justify-center ${
-            project.imageBg ? 'p-10 sm:p-16' : project.motion ? '' : 'p-4 sm:p-6'
+            project.imageBg ? 'p-5 sm:p-8' : project.motion ? '' : 'p-4 sm:p-6'
           }`}
         >
           {project.motion ? (
