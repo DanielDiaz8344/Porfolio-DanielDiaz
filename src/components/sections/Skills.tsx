@@ -11,6 +11,10 @@ import {
   SiClaude,
   SiNotion,
   SiGoogle,
+  SiOdoo,
+  SiInstagram,
+  SiTiktok,
+  SiGooglesheets,
 } from 'react-icons/si';
 import {
   TbBrandAdobePhotoshop,
@@ -131,6 +135,15 @@ const toolSections: { category: string; tools: Tool[] }[] = [
     ],
   },
   {
+    category: 'Campañas & Datos',
+    tools: [
+      { name: 'ODOO', icon: <SiOdoo />, color: '#714B67' },
+      { name: 'Analítica IG', icon: <SiInstagram />, color: '#E4405F' },
+      { name: 'Analítica TikTok', icon: <SiTiktok />, color: '#FFFFFF' },
+      { name: 'Sheets', icon: <SiGooglesheets />, color: '#34A853' },
+    ],
+  },
+  {
     category: 'Productividad',
     tools: [
       { name: 'Notion', icon: <SiNotion />, color: '#FFFFFF' },
@@ -146,7 +159,7 @@ const skillSections = [
   },
   {
     category: 'Marketing & Redes',
-    skills: ['Social Media', 'Marketing Digital', 'Community Manager', 'Estrategia de Contenido'],
+    skills: ['Social Media', 'Community Manager', 'Media Buyer', 'Campañas con Influencers', 'Marketing Digital', 'Estrategia de Contenido'],
   },
   {
     category: 'Producción',

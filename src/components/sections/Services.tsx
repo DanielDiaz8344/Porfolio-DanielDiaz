@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Palette, TrendingUp, Share2, Users, Video, Camera, ArrowUpRight, type LucideIcon } from 'lucide-react';
+import { Palette, TrendingUp, Share2, Users, Megaphone, Video, Camera, ArrowUpRight, type LucideIcon } from 'lucide-react';
 import DecryptedText from '@/components/reactbits/DecryptedText';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
 
@@ -56,6 +56,11 @@ const services: Service[] = [
     icon: Users,
     title: 'Community Manager',
     description: 'Gestión de comunidades digitales, interacción con tu audiencia y crecimiento orgánico.',
+  },
+  {
+    icon: Megaphone,
+    title: 'Media Buyer',
+    description: 'Campañas con creadores de contenido: búsqueda de perfiles, auditoría de audiencia real, negociación y seguimiento hasta la publicación.',
   },
   {
     icon: Video,

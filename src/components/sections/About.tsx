@@ -12,7 +12,7 @@ const stats = [
   { value: 3, suffix: '+', label: 'Años' },
   { value: 50, suffix: '+', label: 'Proyectos' },
   { value: 30, suffix: '+', label: 'Clientes' },
-  { value: 6, suffix: '', label: 'Servicios' },
+  { value: 7, suffix: '', label: 'Servicios' },
 ];
 
 function Counter({ target, suffix }: { target: number; suffix: string }) {

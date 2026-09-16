@@ -46,11 +46,12 @@ export default function Hero() {
             <RotatingText
               texts={[
                 'Diseñador Gráfico',
-                'Editor de Video',
-                'Fotógrafo',
-                'Social Media Manager',
-                'Marketing Digital',
                 'Community Manager',
+                'Media Buyer',
+                'Social Media Manager',
+                'Editor de Video',
+                'Marketing Digital',
+                'Fotógrafo',
               ]}
               rotationInterval={2500}
               mainClassName="text-[#E53935] font-heading font-semibold"
