@@ -261,7 +261,9 @@ function AutoplayVideo({
  * cuadrados, una carta vertical. El marco común es lo que ordena el conjunto.
  */
 function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void }) {
-  const media = 'max-h-full max-w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.03]';
+  // w-full h-full (no max-*): max-w-full solo limita, no estira, y el vídeo
+  // —más pequeño que el marco— se quedaba pintado a su tamaño nativo.
+  const media = 'w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.03]';
 
   return (
     <div
@@ -280,13 +282,15 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
       {/* Zona de imagen: algo mas oscura que la tarjeta para que se distinga
           del bloque de texto sin necesidad de una linea divisoria dura. */}
       <div
-        className="relative aspect-[4/3] overflow-hidden bg-[#0d0d0d]"
+        className={`relative aspect-[4/3] overflow-hidden ${
+          project.motion ? '' : 'bg-[#0d0d0d]'
+        }`}
         style={project.imageBg ? { backgroundColor: project.imageBg } : undefined}
       >
         {/* Los logos necesitan mucho más aire que una captura de pantalla */}
         <div
           className={`absolute inset-0 flex items-center justify-center ${
-            project.imageBg ? 'p-10 sm:p-16' : 'p-4 sm:p-6'
+            project.imageBg ? 'p-10 sm:p-16' : project.motion ? '' : 'p-4 sm:p-6'
           }`}
         >
           {project.motion ? (
