@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Palette, TrendingUp, Share2, Users, Megaphone, Video, Camera, ArrowUpRight, type LucideIcon } from 'lucide-react';
+import { Palette, MonitorSmartphone, TrendingUp, Share2, Users, Megaphone, Video, Camera, ArrowUpRight, type LucideIcon } from 'lucide-react';
 import DecryptedText from '@/components/reactbits/DecryptedText';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
 
@@ -41,6 +41,11 @@ const services: Service[] = [
     icon: Palette,
     title: 'Diseño Gráfico',
     description: 'Identidades visuales, logotipos, material publicitario y piezas gráficas que comunican la esencia de tu marca.',
+  },
+  {
+    icon: MonitorSmartphone,
+    title: 'Diseño Web',
+    description: 'Landing pages y sitios responsivos, del diseño en Figma a la implementación con React, Framer o WordPress.',
   },
   {
     icon: TrendingUp,
