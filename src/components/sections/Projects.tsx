@@ -193,7 +193,7 @@ const projects: Project[] = [
   },
 ];
 
-const INITIAL_COUNT = 5;
+const INITIAL_COUNT = 6;
 
 /**
  * Clip en bucle para las portadas. Reemplaza a los GIF pesados.
@@ -247,6 +247,87 @@ function AutoplayVideo({
       aria-label={label}
       className={className}
     />
+  );
+}
+
+/**
+ * Tarjeta de proyecto: la imagen vive en su propio marco y el texto va debajo,
+ * sobre el fondo de la sección. Se evita a propósito superponer texto sobre la
+ * imagen: casi todas las portadas son capturas o portadas que ya traen su
+ * propia tipografía, y encimar más texto las vuelve ilegibles.
+ *
+ * Todas las piezas comparten marco 4:3 y se muestran completas (object-contain)
+ * aunque sus proporciones reales sean muy distintas — capturas apaisadas, logos
+ * cuadrados, una carta vertical. El marco común es lo que ordena el conjunto.
+ */
+function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void }) {
+  const media = 'max-h-full max-w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.03]';
+
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={onOpen}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onOpen();
+        }
+      }}
+      aria-label={`Ver proyecto ${project.title}`}
+      className="group cursor-pointer focus-visible:outline-none"
+    >
+      <div
+        className="relative aspect-[4/3] overflow-hidden rounded-xl border border-white/[0.07] bg-[#121212] transition-colors duration-500 group-hover:border-[#E53935]/30 group-focus-visible:border-[#E53935]/60"
+        style={project.imageBg ? { backgroundColor: project.imageBg } : undefined}
+      >
+        {/* Los logos necesitan mucho más aire que una captura de pantalla */}
+        <div
+          className={`absolute inset-0 flex items-center justify-center ${
+            project.imageBg ? 'p-10 sm:p-16' : 'p-4 sm:p-6'
+          }`}
+        >
+          {project.motion ? (
+            <AutoplayVideo src={project.motion} poster={project.image} label={project.title} className={media} />
+          ) : (
+            <img src={project.image} alt={project.title} loading="lazy" className={media} />
+          )}
+        </div>
+      </div>
+
+      <div className="mt-5 flex flex-col gap-2">
+        <span className="text-[11px] font-body uppercase tracking-[0.2em] text-[#E53935]">
+          {project.tag}
+        </span>
+
+        <div className="flex items-center gap-2">
+          <h3 className="text-xl sm:text-2xl font-heading font-bold text-[#f5f5f5] transition-colors duration-300 group-hover:text-[#E53935]">
+            {project.title}
+          </h3>
+          <ArrowUpRight
+            size={18}
+            className="text-[#E53935] shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+          />
+        </div>
+
+        <p className="text-sm leading-relaxed text-[#8a8a8a] font-body line-clamp-2 max-w-[52ch]">
+          {project.shortDesc}
+        </p>
+
+        {/* Etiquetas en gris: el rojo se reserva para el epígrafe, así queda un
+            único acento por tarjeta en vez de dos compitiendo. */}
+        <div className="flex flex-wrap gap-2 mt-1">
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className="text-[11px] font-body text-[#8a8a8a] border border-white/[0.09] rounded-full px-2.5 py-1"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -468,96 +549,21 @@ export default function Projects() {
           />
         </div>
 
-        {/* Projects Stack */}
-        <div className="flex flex-col gap-5">
-          {visible.map((project, index) => {
-            const imageLeft = index % 2 === 0;
-
-            return (
-              <AnimatedContent
-                key={project.title}
-                distance={60}
-                duration={0.6}
-                delay={0.1}
-                threshold={0.1}
-              >
-                <div
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => openProject(project)}
-                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openProject(project); } }}
-                  aria-label={`Ver proyecto ${project.title}`}
-                  className="group relative overflow-hidden rounded-2xl bg-white/[0.03] backdrop-blur-md border border-white/[0.08] transition-all duration-500 hover:bg-white/[0.06] hover:border-white/[0.15] hover:shadow-[0_8px_40px_rgba(229,57,53,0.06)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E53935]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
-                >
-                  {/* Shimmer on hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[linear-gradient(105deg,transparent_40%,rgba(255,255,255,0.03)_45%,rgba(255,255,255,0.06)_50%,rgba(255,255,255,0.03)_55%,transparent_60%)] group-hover:animate-[shimmer_1.5s_ease-in-out] pointer-events-none z-10" />
-
-                  <div
-                    className={`flex flex-col ${
-                      imageLeft ? 'md:flex-row' : 'md:flex-row-reverse'
-                    }`}
-                  >
-                    {/* Image */}
-                    <div
-                      className="relative md:w-[40%] aspect-video md:aspect-auto md:h-[220px] overflow-hidden"
-                      style={project.imageBg ? { backgroundColor: project.imageBg } : undefined}
-                    >
-                      {project.motion ? (
-                        <AutoplayVideo
-                          src={project.motion}
-                          poster={project.image}
-                          label={project.title}
-                          className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${
-                            project.imageBg ? 'object-contain p-6' : 'object-cover'
-                          }`}
-                        />
-                      ) : (
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          loading="lazy"
-                          className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${
-                            project.imageBg ? 'object-contain p-6' : 'object-cover'
-                          }`}
-                        />
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/40 via-transparent to-transparent" />
-
-                    </div>
-
-                    {/* Content */}
-                    <div className="md:w-[60%] p-5 sm:p-6 flex flex-col justify-center gap-3">
-                      <div className="flex items-start justify-between gap-3">
-                        <h3 className="text-xl sm:text-2xl font-heading font-bold text-[#f5f5f5] group-hover:text-[#E53935] transition-colors duration-300">
-                          {project.title}
-                        </h3>
-                        <ArrowUpRight
-                          size={20}
-                          className="text-[#737373] shrink-0 mt-1 opacity-0 -translate-x-2 translate-y-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300"
-                        />
-                      </div>
-
-                      <p className="text-[#a3a3a3] font-body text-sm leading-relaxed line-clamp-2">
-                        {project.shortDesc}
-                      </p>
-
-                      {/* Tools */}
-                      <div className="flex flex-wrap gap-2">
-                        {project.tools.map((tool) => (
-                          <span
-                            key={tool}
-                            className="text-xs font-body text-[#E53935]/70 bg-[#E53935]/[0.06] border border-[#E53935]/10 rounded-md px-2.5 py-1"
-                          >
-                            {tool}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </AnimatedContent>
-            );
-          })}
+        {/* Dos columnas: a tres, las capturas de landing bajan de 600 a 390px
+            de ancho y dejan de leerse. El aire vertical entre filas (gap-y-14)
+            es lo que separa una pieza de la siguiente sin necesidad de marcos. */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-14">
+          {visible.map((project, index) => (
+            <AnimatedContent
+              key={project.title}
+              distance={40}
+              duration={0.55}
+              delay={(index % 2) * 0.08}
+              threshold={0.08}
+            >
+              <ProjectCard project={project} onOpen={() => openProject(project)} />
+            </AnimatedContent>
+          ))}
         </div>
 
         {/* Ver más / Ver menos button */}
