@@ -1,109 +1,61 @@
-import * as React from 'react';
-import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import type { CSSProperties, ReactNode } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 
-gsap.registerPlugin(ScrollTrigger);
+// Equivalente a gsap "power2.out".
+const EASE_POWER2_OUT = [0.25, 0.46, 0.45, 0.94] as const;
 
-interface FadeContentProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-  container?: Element | string | null;
+// La API original aceptaba milisegundos (600) o segundos (0.6); se conserva.
+const toSeconds = (value: number) => (value > 10 ? value / 1000 : value);
+
+interface FadeContentProps {
+  children: ReactNode;
+  className?: string;
+  style?: CSSProperties;
   blur?: boolean;
   duration?: number;
-  ease?: string;
   delay?: number;
+  /** Fracción del elemento visible que dispara la animación (0–1). */
   threshold?: number;
   initialOpacity?: number;
-  disappearAfter?: number;
-  disappearDuration?: number;
-  disappearEase?: string;
-  onComplete?: () => void;
-  onDisappearanceComplete?: () => void;
 }
 
-const FadeContent: React.FC<FadeContentProps> = ({
+export default function FadeContent({
   children,
-  container,
+  className = '',
+  style,
   blur = false,
   duration = 1000,
-  ease = 'power2.out',
   delay = 0,
   threshold = 0.1,
   initialOpacity = 0,
-  disappearAfter = 0,
-  disappearDuration = 0.5,
-  disappearEase = 'power2.in',
-  onComplete,
-  onDisappearanceComplete,
-  className = '',
-  ...props
-}) => {
-  const ref = useRef<HTMLDivElement>(null);
+}: FadeContentProps) {
+  const reduceMotion = useReducedMotion();
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    let scrollerTarget: Element | string | null = container || null;
-
-    if (typeof scrollerTarget === 'string') {
-      scrollerTarget = document.querySelector(scrollerTarget);
-    }
-
-    const startPct = (1 - threshold) * 100;
-    const getSeconds = (val: number) => (val > 10 ? val / 1000 : val);
-
-    gsap.set(el, {
-      autoAlpha: initialOpacity,
-      filter: blur ? 'blur(10px)' : 'blur(0px)',
-      willChange: 'opacity, filter, transform'
-    });
-
-    const tl = gsap.timeline({
-      paused: true,
-      delay: getSeconds(delay),
-      onComplete: () => {
-        if (onComplete) onComplete();
-        if (disappearAfter > 0) {
-          gsap.to(el, {
-            autoAlpha: initialOpacity,
-            filter: blur ? 'blur(10px)' : 'blur(0px)',
-            delay: getSeconds(disappearAfter),
-            duration: getSeconds(disappearDuration),
-            ease: disappearEase,
-            onComplete: () => onDisappearanceComplete?.()
-          });
-        }
-      }
-    });
-
-    tl.to(el, {
-      autoAlpha: 1,
-      filter: 'blur(0px)',
-      duration: getSeconds(duration),
-      ease: ease
-    });
-
-    const st = ScrollTrigger.create({
-      trigger: el,
-      scroller: scrollerTarget || window,
-      start: `top ${startPct}%`,
-      once: true,
-      onEnter: () => tl.play()
-    });
-
-    return () => {
-      st.kill();
-      tl.kill();
-      gsap.killTweensOf(el);
-    };
-  }, []);
+  if (reduceMotion) {
+    return (
+      <div className={className} style={style}>
+        {children}
+      </div>
+    );
+  }
 
   return (
-    <div ref={ref} className={className} {...props}>
+    <motion.div
+      className={className}
+      style={style}
+      initial={{
+        opacity: initialOpacity,
+        filter: blur ? 'blur(10px)' : 'blur(0px)',
+      }}
+      whileInView={{ opacity: 1, filter: 'blur(0px)' }}
+      viewport={{ once: true, amount: Math.min(Math.max(threshold, 0), 1) }}
+      transition={{
+        duration: toSeconds(duration),
+        delay: toSeconds(delay),
+        ease: EASE_POWER2_OUT,
+      }}
+    >
       {children}
-    </div>
+    </motion.div>
   );
-};
-
-export default FadeContent;
+}

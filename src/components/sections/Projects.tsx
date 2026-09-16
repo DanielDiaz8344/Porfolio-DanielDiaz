@@ -26,6 +26,21 @@ interface Project {
 }
 
 const projects: Project[] = [
+  // 0. LO MÁS RECIENTE — Media Buyer: el perfil que diferencia del resto de diseñadores
+  {
+    title: 'Media Buyer — MiCasino',
+    tag: 'Influencer Marketing',
+    shortDesc:
+      'Captación, auditoría y cierre de campañas con creadores de contenido para el mercado chileno.',
+    fullDesc:
+      'Trabajo como Media Buyer para JuegosMcGroup (MiCasino.com) en el mercado chileno. El rol abarca el ciclo completo de una campaña con creadores de contenido: búsqueda de perfiles por nicho y país, auditoría de la audiencia real —alcance, engagement y demografía por país, edad y sexo, contrastados contra los seguidores declarados—, negociación de la propuesta y la tarifa, firma de contrato, y seguimiento del calendario de publicaciones hasta el pago. Una parte central del trabajo es el descarte: aplicar criterios de idoneidad de marca para filtrar perfiles con seguidores inflados, audiencia menor de edad, actividad política o conflicto de valores, antes de invertir presupuesto. Las campañas ejecutadas están documentadas en mi cuenta de Instagram de Media Buyer.',
+    image: '/projects/media-buyer.png',
+    imageBg: '#0a0a0a',
+    link: 'https://www.instagram.com/danieldiaz.mc8',
+    linkLabel: 'Ver campañas en Instagram',
+    tools: ['ODOO', 'Analítica IG/TikTok', 'Excel'],
+    tags: ['Media Buyer', 'Influencers', 'Campañas'],
+  },
   // 1. PRIMACÍA — Proyecto más completo (diseño + dev + branding + sitio live)
   {
     title: 'Sube con Pepe',
@@ -121,7 +136,7 @@ const projects: Project[] = [
       'Cartas con temática cyberpunk retro para mazo de blackjack, combinando investigación visual y diseño digital especializado.',
     fullDesc:
       'Mazo completo de blackjack con temática cyberpunk retro. Investigación de referencias visuales del género para crear un concepto cohesivo con gradientes neón, texturas digitales y geometrías angulares. Cada carta combina funcionalidad tradicional con estética retro-futurista.',
-    image: '/projects/cartas.png',
+    image: '/projects/cartas.jpg',
     tools: ['Canva', 'Photoshop'],
     tags: ['Cartas', 'Cyberpunk'],
   },

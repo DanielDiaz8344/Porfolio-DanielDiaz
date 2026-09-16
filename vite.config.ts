@@ -23,23 +23,19 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          // React core — changes rarely, great for long-term cache
-          'vendor-react': ['react', 'react-dom'],
+          // React core — changes rarely, great for long-term cache.
+          // Incluye jsx-runtime y react-dom/client: sin ellos el chunk salía vacío
+          // y React terminaba dentro del bundle de entrada.
+          'vendor-react': ['react', 'react/jsx-runtime', 'react-dom', 'react-dom/client'],
 
-          // Animation libs share internals — keep together
-          'vendor-motion': ['motion', 'motion/react', 'framer-motion'],
-
-          // GSAP ecosystem
-          'vendor-gsap': ['gsap', 'gsap/ScrollTrigger', '@gsap/react'],
+          // Motion: única librería de animación del sitio (GSAP se retiró)
+          'vendor-motion': ['motion', 'motion/react'],
 
           // WebGL — heavy, changes infrequently
           'vendor-ogl': ['ogl'],
 
           // Smooth scroll
           'vendor-lenis': ['lenis'],
-
-          // Router
-          'vendor-router': ['react-router-dom'],
 
           // UI utilities — small, stable
           'vendor-ui': [
