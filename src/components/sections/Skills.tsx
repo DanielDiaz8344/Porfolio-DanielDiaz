@@ -168,8 +168,11 @@ const skillSections = [
 ];
 
 const Skills = memo(function Skills() {
+  // La sección contiene dos bloques con anclaje propio: el contenedor lleva
+  // id="herramientas" porque es lo primero que se ve al entrar, y el bloque
+  // de abajo lleva id="skills".
   return (
-    <section id="skills" className="py-24 md:py-32 bg-[#0e0e0e]">
+    <section id="herramientas" className="py-24 md:py-32 bg-[#0e0e0e]">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* — HERRAMIENTAS — */}
@@ -224,7 +227,9 @@ const Skills = memo(function Skills() {
         </div>
 
         {/* — SKILLS — */}
-        <div>
+        {/* scroll-mt compensa la altura del navbar fijo: sin esto el título
+            quedaría tapado al llegar desde el menú. */}
+        <div id="skills" className="scroll-mt-28">
           <div className="mb-14">
             <DecryptedText
               text="Skills"

@@ -6,6 +6,7 @@ const navLinks = [
   { label: 'Inicio', href: '#hero' },
   { label: 'Sobre mí', href: '#about' },
   { label: 'Servicios', href: '#services' },
+  { label: 'Herramientas', href: '#herramientas' },
   { label: 'Skills', href: '#skills' },
   { label: 'Proyectos', href: '#projects' },
   { label: 'Contacto', href: '#contact' },
@@ -62,7 +63,7 @@ const Navbar = memo(function Navbar() {
                 <Magnet key={link.href} padding={20} magnetStrength={4}>
                   <button
                     onClick={() => handleNavClick(link.href)}
-                    className="relative font-body text-sm font-medium px-4 py-2 rounded-full transition-all duration-300 text-[#a3a3a3] hover:text-[#f5f5f5] hover:bg-white/[0.06] group"
+                    className="relative whitespace-nowrap font-body text-sm font-medium px-3 xl:px-4 py-2 rounded-full transition-all duration-300 text-[#a3a3a3] hover:text-[#f5f5f5] hover:bg-white/[0.06] group"
                   >
                     {link.label}
                     <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-[#E53935] rounded-full transition-all duration-300 group-hover:w-1/2" />
