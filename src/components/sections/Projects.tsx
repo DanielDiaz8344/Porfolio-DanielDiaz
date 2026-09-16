@@ -275,10 +275,12 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
         }
       }}
       aria-label={`Ver proyecto ${project.title}`}
-      className="group cursor-pointer focus-visible:outline-none"
+      className="group flex h-full flex-col overflow-hidden rounded-xl border border-white/[0.07] bg-[#121212] cursor-pointer transition-colors duration-500 hover:border-[#E53935]/30 focus-visible:outline-none focus-visible:border-[#E53935]/60"
     >
+      {/* Zona de imagen: algo mas oscura que la tarjeta para que se distinga
+          del bloque de texto sin necesidad de una linea divisoria dura. */}
       <div
-        className="relative aspect-[4/3] overflow-hidden rounded-xl border border-white/[0.07] bg-[#121212] transition-colors duration-500 group-hover:border-[#E53935]/30 group-focus-visible:border-[#E53935]/60"
+        className="relative aspect-[4/3] overflow-hidden bg-[#0d0d0d]"
         style={project.imageBg ? { backgroundColor: project.imageBg } : undefined}
       >
         {/* Los logos necesitan mucho más aire que una captura de pantalla */}
@@ -295,7 +297,9 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
         </div>
       </div>
 
-      <div className="mt-5 flex flex-col gap-2">
+      {/* Bloque de texto dentro de la misma tarjeta. flex-1 iguala la altura
+          de las dos tarjetas de una fila aunque las descripciones difieran. */}
+      <div className="flex flex-1 flex-col gap-2 border-t border-white/[0.05] p-5 sm:p-6">
         <span className="text-[11px] font-body uppercase tracking-[0.2em] text-[#E53935]">
           {project.tag}
         </span>
@@ -310,13 +314,13 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
           />
         </div>
 
-        <p className="text-sm leading-relaxed text-[#8a8a8a] font-body line-clamp-2 max-w-[52ch]">
+        <p className="text-sm leading-relaxed text-[#8a8a8a] font-body line-clamp-2">
           {project.shortDesc}
         </p>
 
         {/* Etiquetas en gris: el rojo se reserva para el epígrafe, así queda un
             único acento por tarjeta en vez de dos compitiendo. */}
-        <div className="flex flex-wrap gap-2 mt-1">
+        <div className="mt-auto flex flex-wrap gap-2 pt-2">
           {project.tags.map((tag) => (
             <span
               key={tag}
@@ -552,7 +556,7 @@ export default function Projects() {
         {/* Dos columnas: a tres, las capturas de landing bajan de 600 a 390px
             de ancho y dejan de leerse. El aire vertical entre filas (gap-y-14)
             es lo que separa una pieza de la siguiente sin necesidad de marcos. */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-7">
           {visible.map((project, index) => (
             <AnimatedContent
               key={project.title}
@@ -560,6 +564,7 @@ export default function Projects() {
               duration={0.55}
               delay={(index % 2) * 0.08}
               threshold={0.08}
+              className="h-full"
             >
               <ProjectCard project={project} onOpen={() => openProject(project)} />
             </AnimatedContent>
