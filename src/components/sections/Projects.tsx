@@ -29,7 +29,21 @@ interface Project {
 }
 
 const projects: Project[] = [
-  // 0. LO MÁS RECIENTE — Media Buyer: el perfil que diferencia del resto de diseñadores
+  // — Social media y campañas — el perfil al que apunta el CV —
+  {
+    title: 'Zona Elite TikTok',
+    tag: 'Content Creation',
+    shortDesc:
+      'Creación de contenido para TikTok de marca deportiva: guion, grabación, edición y publicación con enfoque en storytelling.',
+    fullDesc:
+      'Gestión integral del contenido audiovisual para la cuenta de TikTok de Zona Elite (@zonaeliteve). El proceso abarca desde la conceptualización y escritura de guiones con técnicas de storytelling hasta la grabación, edición y publicación. Cada pieza se diseña para captar atención en los primeros segundos, mantener el engagement con narrativas dinámicas y cerrar con llamados a la acción efectivos. Se trabaja con tendencias actuales de la plataforma, transiciones creativas, música estratégica y copy persuasivo. El objetivo es posicionar a Zona Elite como referente en el nicho deportivo, generando comunidad y reconocimiento de marca a través de contenido auténtico y de alto impacto.',
+    image: '/projects/zona-elite-tiktok-poster.jpg',
+    motion: '/projects/zona-elite-tiktok.mp4',
+    link: 'https://www.tiktok.com/@zonaeliteve',
+    linkLabel: 'Ver TikTok',
+    tools: ['CapCut', 'Canva', 'TikTok'],
+    tags: ['Content Creation', 'Storytelling', 'Video'],
+  },
   {
     title: 'Media Buyer — MiCasino',
     tag: 'Influencer Marketing',
@@ -44,7 +58,7 @@ const projects: Project[] = [
     tools: ['ODOO', 'Analítica IG/TikTok', 'Excel'],
     tags: ['Media Buyer', 'Influencers', 'Campañas'],
   },
-  // 1. PRIMACÍA — Proyecto más completo (diseño + dev + branding + sitio live)
+  // — Web y producto — de la maqueta al sitio publicado —
   {
     title: 'Sube con Pepe',
     tag: 'Landing Page & Branding',
@@ -61,7 +75,6 @@ const projects: Project[] = [
     tools: ['Figma', 'Illustrator', 'React', 'Tailwind'],
     tags: ['Landing', 'Branding'],
   },
-  // 2. Landing SIE — producto tech con IA
   {
     title: 'SIE',
     tag: 'Landing Page',
@@ -75,36 +88,6 @@ const projects: Project[] = [
     tools: ['Claude AI', 'Pencil Dev'],
     tags: ['Landing', 'ERP', 'IA'],
   },
-  // 3. UX/UI con video — muestra proceso profesional
-  {
-    title: 'Aircool',
-    tag: 'UX/UI Design',
-    shortDesc:
-      'Sistema de inventario moderno diseñado para reemplazar procesos obsoletos basados en Excel, priorizando la simplicidad y usabilidad.',
-    fullDesc:
-      'Modernización del sistema de inventario para Aircool, reemplazando procesos manuales en Excel por interfaces digitales intuitivas. Se diseñaron flujos completos en Figma con una paleta adaptada del logo existente, priorizando legibilidad y bajo cansancio visual para jornadas extensas.',
-    image: '/projects/aircool.png',
-    imageBg: '#0a0a0a',
-    video: 'https://drive.google.com/file/d/1dFc3ZJCI1TDfVFUI3cIeqgc9REjR3XMZ/preview',
-    tools: ['Figma'],
-    tags: ['UX/UI', 'Figma'],
-  },
-  // 3. CONTRASTE — Content creation rompe expectativas, muestra versatilidad
-  {
-    title: 'Zona Elite TikTok',
-    tag: 'Content Creation',
-    shortDesc:
-      'Creación de contenido para TikTok de marca deportiva: guion, grabación, edición y publicación con enfoque en storytelling.',
-    fullDesc:
-      'Gestión integral del contenido audiovisual para la cuenta de TikTok de Zona Elite (@zonaeliteve). El proceso abarca desde la conceptualización y escritura de guiones con técnicas de storytelling hasta la grabación, edición y publicación. Cada pieza se diseña para captar atención en los primeros segundos, mantener el engagement con narrativas dinámicas y cerrar con llamados a la acción efectivos. Se trabaja con tendencias actuales de la plataforma, transiciones creativas, música estratégica y copy persuasivo. El objetivo es posicionar a Zona Elite como referente en el nicho deportivo, generando comunidad y reconocimiento de marca a través de contenido auténtico y de alto impacto.',
-    image: '/projects/zona-elite-tiktok-poster.jpg',
-    motion: '/projects/zona-elite-tiktok.mp4',
-    link: 'https://www.tiktok.com/@zonaeliteve',
-    linkLabel: 'Ver TikTok',
-    tools: ['CapCut', 'Canva', 'TikTok'],
-    tags: ['Content Creation', 'Storytelling', 'Video'],
-  },
-  // 4. Otro sitio live — refuerza capacidad web
   {
     title: 'Landing Page Kyra',
     tag: 'Landing Page',
@@ -118,7 +101,20 @@ const projects: Project[] = [
     tools: ['Framer', 'Figma', 'Canva', 'IA'],
     tags: ['Landing', 'Web Design'],
   },
-  // 5. Branding sólido — cierra los 5 visibles con identidad visual
+  {
+    title: 'Aircool',
+    tag: 'UX/UI Design',
+    shortDesc:
+      'Sistema de inventario moderno diseñado para reemplazar procesos obsoletos basados en Excel, priorizando la simplicidad y usabilidad.',
+    fullDesc:
+      'Modernización del sistema de inventario para Aircool, reemplazando procesos manuales en Excel por interfaces digitales intuitivas. Se diseñaron flujos completos en Figma con una paleta adaptada del logo existente, priorizando legibilidad y bajo cansancio visual para jornadas extensas.',
+    image: '/projects/aircool.png',
+    imageBg: '#0a0a0a',
+    video: 'https://drive.google.com/file/d/1dFc3ZJCI1TDfVFUI3cIeqgc9REjR3XMZ/preview',
+    tools: ['Figma'],
+    tags: ['UX/UI', 'Figma'],
+  },
+  // — Identidad de marca —
   {
     title: 'Kyra Wallet',
     tag: 'Branding',
@@ -131,20 +127,19 @@ const projects: Project[] = [
     tools: ['Illustrator', 'Photoshop', 'IA'],
     tags: ['Branding', 'Identidad Visual'],
   },
-  // --- VER MÁS ---
-  // 6. Creativo/sorpresa — mantiene interés
   {
-    title: 'Diseño de Cartas',
-    tag: 'Diseño Gráfico',
+    title: 'Zona Elite',
+    tag: 'Logo Design',
     shortDesc:
-      'Cartas con temática cyberpunk retro para mazo de blackjack, combinando investigación visual y diseño digital especializado.',
+      'Logotipo geométrico de lobo enmarcado en hexágono con degradado cyan a púrpura, diseñado para marca deportiva premium.',
     fullDesc:
-      'Mazo completo de blackjack con temática cyberpunk retro. Investigación de referencias visuales del género para crear un concepto cohesivo con gradientes neón, texturas digitales y geometrías angulares. Cada carta combina funcionalidad tradicional con estética retro-futurista.',
-    image: '/projects/cartas.jpg',
-    tools: ['Canva', 'Photoshop'],
-    tags: ['Cartas', 'Cyberpunk'],
+      'Logo para Zona Elite, marca deportiva de alto rendimiento. El lobo simboliza liderazgo y disciplina, enmarcado en un hexágono con degradado cyan-púrpura que aporta modernidad. Entregado en versiones para digital e impreso.',
+    image: '/projects/zona-elite.png',
+    imageBg: '#0a0a0a',
+    tools: ['Illustrator'],
+    tags: ['Logo', 'Branding'],
   },
-  // 7. Volumen de trabajo — demuestra confianza del cliente
+  // — Editorial y gráfico —
   {
     title: 'Catálogos Kyra',
     tag: 'Diseño Editorial',
@@ -163,20 +158,6 @@ const projects: Project[] = [
     tools: ['Canva', 'Photoshop'],
     tags: ['Branding', 'Editorial', 'Catálogos'],
   },
-  // 8. Logo limpio
-  {
-    title: 'Zona Elite',
-    tag: 'Logo Design',
-    shortDesc:
-      'Logotipo geométrico de lobo enmarcado en hexágono con degradado cyan a púrpura, diseñado para marca deportiva premium.',
-    fullDesc:
-      'Logo para Zona Elite, marca deportiva de alto rendimiento. El lobo simboliza liderazgo y disciplina, enmarcado en un hexágono con degradado cyan-púrpura que aporta modernidad. Entregado en versiones para digital e impreso.',
-    image: '/projects/zona-elite.png',
-    imageBg: '#0a0a0a',
-    tools: ['Illustrator'],
-    tags: ['Logo', 'Branding'],
-  },
-  // 9. RECENCIA — Catálogo personal = CTA natural hacia contratación
   {
     title: 'Catálogo Daniel Diaz',
     tag: 'Diseño Editorial',
@@ -190,6 +171,17 @@ const projects: Project[] = [
     ],
     tools: ['Canva', 'Photoshop'],
     tags: ['Editorial', 'Servicios'],
+  },
+  {
+    title: 'Diseño de Cartas',
+    tag: 'Diseño Gráfico',
+    shortDesc:
+      'Cartas con temática cyberpunk retro para mazo de blackjack, combinando investigación visual y diseño digital especializado.',
+    fullDesc:
+      'Mazo completo de blackjack con temática cyberpunk retro. Investigación de referencias visuales del género para crear un concepto cohesivo con gradientes neón, texturas digitales y geometrías angulares. Cada carta combina funcionalidad tradicional con estética retro-futurista.',
+    image: '/projects/cartas.jpg',
+    tools: ['Canva', 'Photoshop'],
+    tags: ['Cartas', 'Cyberpunk'],
   },
 ];
 
