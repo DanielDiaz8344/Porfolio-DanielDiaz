@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ExternalLink, ArrowUpRight, ChevronDown, X, Loader2, FileText } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import DecryptedText from '@/components/reactbits/DecryptedText';
@@ -14,7 +14,10 @@ interface Project {
   tag: string;
   shortDesc: string;
   fullDesc: string;
+  /** Imagen de portada. Si hay `motion`, actúa además como poster del vídeo. */
   image: string;
+  /** Clip corto en bucle que reemplaza a la portada (un mp4 pesa mucho menos que un gif). */
+  motion?: string;
   images?: string[];
   link?: string;
   linkLabel?: string;
@@ -94,7 +97,8 @@ const projects: Project[] = [
       'Creación de contenido para TikTok de marca deportiva: guion, grabación, edición y publicación con enfoque en storytelling.',
     fullDesc:
       'Gestión integral del contenido audiovisual para la cuenta de TikTok de Zona Elite (@zonaeliteve). El proceso abarca desde la conceptualización y escritura de guiones con técnicas de storytelling hasta la grabación, edición y publicación. Cada pieza se diseña para captar atención en los primeros segundos, mantener el engagement con narrativas dinámicas y cerrar con llamados a la acción efectivos. Se trabaja con tendencias actuales de la plataforma, transiciones creativas, música estratégica y copy persuasivo. El objetivo es posicionar a Zona Elite como referente en el nicho deportivo, generando comunidad y reconocimiento de marca a través de contenido auténtico y de alto impacto.',
-    image: '/projects/zona-elite-tiktok.gif',
+    image: '/projects/zona-elite-tiktok-poster.jpg',
+    motion: '/projects/zona-elite-tiktok.mp4',
     link: 'https://www.tiktok.com/@zonaeliteve',
     linkLabel: 'Ver TikTok',
     tools: ['CapCut', 'Canva', 'TikTok'],
@@ -191,6 +195,61 @@ const projects: Project[] = [
 
 const INITIAL_COUNT = 5;
 
+/**
+ * Clip en bucle para las portadas. Reemplaza a los GIF pesados.
+ *
+ * No basta con poner `autoPlay muted`: React aplica `muted` como propiedad y no
+ * como atributo, así que cuando el navegador evalúa el autoplay ve un vídeo con
+ * sonido y lo bloquea — se queda en el póster. Por eso se silencia por ref y se
+ * llama a play() a mano. De paso solo se reproduce mientras está en pantalla.
+ */
+function AutoplayVideo({
+  src,
+  poster,
+  label,
+  className,
+}: {
+  src: string;
+  poster: string;
+  label: string;
+  className: string;
+}) {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+
+    video.muted = true;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      },
+      { threshold: 0.25 },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <video
+      ref={ref}
+      src={src}
+      poster={poster}
+      loop
+      muted
+      playsInline
+      preload="metadata"
+      aria-label={label}
+      className={className}
+    />
+  );
+}
+
 interface ProjectModalProps {
   selected: Project;
   onClose: () => void;
@@ -259,6 +318,16 @@ function ProjectModal({ selected, onClose }: ProjectModalProps) {
               allowFullScreen
               onLoad={() => setVideoLoaded(true)}
             />
+          </div>
+        ) : selected.motion ? (
+          <div className="relative overflow-hidden rounded-t-2xl sm:rounded-t-3xl bg-[#111] flex items-center justify-center">
+            <AutoplayVideo
+              src={selected.motion}
+              poster={selected.image}
+              label={selected.title}
+              className="w-full max-h-[50vh] object-contain"
+            />
+            <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0e0e0e] to-transparent" />
           </div>
         ) : (
           <div className={`relative overflow-hidden rounded-t-2xl sm:rounded-t-3xl bg-[#111] flex items-center justify-center ${imageBroken ? 'min-h-[200px]' : 'max-h-[50vh]'}`}>
@@ -433,14 +502,25 @@ export default function Projects() {
                       className="relative md:w-[40%] aspect-video md:aspect-auto md:h-[220px] overflow-hidden"
                       style={project.imageBg ? { backgroundColor: project.imageBg } : undefined}
                     >
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        loading="lazy"
-                        className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${
-                          project.imageBg ? 'object-contain p-6' : 'object-cover'
-                        }`}
-                      />
+                      {project.motion ? (
+                        <AutoplayVideo
+                          src={project.motion}
+                          poster={project.image}
+                          label={project.title}
+                          className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${
+                            project.imageBg ? 'object-contain p-6' : 'object-cover'
+                          }`}
+                        />
+                      ) : (
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          loading="lazy"
+                          className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${
+                            project.imageBg ? 'object-contain p-6' : 'object-cover'
+                          }`}
+                        />
+                      )}
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/40 via-transparent to-transparent" />
 
                     </div>
